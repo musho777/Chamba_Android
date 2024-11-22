@@ -54,6 +54,7 @@ export const Slider = ({ photo, music_name, description, setActiveImage, save, s
     let item = [...currentTime]
     item[active] = value
     setCurrentTime(item)
+    console.log(value, 'value')
     videoRef?.current?.seek(value);
   };
 
@@ -127,20 +128,6 @@ export const Slider = ({ photo, music_name, description, setActiveImage, save, s
           );
         }}
       />
-      {(photo[active]?.video && showSlider) &&
-        <View style={styles.slider}>
-          <Sliders
-            style={styles.seekSlider}
-            value={currentTime[active]}
-            minimumValue={0}
-            maximumValue={duration}
-            onValueChange={onSeek}
-            minimumTrackTintColor="#FFFFFF"
-            maximumTrackTintColor="#000000"
-            thumbTintColor="#FFC24B"
-          />
-        </View>
-      }
       <View
         style={{
           flexDirection: 'row',

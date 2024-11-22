@@ -33,22 +33,39 @@ export const Slider = React.memo(({ scroll, id, photo, viewableItems, setOpenMod
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const dispatch = useDispatch()
   const [showSlider, setShowSlider] = useState(true)
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   const videoRef = useRef(null);
+  const videoRef1 = useRef(null);
+  const videoRef2 = useRef(null);
+  const videoRef3 = useRef(null);
+  const videoRef4 = useRef(null);
+  const videoRef5 = useRef(null);
+  const videoRef6 = useRef(null);
+  const videoRef7 = useRef(null);
+  const videoRef8 = useRef(null);
+  const videoRef9 = useRef(null);
+
+  const [reff, setReff] = useState([videoRef, videoRef1, videoRef2, videoRef3, videoRef4, videoRef5, videoRef6, videoRef7, videoRef8, videoRef9])
+
   const [currentTime, setCurrentTime] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   const animation = useRef(null);
+  const [paused, setPaused] = useState([true, true, true, true, true, true, true, true, true, true]);
 
   const onSeek = (value) => {
     let item = [...currentTime]
     item[active] = value
     setCurrentTime(item)
-    videoRef?.current?.seek(value);
+    console.log(reff[active], 'value')
+    reff[active]?.current?.seek(value);
   };
+
+  useEffect(() => {
+    setPaused([true, true, true, true, true, true, true, true, true, true])
+  }, [active])
 
   const LikePost = useCallback(() => {
     dispatch(LikePostAction({ post_id: data?.id }, staticdata.token, user.data?.id));
   }, [dispatch, data?.id, staticdata.token, user.data?.id]);
-
 
 
 
@@ -88,8 +105,17 @@ export const Slider = React.memo(({ scroll, id, photo, viewableItems, setOpenMod
 
   const CurrentTimeSet = (i, e) => {
     let item = [...currentTime]
-    item[i] = e
-    setCurrentTime(item)
+    let temp = [...paused]
+    if (item[i] <= duration[i]) {
+      item[i] = e
+      setCurrentTime(item)
+    }
+    else {
+      item[i] = 0
+      setCurrentTime(item)
+      temp[i] = true
+      setPaused(temp)
+    }
   }
 
   const formatTime = (time) => {
@@ -98,6 +124,12 @@ export const Slider = React.memo(({ scroll, id, photo, viewableItems, setOpenMod
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
+
+  const GetDuration = (e, i) => {
+    let item = [...duration]
+    item[i] = e
+    setDuration(item)
+  }
 
   const { fullScreen } = useSelector((st) => st.fullScreenData)
 
@@ -117,6 +149,16 @@ export const Slider = React.memo(({ scroll, id, photo, viewableItems, setOpenMod
         setHeight(393)
       }
     }
+
+
+    const ChangePauesd = (e, index) => {
+      let temp = [...paused]
+      temp[index] = e
+      setPaused(temp)
+    }
+
+
+
     return (
       <TouchableOpacity
         onLongPress={() => onLongClikc()}
@@ -125,20 +167,21 @@ export const Slider = React.memo(({ scroll, id, photo, viewableItems, setOpenMod
         onPressOut={() => onPressOut()}
         onPress={(e) => handleClick(e, item)}
         style={[styles.img, { height: !fullScreen ? height : windowHeight }]}>
-        {item.video ?
+        {(item.video && active == index) ?
           <VidioComponent
-            active={active == index}
+            active={active}
             viewableItems={viewableItems}
             music={data.music_name}
             item={item}
             scroll={(e) => scroll(e)}
-            index={index}
+            setPaused={(e, index) => ChangePauesd(e, index)}
+            paused={paused}
             id={id}
             currentTime={currentTime[active]}
             setCurrentTime={(e) => CurrentTimeSet(index, e)}
-            setDuration={(e) => setDuration(e)}
-            duration={duration}
-            ref={videoRef}
+            setDuration={(e, index) => GetDuration(e, index)}
+            duration={duration[active]}
+            ref={reff[active]}
             height={height}
             isExpanded={isExpanded}
             description={description}
@@ -216,13 +259,13 @@ export const Slider = React.memo(({ scroll, id, photo, viewableItems, setOpenMod
               style={styles.seekSlider}
               value={currentTime[active]}
               minimumValue={0}
-              maximumValue={duration}
+              maximumValue={duration[active]}
               onValueChange={onSeek}
               minimumTrackTintColor="#FFFFFF"
               maximumTrackTintColor="#000000"
               thumbTintColor="#FFC24B"
             />
-            <Text style={[Styles.whiteSemiBold13, { textAlign: 'center' }]}>{formatTime(duration)}</Text>
+            <Text style={[Styles.whiteSemiBold13, { textAlign: 'center' }]}>{formatTime(duration[active])}</Text>
           </View>
         }
       </View>}

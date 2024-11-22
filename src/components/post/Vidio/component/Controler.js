@@ -23,7 +23,8 @@ export const Controler = forwardRef(({
   id,
   setStart,
   start,
-  big
+  big,
+  height
 }, ref) => {
 
   const dispatch = useDispatch()
@@ -109,51 +110,42 @@ export const Controler = forwardRef(({
       </View>
     </View>
   }
-
-  return <View style={styles.wrapper1}>
-    <TouchableOpacity onPress={() => setFullScreen(!full)}>
-      <FullScrenn />
-    </TouchableOpacity>
-
-    <View style={styles.playButtonFull}>
-      <TouchableOpacity style={{ transform: [{ rotate: '360deg' }] }} onPress={() => LakeCurrentTime()}>
-        <AddSecSvg1 />
-      </TouchableOpacity>
-      {loading ?
-        <View>
-          <ActivityIndicator size={"small"} color={'white'} />
-        </View> :
-        <View >
-          {!paused ?
-            <TouchableOpacity onPress={() => onPlayPausePress(true)}>
-              <Pause />
-            </TouchableOpacity> :
-            <TouchableOpacity onPress={() => onPlayPausePress(false)}>
-              <StartSvg />
-            </TouchableOpacity>
-          }
-        </View>}
-      <TouchableOpacity onPress={AddCurrentTime}>
-        <AddSecSvg />
-      </TouchableOpacity>
-    </View>
-
-    <TouchableOpacity activeOpacity={1} onPress={() => setVolume(volume === 0 ? 1 : 0)}>
+  return <View>
+    <TouchableOpacity style={[styles.voice1, { top: -height }, big && { top: 55, right: 5 }]} activeOpacity={1} onPress={() => setVolume(volume === 0 ? 1 : 0)}>
       {!volume ?
         <MuteSvg /> :
         <Image style={{ width: 25, height: 25 }} source={require('../../../../assets/img/Sound.png')} />}
     </TouchableOpacity>
+    <TouchableOpacity style={[styles.full1, { top: -height - 40 }]} onPress={() => setFullScreen(!full)}>
+      <FullScrenn />
+    </TouchableOpacity>
+    <View style={styles.wrapper1}>
 
-    <View
-      style={{ height: 60, width: '100%', position: 'absolute', bottom: 5 }}>
-      <View style={styles.music}>
-        <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center', marginBottom: 0 }}>
-          {music && <MusicSvg />}
-          <Text style={Styles.whiteSemiBold13}>{music}</Text>
-        </View>
+      <View style={styles.playButtonFull}>
+        <TouchableOpacity style={{ transform: [{ rotate: '360deg' }] }} onPress={() => LakeCurrentTime()}>
+          <AddSecSvg1 />
+        </TouchableOpacity>
+        {loading ?
+          <View>
+            <ActivityIndicator size={"small"} color={'white'} />
+          </View> :
+          <View >
+            {!paused ?
+              <TouchableOpacity onPress={() => onPlayPausePress(true)}>
+                <Pause />
+              </TouchableOpacity> :
+              <TouchableOpacity onPress={() => onPlayPausePress(false)}>
+                <StartSvg />
+              </TouchableOpacity>
+            }
+          </View>}
+        <TouchableOpacity onPress={AddCurrentTime}>
+          <AddSecSvg />
+        </TouchableOpacity>
       </View>
-    </View>
-  </View >
+    </View >
+
+  </View>
 })
 
 const styles = StyleSheet.create({
@@ -168,14 +160,25 @@ const styles = StyleSheet.create({
     zIndex: 99999,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     paddingHorizontal: 10,
   },
   voice: {
     position: 'absolute',
     top: 100,
     zIndex: 9999,
-    right: 10
+    right: 10,
+  },
+  voice1: {
+    position: 'absolute',
+    zIndex: 99999,
+    right: 10,
+  },
+  full1: {
+    position: 'absolute',
+    right: 10,
+    zIndex: 999,
+    zIndex: 99999,
   },
   full: {
     position: 'absolute',

@@ -82,7 +82,7 @@ export const AboutApplication = () => {
         <Text style={[styles.line, { borderBottomWidth: 0 }]}>
           Уникальный контент:{"\n"}
         </Text>
-        Мы покажем Вам все самое свежее и интересное, никаких групп, сообществ, фото фильтров и повторяющегося контента.!
+        Мы покажем Вам все самое свежее и интересное, никаких групп, сообществ, фотофильтров и повторяющегося контента!
       </Text>
       <Text style={Styles.balihaiMedium13}>
         <Text style={[styles.line, { borderBottomWidth: 0 }]}>

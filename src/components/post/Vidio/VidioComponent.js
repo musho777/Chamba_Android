@@ -1,8 +1,7 @@
-import { Animated, Dimensions, Easing, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Animated, Dimensions, Easing, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 import Video from 'react-native-video';
 import FastImage from 'react-native-fast-image';
-import { useNavigation } from '@react-navigation/native';
 import { Controler } from './component/Controler';
 import Slider from 'react-native-slider'
 import { Styles } from '../../../styles/Styles';
@@ -24,26 +23,24 @@ export const VidioComponent = forwardRef(({
   setDuration,
   onSeek,
   description,
-  index,
   setIsExpanded,
   height,
   id,
-  scroll
+  scroll,
+  setPaused,
+  paused,
 }, ref) => {
   const [first, setFirst] = useState(true);
   const MAX_Height = 40;
   const dispatch = useDispatch()
   const [showStartButton, setShowStartButton] = useState(false);
   const [currentId, setCurrentId] = useState();
-  const [paused, setPaused] = useState(true);
   const [volume, setVolume] = useState(0);
-  const navigation = useNavigation()
   const [loading, setLoading] = useState(true)
   const heightAnim = useRef(new Animated.Value(0)).current;
   const [showText, setShowText] = useState(false)
   const [isBuffering, setIsBuffering] = useState(false);
   const [start, setStart] = useState(null)
-  const [full, setFull] = useState(false)
   const { fullScreen } = useSelector((st) => st.fullScreenData)
 
   const handleBuffer = ({ isBuffering }) => {
@@ -60,7 +57,7 @@ export const VidioComponent = forwardRef(({
 
 
   useEffect(() => {
-    setPaused(true)
+    setPaused(true, active)
   }, [active])
 
 
@@ -69,9 +66,12 @@ export const VidioComponent = forwardRef(({
       if (currentId === viewableItems[0]?.item.id && !viewableItems[0]?.isViewable) {
         setFirst(true);
         setPaused(true)
+        setPaused(true, active)
+
       } else if ((currentId !== viewableItems[0]?.item.id) && viewableItems[0]?.item.id && currentId) {
         setFirst(true);
-        setPaused(true)
+        setPaused(true, active)
+
       }
     }
   }, [viewableItems]);
@@ -81,7 +81,7 @@ export const VidioComponent = forwardRef(({
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!fullScreen) {
-        if (!paused) {
+        if (!paused[active]) {
           setShowStartButton(false);
         }
       }
@@ -95,7 +95,7 @@ export const VidioComponent = forwardRef(({
         setCurrentTime(currentTime + 0.251);
       } else {
         setCurrentTime(0);
-        setPaused(false);
+        // setPaused(false);
         ref.current.seek(0);
       }
     }
@@ -106,20 +106,14 @@ export const VidioComponent = forwardRef(({
 
 
   const handleLoad = (data) => {
-    setDuration(data.duration);
+    console.log(data.duration, '2000')
+    setDuration(data.duration, active);
     setVolume(1)
     setLoading(false)
     ref.current.seek(currentTime)
   };
 
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', async () => {
-      setFirst(true)
-      setPaused(true)
-    });
-    return unsubscribe;
-  }, [navigation]);
 
 
   const formatTime = (time) => {
@@ -131,7 +125,6 @@ export const VidioComponent = forwardRef(({
   const startAnimation = (show) => {
     setIsExpanded(show)
     setShowText(!showText)
-    // setIsExpanded()
     Animated.timing(heightAnim, {
       toValue: show ? 400 : 0,
       duration: 400,
@@ -149,6 +142,9 @@ export const VidioComponent = forwardRef(({
     return desc;
   }, [description]);
 
+
+  console.log(paused[active])
+
   return <View style={{ height: !fullScreen ? height : windowHeight, justifyContent: 'center' }}>
     <TouchableOpacity
       activeOpacity={1}
@@ -159,7 +155,7 @@ export const VidioComponent = forwardRef(({
 
       style={{ height: height }}
     >
-      {(first && paused) &&
+      {(first && paused[active]) &&
         <FastImage
           style={[styles.Vidio, { height: height }]}
           source={{
@@ -173,24 +169,19 @@ export const VidioComponent = forwardRef(({
       }
       <Video
         ref={ref}
-        paused={paused}
+        paused={paused[active]}
         repeat={false}
         volume={volume}
-        style={[styles.Vidio, { height: height }, first && { opacity: 0 }]}
+        style={[styles.Vidio, { height: height, }, first && { opacity: 0 }]}
         source={{ uri: `https://chambaonline.pro/uploads/${item.video}`, cache: true }}
         resizeMode={'cover'}
-        // onFullscreenPlayerWillPresent={() => {
-        // }}
-        // onFullscreenPlayerWillDismiss={() => {
-        //   setPaused(true)
-        // }}
         onProgress={(data) => ChangeCurentTime(data)}
         useTextureView={false}
         onLoad={(data) => handleLoad(data)}
         onBuffer={handleBuffer}
         onEnd={() => {
           setCurrentTime(0);
-          setPaused(true);
+          setPaused(true, active);
           ref.current?.seek(0);
         }}
       />
@@ -223,15 +214,15 @@ export const VidioComponent = forwardRef(({
         big={big}
         volume={volume}
         setFullScreen={(e) => {
-          setFull(!fullScreen)
           scroll(!fullScreen)
           dispatch(FullScreenAction(!fullScreen, id))
         }}
         duration={duration}
+        height={height}
         setVolume={(e) => setVolume(e)}
         showStartButton={showStartButton}
-        paused={paused}
-        setPaused={(e) => setPaused(e)}
+        paused={paused[active]}
+        setPaused={(e) => setPaused(e, active)}
         setFirst={(e) => setFirst(e)}
         loading={loading}
         id={item.id}
@@ -239,17 +230,17 @@ export const VidioComponent = forwardRef(({
     }
 
     <View style={{ marginVertical: 10, position: 'absolute', top: 40, backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 5, marginHorizontal: 5 }}>
-      {(Description && Description[index]) && !showText &&
+      {(Description && Description[active]) && !showText &&
         <View style={[{ paddingHorizontal: 10 }]}>
           <View>
-            {Description[index] &&
+            {Description[active] &&
               <View>
                 <Text style={[Styles.darkMedium13, { color: 'white' }]}>
-                  {`${Description[index].slice(0, MAX_Height)}`}
+                  {`${Description[active].slice(0, MAX_Height)}`}
                 </Text>
               </View>
             }
-            {Description[index].length > MAX_Height && <TouchableOpacity
+            {Description[active].length > MAX_Height && <TouchableOpacity
               onPress={() => startAnimation(true)}
             >
               <Text style={[Styles.balihaiMedium13, { color: 'white' }]}>Показать больше</Text>
@@ -266,14 +257,14 @@ export const VidioComponent = forwardRef(({
         showsVerticalScrollIndicator={false}
         style={styles.textScrollContainer}>
         <TouchableOpacity style={{ padding: 10 }} activeOpacity={1}>
-          {Description && Description[index] &&
+          {Description && Description[active] &&
             <View>
               <Text style={[Styles.darkMedium13]}>
-                {Description[index]}
+                {Description[active]}
               </Text>
             </View>
           }
-          {Description && Description[index] && <TouchableOpacity onPress={() => startAnimation(false)}>
+          {Description && Description[active] && <TouchableOpacity onPress={() => startAnimation(false)}>
             <Text style={[Styles.balihaiMedium13]}>
               Cвернуть
             </Text>
@@ -287,7 +278,6 @@ export const VidioComponent = forwardRef(({
 const styles = StyleSheet.create({
   Vidio: {
     width: '100%',
-    // height: 570,
     position: 'relative',
   },
   slider: {
@@ -301,12 +291,9 @@ const styles = StyleSheet.create({
   seekSlider: {
     width: '80%',
     height: 50,
-    // bottom: -25,
-    // position: 'absolute',
     zIndex: 999999999,
   },
   full: {
-    // position: 'absolute',
     height: 100,
   }
 });
