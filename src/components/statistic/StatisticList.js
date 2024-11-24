@@ -92,67 +92,76 @@ export const StatisticList = ({ id, token, vidio }) => {
   }, [])
 
   function getMaxCountItem(data) {
-    return data.map((item) => {
-      const maxStatistic = item.statistics.reduce((max, current) =>
-        current.count > max.count ? current : max, item.statistics[0]);
-      const gender = maxStatistic.gender === "men" ? "M" : "Ж";
+    let temp = []
+    data.map((item) => {
       let date = new Date(item.date)
       const day = String(date.getDate()).padStart(2, '0');
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const year = String(date.getFullYear()).slice(2);
-      if (maxStatistic.count)
-        return [`${day}.${month}.${year}`, item.hour_range, gender, maxStatistic.year, maxStatistic.count];
+      item.statistics.map((elm, i) => {
+        const gender = elm.gender === "men" ? "M" : "Ж";
+        if (elm.count > 0)
+          temp.push(
+            [`${day}.${month}.${year}`, item.hour_range, gender, elm.year, elm.count]
+          )
+      })
     });
+    return temp
   }
 
   function getMaxCountItemUnG(data) {
-    return data.map((item) => {
-      const maxStatistic = item.statistics_unknown_gender.reduce((max, current) =>
-        current.count > max.count ? current : max, item.statistics_unknown_gender[0]);
-      const gender = 'U';
+    let temp = []
+    // console.log(data.statistics, '------------')
+    console.log(data)
+    data.map((item) => {
       let date = new Date(item.date)
       const day = String(date.getDate()).padStart(2, '0');
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const year = String(date.getFullYear()).slice(2);
-      if (maxStatistic.count)
-        return [`${day}.${month}.${year}`, item.hour_range, gender, maxStatistic.year, maxStatistic.count];
+      item.statistics_unknown_gender.map((elm, i) => {
+        const gender = elm.gender === "men" ? "M" : "Ж";
+        if (elm.count > 0)
+          temp.push([`${day}.${month}.${year}`, item.hour_range, gender, "", elm.count])
+      })
     });
+    return temp
   }
 
 
 
   function getMaxCountItemUnY(data) {
-    return data.map((item) => {
-      const maxStatistic = item.statistics_unknown_year.reduce((max, current) =>
-        current.count > max.count ? current : max, item.statistics_unknown_year[0]);
-      // const gender = 'U';
-      const gender = maxStatistic.gender === "men" ? "M" : "Ж";
+    let temp = []
+    data.map((item) => {
       let date = new Date(item.date)
       const day = String(date.getDate()).padStart(2, '0');
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const year = String(date.getFullYear()).slice(2);
-      setDatay(data)
-      if (maxStatistic.count) {
-        return [`${day}.${month}.${year}`, item.hour_range, gender, "не указан", maxStatistic.count];
-      }
+      item.statistics_unknown_year.map((elm, i) => {
+        const gender = elm.gender === "men" ? "M" : "Ж";
+        if (elm.count > 0)
+          temp.push(
+            [`${day}.${month}.${year}`, item.hour_range, "", elm.year, elm.count]
+          )
+      })
     });
+    return temp
   }
 
   function getMaxCountItemUnYG(data) {
-    return data.map((item) => {
-      const maxStatistic = item.statistics_unknown.reduce((max, current) =>
-        current.count > max.count ? current : max, item.statistics_unknown[0]);
-      // const gender = 'U';
-      const gender = maxStatistic.gender === "men" ? "M" : "Ж";
+    let temp = []
+    data.map((item) => {
       let date = new Date(item.date)
       const day = String(date.getDate()).padStart(2, '0');
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const year = String(date.getFullYear()).slice(2);
-      setDatay(data)
-      if (maxStatistic.count) {
-        return [`${day}.${month}.${year}`, item.hour_range, gender, "не указан", maxStatistic.count];
-      }
+      item.statistics_unknown.map((elm, i) => {
+        if (elm.count > 0)
+          temp.push(
+            [`${day}.${month}.${year}`, item.hour_range, "", "", elm.count]
+          )
+      })
     });
+    return temp
   }
 
 
@@ -169,6 +178,7 @@ export const StatisticList = ({ id, token, vidio }) => {
     let resut2 = []
     let resut3 = []
     if (getStatistic2.data.length >= 0) {
+      console.log(getStatistic2.data, 'getStatistic2.data')
       result = getMaxCountItem(getStatistic2.data);
       resut1 = getMaxCountItemUnG(getStatistic2.data)
       resut2 = getMaxCountItemUnY(getStatistic2.data)
@@ -271,7 +281,7 @@ export const StatisticList = ({ id, token, vidio }) => {
                         key={index}
                         data={rowData}
                         widthArr={widthArr}
-                        style={[styles.row, index % 2 == 0 && { backgroundColor: 'rgba(255,194,75,0.8)' }]}
+                        style={[styles.row]}
                         textStyle={styles.textStyle}
                       />
                     })
