@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Image, Text, Dimensions, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
 import { AppColors } from '../../styles/AppColors';
 import { Slider } from '../Slider';
@@ -24,7 +24,7 @@ export const Post = React.memo(({
   setCommentData,
   big = false,
   index,
-  scroll = () => { }
+  setShowInfo
 }) => {
   const user = useSelector((st) => st.userData)
   const [openModal, setOpenModal] = useState(false)
@@ -132,15 +132,10 @@ export const Post = React.memo(({
 
 
   ]
+
   const [isExpanded, setIsExpanded] = useState(false);
   return (
-    <View
-      style={[
-        { marginVertical: 5, height: height },
-        index === indexData && fullScreen ? styles.fullScreen : null,
-        index !== indexData && fullScreen ? { opacity: 0 } : null,
-      ]}
-    >
+    <View style={[{ marginVertical: 5, height: height }, (index == indexData && fullScreen) && styles.fullScreen, (index != indexData && fullScreen) && { display: 'none' }]}>
       {showSave && <ShowSave saveType={saveType} />}
       <View style={styles.block}>
         {!fullScreen && <View style={{ position: 'absolute', zIndex: 111, width: '100%' }}>
@@ -156,6 +151,7 @@ export const Post = React.memo(({
             deletData={deletData}
             addToblack={addToblack}
             activeImage={activeImage}
+            setShowInfo={(e) => setShowInfo(e)}
           />
         </View>}
         {!data?.background ? <Slider
@@ -174,8 +170,6 @@ export const Post = React.memo(({
           setIsExpanded={(e) => setIsExpanded(e)}
           isExpanded={isExpanded}
           id={index}
-          big={big}
-          scroll={(e) => scroll({ e: e, index: index })}
         /> :
           <View style={{ height: 570, position: 'relative' }}>
             <Image
@@ -216,8 +210,8 @@ export const Post = React.memo(({
   return (
     prevProps.data?.comment_count === nextProps.data?.comment_count &&
     prevProps.data?.id === nextProps.data?.id &&
-    prevProps.data?.description === nextProps.data?.description &&
-    prevProps.data.scroll === nextProps.data.scroll
+    prevProps.data?.description === nextProps.data?.description
+
   )
 });
 
@@ -239,13 +233,19 @@ const styles = StyleSheet.create({
     height: 570,
   },
   fullScreen: {
-    height: 'auto',
-    zIndex: 99999,
+    height: 800,
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 9999,
   },
   PostBody: {
     zIndex: 999,
     bottom: 40,
-    width: '100%'
+    width: '100%',
+    zIndex: 1
   },
   img: {
     width: windowWidth,

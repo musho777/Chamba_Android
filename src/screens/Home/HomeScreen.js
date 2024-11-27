@@ -16,6 +16,7 @@ import { AddImageLoading } from '../../components/addImageLoading';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CommmentModal } from '../../components/comment/CommmentModal';
+import { SpamModal } from '../../components/spamModal';
 const windowHeight = Dimensions.get('window').height;
 
 
@@ -34,8 +35,8 @@ export const HomeScreen = () => {
   const createPost = useSelector(st => st.createPost);
   const [selecteidId, setSelectidId] = useState(null)
   const [commentData, setCommentData] = useState({ parentId: "", categoryId: "" })
-  const [yPosition, setYPosition] = useState(0);
   const [selectedVidioId, setSelectedVidioId] = useState(null)
+  const [showInfo, setShowInfo] = useState(false)
 
   const [showView, setShowView] = useState(false)
   const [likeClose, setLikeClose] = useState(false)
@@ -170,11 +171,6 @@ export const HomeScreen = () => {
     }
   };
 
-  const handleScroll = (event) => {
-    const contentOffsetY = event.nativeEvent.contentOffset.y;
-    setYPosition(contentOffsetY);
-  };
-
 
   const loadingData = ['', '']
   const renderItem = useMemo(
@@ -192,6 +188,7 @@ export const HomeScreen = () => {
             setShowComment={() => setShowComment(true)}
             deletData={(e) => deletData(e)}
             setSelectidId={(id) => setSelectidId(id)}
+            setShowInfo={(e) => setShowInfo(e)}
             setShowShare={(e) => setShowShare(e)}
             setSelectedVidioId={(e) => setSelectedVidioId(e)}
             setCommentData={(e) => setCommentData(e)}
@@ -251,7 +248,6 @@ export const HomeScreen = () => {
           onEndReachedThreshold={0.5}
           initialNumToRender={5}
           maxToRenderPerBatch={5}
-          onScroll={handleScroll}
           windowSize={10}
           removeClippedSubviews={true}
           ref={flatListRef}
@@ -291,6 +287,12 @@ export const HomeScreen = () => {
         close={() => setShowComment(false)}
         postId={selecteidId}
         open={showShare}
+        commentData={commentData}
+      />}
+      {showInfo && <SpamModal
+        close={() => setShowInfo(false)}
+        postId={selecteidId}
+        open={showInfo}
         commentData={commentData}
       />}
     </View>

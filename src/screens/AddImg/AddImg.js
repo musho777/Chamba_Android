@@ -227,6 +227,9 @@ export const AddImg = ({ navigation }) => {
         <TouchableOpacity onPress={() => { delateFoto(index) }} style={{ position: 'absolute', top: 10, right: 10 }}>
           <CloseSvg1 />
         </TouchableOpacity>
+        <TouchableOpacity style={{ position: 'absolute', top: 50, right: 10 }} onPress={() => addPhoto(uri, 1)}>
+          <AddImage />
+        </TouchableOpacity>
       </ScrollView>
       <View style={keyboardVisible ? { justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 80, width: '100%' } : { justifyContent: 'center', alignItems: 'center' }}>
         <TextInput
@@ -291,11 +294,11 @@ export const AddImg = ({ navigation }) => {
             {"\n"}
             Мы предлагаем такой контент выложить в несколько рубрик (не более 4 - x), где Ваше искусство увидят любители разного.
           </Text>
-          <View style={{ alignItems: 'center' }}>
+          {/* <View style={{ alignItems: 'center' }}>
             <TouchableOpacity onPress={() => addPhoto(uri, 1)}>
               <AddImage />
             </TouchableOpacity>
-          </View>
+          </View> */}
 
         </View>}
       </View>

@@ -105,8 +105,8 @@ export const AboutApplication = () => {
     <View style={{ marginBottom: 55 }}>
       <Text style={[Styles.balihaiMedium13, styles.line, { borderBottomWidth: 0 }]}>Рекомендации</Text>
       <Text style={Styles.balihaiMedium13}>Автор канала не выкладывает:</Text>
-      <Text style={[Styles.balihaiMedium13,]}>-Запрещенный контент</Text>
-      <Text style={[Styles.balihaiMedium13,]}>-Чужой фото и видео контент</Text>
+      <Text style={[Styles.balihaiMedium13,]}>- Контент с собой.</Text>
+      <Text style={[Styles.balihaiMedium13,]}>- Чужой и запрещённый контент.</Text>
     </View>
   </ScrollView>
 }
