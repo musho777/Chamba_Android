@@ -32,7 +32,6 @@ export const Comments = ({ commentData, CommentCount = () => { } }) => {
   const bottomSheetRef = useRef(null);
   const bottomSheetRef1 = useRef(null);
   const getSound = useSelector((st) => st.getSound)
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
 
   const mounth = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
@@ -74,44 +73,12 @@ export const Comments = ({ commentData, CommentCount = () => { } }) => {
   }
 
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => {
-        setKeyboardVisible(true);
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setKeyboardVisible(false);
-      }
-    );
-
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
-    };
-  }, []);
-
 
   const onEndReached = () => {
     if (getComments?.nextPage) {
       let p = page + 1;
       dispatch(GelPostCommentsAction({ post_id: parentId }, staticdata.token, p));
       setPage(p);
-    }
-  }
-
-  const Empty = () => {
-    if (!getComments?.loading) {
-      return <Text
-        style={[
-          Styles.darkMedium16,
-          { marginTop: 40, textAlign: 'center' },
-        ]}>
-        {t(mainData.lang).Nocomments}
-      </Text>
     }
   }
 
@@ -239,11 +206,13 @@ export const Comments = ({ commentData, CommentCount = () => { } }) => {
               <Nota />
             </TouchableOpacity>}
           </View>
-          <EmojiPicker onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
         </View>
         <Main SendSticker={(e) => sendCommentFunction(e)} ref={bottomSheetRef} />
       </View>
       <MusicPlay categoryID={categoryId} ref={bottomSheetRef1} onSend={(e) => sendCommentFunction(e)} />
+      {isOpen &&
+        <EmojiPicker onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
+      }
     </View >
   );
 };

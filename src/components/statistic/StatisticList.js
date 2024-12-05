@@ -111,8 +111,6 @@ export const StatisticList = ({ id, token, vidio }) => {
 
   function getMaxCountItemUnG(data) {
     let temp = []
-    // console.log(data.statistics, '------------')
-    console.log(data)
     data.map((item) => {
       let date = new Date(item.date)
       const day = String(date.getDate()).padStart(2, '0');
@@ -121,7 +119,7 @@ export const StatisticList = ({ id, token, vidio }) => {
       item.statistics_unknown_gender.map((elm, i) => {
         const gender = elm.gender === "men" ? "M" : "Ж";
         if (elm.count > 0)
-          temp.push([`${day}.${month}.${year}`, item.hour_range, gender, "", elm.count])
+          temp.push([`${day}.${month}.${year}`, item.hour_range, "", elm.year, elm.count])
       })
     });
     return temp
@@ -140,7 +138,7 @@ export const StatisticList = ({ id, token, vidio }) => {
         const gender = elm.gender === "men" ? "M" : "Ж";
         if (elm.count > 0)
           temp.push(
-            [`${day}.${month}.${year}`, item.hour_range, "", elm.year, elm.count]
+            [`${day}.${month}.${year}`, item.hour_range, gender, "", elm.count]
           )
       })
     });
@@ -267,7 +265,7 @@ export const StatisticList = ({ id, token, vidio }) => {
               </ScrollView>
             </View>
           </ScrollView>
-          <Text style={[{ marginTop: 20, marginBottom: 10, paddingHorizontal: 15 }, Styles.balihaiMedium13]}>Не указан возраст</Text>
+          <Text style={[{ marginTop: 20, marginBottom: 10, paddingHorizontal: 15 }, Styles.balihaiMedium13]}>Не указан пол</Text>
           <ScrollView contentContainerStyle={{ justifyContent: 'center', width: '100%' }} horizontal={true}>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
               <Table >
@@ -291,7 +289,7 @@ export const StatisticList = ({ id, token, vidio }) => {
             </View>
           </ScrollView>
 
-          <Text style={[{ marginTop: 20, marginBottom: 10, paddingHorizontal: 15 }, Styles.balihaiMedium13]}>Не указан пол</Text>
+          <Text style={[{ marginTop: 20, marginBottom: 10, paddingHorizontal: 15 }, Styles.balihaiMedium13]}>Не указан возраст</Text>
           <ScrollView contentContainerStyle={{ justifyContent: 'center', width: '100%' }} horizontal={true}>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
               <Table >

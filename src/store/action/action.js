@@ -1783,7 +1783,7 @@ export const GetStatisitc2 = (id, token, data) => {
   };
   return dispatch => {
     dispatch(StartGetStatisitc2());
-    fetch(`${Api}/get_statistics_three_new?post_id=${id}`, requestOptions)
+    fetch(`${Api}/get_statistics_three_with_date_new?post_id=${id}`, requestOptions)
       .then(response => response.json())
       .then(r => {
         if (r.status) {

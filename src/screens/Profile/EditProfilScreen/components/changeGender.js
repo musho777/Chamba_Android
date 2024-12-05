@@ -28,6 +28,12 @@ export const ChnageGender = ({ value, setValue }) => {
       <BootomModal ref={bottomSheetRef} snapPoints={snapPoints}>
         <View style={{ paddingHorizontal: 20 }}>
           <TouchableOpacity onPress={() => {
+            setValue('')
+            bottomSheetRef.current?.close()
+          }} style={{ marginTop: 20 }} >
+            <Text style={Styles.darkRegular14}>{t(mainData.lang).Delete}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {
             setValue('Мужской')
             bottomSheetRef.current?.close()
           }} style={{ marginBottom: 20, marginTop: 20 }} >
