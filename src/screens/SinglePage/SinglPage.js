@@ -17,7 +17,7 @@ import { Share } from '../../components/share';
 import { Post } from '../../components/post/Post';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CommmentModal } from '../../components/comment/CommmentModal';
-
+import { SpamModal } from '../../components/spamModal';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -39,6 +39,7 @@ export const SinglPageScreen = ({ route }) => {
 
   const insets = useSafeAreaInsets();
   const navigation = useNavigation()
+  const [showInfo, setShowInfo] = useState(false)
 
   useFocusEffect(
     useCallback(() => {
@@ -52,6 +53,10 @@ export const SinglPageScreen = ({ route }) => {
     }, [data?.id])
   );
 
+
+  const AddToBack = () => {
+    navigation.replace('TabNavigation', { screen: "ProfileNavigation" })
+  }
 
   useEffect(() => {
     dispatch(AddPostViewCount({ post_id: data?.id }, staticdata.token))
@@ -119,6 +124,8 @@ export const SinglPageScreen = ({ route }) => {
           setShowComment={() => setShowComment(true)}
           big={true}
           horiznotal={horiznotal}
+          setShowInfo={(e) => setShowInfo(e)}
+          setPostUserId={(e) => { }}
         />
       </ScrollView>
       {showView && <ViewComponent
@@ -151,6 +158,11 @@ export const SinglPageScreen = ({ route }) => {
         }}
         close={() => setShowComment(false)}
         commentData={commentData}
+      />}
+      {showInfo && <SpamModal
+        close={() => setShowInfo(false)}
+        postUserId={data?.user.id}
+        addToblack={(e) => AddToBack(e)}
       />}
     </SafeAreaView>
   );

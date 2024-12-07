@@ -7,7 +7,7 @@ import { t } from '../../lang';
 export const InputComponent = ({ sendComment, setSendCommet, sendCommentFunction, width }) => {
   const mainData = useSelector(st => st.mainData);
 
-  return <View style={[width ? styles.InputComponent : { width: '80%' }]}>
+  return <View style={[width ? styles.InputComponent : { width: '83%' }]}>
     <Input
       send
       pdR={50}
@@ -22,6 +22,6 @@ export const InputComponent = ({ sendComment, setSendCommet, sendCommentFunction
 
 const styles = StyleSheet.create({
   InputComponent: {
-    width: '70%',
+    width: '80%',
   }
 });

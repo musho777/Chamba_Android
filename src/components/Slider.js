@@ -21,7 +21,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-export const Slider = React.memo(({ scroll, id, photo, viewableItems, setOpenModal, user, onLongClikc, long, onPressOut, setActiveImage, data, setHoriznotal = () => { }, description, setIsExpanded, isExpanded, setHeight, big }) => {
+export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItems, setOpenModal, user, onLongClikc, long, onPressOut, setActiveImage, data, setHoriznotal = () => { }, description, setIsExpanded, isExpanded, setHeight, big }) => {
   const [active, setActive] = useState(0);
   const [openSlider, setOpenSlider] = useState(false);
   const [showLikeIcone, setShowLikeICone] = useState(false)
@@ -197,6 +197,7 @@ export const Slider = React.memo(({ scroll, id, photo, viewableItems, setOpenMod
             item={item}
             height={height}
             isExpanded={isExpanded}
+            adminStatus={adminStatus}
             setIsExpanded={(e) => setIsExpanded(e)}
           />
         }

@@ -11,6 +11,7 @@ export const Albom = ({ id, data, seved, my = false, elm, lastItem, index }) => 
     index % 2 != 0 && { marginLeft: 5 }
     ]}>
       <ImageComponent
+        adminStatus={elm.admin_status}
         onPress={() => {
           my ?
             navigation.navigate('SinglPageScreen', { id: id }) :

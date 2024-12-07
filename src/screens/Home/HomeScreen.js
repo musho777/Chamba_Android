@@ -44,8 +44,8 @@ export const HomeScreen = () => {
   const [isFetching, setIsFetching] = useState(false);
 
   const [showComment, setShowComment] = useState(false)
-  const { fullScreen, indexData } = useSelector((st) => st.fullScreenData)
-
+  const { fullScreen } = useSelector((st) => st.fullScreenData)
+  const [postUserId, setPostUserId] = useState(null)
 
   useFocusEffect(
     useCallback(() => {
@@ -100,26 +100,26 @@ export const HomeScreen = () => {
 
 
 
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', async () => {
+  // useEffect(() => {
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', async () => {
 
-      if (showShare || likeClose || showView) {
-        setShowShare(false)
-        setLikeClose(false)
-        setShowView(false)
-        dispatch(ShowTabNavigation())
-        dispatch(FullScreenAction(false, null))
-        return true;
-      }
-      else {
-        return false
-      }
-    });
+  //     if (showShare || likeClose || showView) {
+  //       setShowShare(false)
+  //       setLikeClose(false)
+  //       setShowView(false)
+  //       dispatch(ShowTabNavigation())
+  //       dispatch(FullScreenAction(false, null))
+  //       return true;
+  //     }
+  //     else {
+  //       return false
+  //     }
+  //   });
 
-    return () => {
-      backHandler.remove();
-    };
-  }, [showShare, likeClose, showView]);
+  //   return () => {
+  //     backHandler.remove();
+  //   };
+  // }, [showShare, likeClose, showView]);
 
 
 
@@ -179,6 +179,7 @@ export const HomeScreen = () => {
         return (
           <Post
             data={item}
+            adminStatus={item.admin_status}
             index={index}
             scroll={(e) => Scroll(e)}
             viewableItems={viewableItems}
@@ -192,6 +193,7 @@ export const HomeScreen = () => {
             setShowShare={(e) => setShowShare(e)}
             setSelectedVidioId={(e) => setSelectedVidioId(e)}
             setCommentData={(e) => setCommentData(e)}
+            setPostUserId={(e) => setPostUserId(e)}
           />
         );
       }
@@ -291,9 +293,9 @@ export const HomeScreen = () => {
       />}
       {showInfo && <SpamModal
         close={() => setShowInfo(false)}
-        postId={selecteidId}
         open={showInfo}
-        commentData={commentData}
+        postUserId={postUserId}
+        addToblack={(e) => AddToBack(e)}
       />}
     </View>
   );

@@ -38,7 +38,6 @@ export const Comments = ({ commentData, CommentCount = () => { } }) => {
   const [senderName, setSenderNAme] = useState('')
   const getComments = useSelector(st => st.getComments);
   const textInputRef = useRef(null);
-  const mainData = useSelector(st => st.mainData);
 
   const user = useSelector(st => st.userData);
   const dispatch = useDispatch();
@@ -196,9 +195,9 @@ export const Comments = ({ commentData, CommentCount = () => { } }) => {
             width={getSound.data.length}
           />
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-            <TouchableOpacity onPress={() => setIsOpen(true)}>
+            {/* <TouchableOpacity onPress={() => setIsOpen(true)}>
               <Emojy />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity onPress={() => bottomSheetRef.current?.present()}>
               <Sticker />
             </TouchableOpacity>
@@ -209,10 +208,8 @@ export const Comments = ({ commentData, CommentCount = () => { } }) => {
         </View>
         <Main SendSticker={(e) => sendCommentFunction(e)} ref={bottomSheetRef} />
       </View>
+      <EmojiPicker onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
       <MusicPlay categoryID={categoryId} ref={bottomSheetRef1} onSend={(e) => sendCommentFunction(e)} />
-      {isOpen &&
-        <EmojiPicker onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
-      }
     </View >
   );
 };

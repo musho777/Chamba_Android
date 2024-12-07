@@ -8,7 +8,6 @@ import { PostBody } from '../postBody';
 import { ShowSave } from './showSave';
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 export const Post = React.memo(({
   viewableItems,
@@ -24,7 +23,11 @@ export const Post = React.memo(({
   setCommentData,
   big = false,
   index,
-  setShowInfo
+  setShowInfo,
+  adminStatus,
+  setPostUserId = () => { },
+  AddToBack,
+
 }) => {
   const user = useSelector((st) => st.userData)
   const [openModal, setOpenModal] = useState(false)
@@ -143,15 +146,17 @@ export const Post = React.memo(({
             data={data}
             big={big}
             user={user}
+            AddToBack={AddToBack}
             setShowSave={(e) => setShowSave(true)}
             setSaveType={(e) => setSaveType(e)}
             openModal={openModal}
             star={data?.user.star}
             setOpenModal={setOpenModal}
             deletData={deletData}
-            addToblack={addToblack}
+            addToblack={(e) => addToblack(e)}
             activeImage={activeImage}
             setShowInfo={(e) => setShowInfo(e)}
+            setPostUserId={(e) => setPostUserId(e)}
           />
         </View>}
         {!data?.background ? <Slider
@@ -170,6 +175,7 @@ export const Post = React.memo(({
           setIsExpanded={(e) => setIsExpanded(e)}
           isExpanded={isExpanded}
           id={index}
+          adminStatus={adminStatus}
         /> :
           <View style={{ height: 570, position: 'relative' }}>
             <Image
@@ -181,7 +187,7 @@ export const Post = React.memo(({
             </View>
           </View>
         }
-        {!isExpanded && !fullScreen && <View style={styles.PostBody}>
+        {!isExpanded && !fullScreen && adminStatus != 0 && < View style={styles.PostBody}>
           <PostBody
             postCount={user.postCount}
             commentCount={data?.comment_count}

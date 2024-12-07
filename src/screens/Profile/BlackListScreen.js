@@ -36,7 +36,14 @@ export const BlackListScreen = ({ navigation }) => {
   }
 
   const renderItem = ({ item, index }) => {
-    return <BlackListBlock onPress1={() => RemoveFromBlackList(item.receiver.id, index)} key={index} name={item.receiver.name} img={item.receiver.avatar} username={item.receiver.nickname} type="Помиловать" />
+    return <BlackListBlock
+      onPress1={() => RemoveFromBlackList(item.receiver.id, index)}
+      key={index}
+      name={item.receiver.name}
+      img={item.receiver.avatar}
+      username={item.receiver.nickname}
+      type="Помиловать"
+    />
   }
   return <View style={{ marginTop: 30, alignItems: 'center', paddingHorizontal: 15 }}>
     <FlatList

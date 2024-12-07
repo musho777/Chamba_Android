@@ -8,6 +8,15 @@ export const BlackListBlock = ({
   onPress,
   onPress1,
 }) => {
+  function canParseJSON(jsonString) {
+    try {
+      JSON.parse(jsonString);
+      return <Text style={[Styles.darkSemiBold14, { color: JSON.parse(jsonString)?.color?.title ? JSON.parse(jsonString)?.color?.title : "black", fontFamily: JSON.parse(jsonString)?.font, marginTop: -2 }]}>{JSON.parse(jsonString).name}</Text>
+    } catch (error) {
+      return <Text style={[Styles.whiteSemiBold14, { marginTop: -2 }]}>{jsonString}</Text>
+    }
+  }
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -18,7 +27,7 @@ export const BlackListBlock = ({
           source={{ uri: `https://chambaonline.pro/uploads/${img}` }}
         />
         <View>
-          <Text style={Styles.darkSemiBold14}>{name}</Text>
+          {canParseJSON(name)}
         </View>
       </View>
       <View>
