@@ -8,7 +8,7 @@ import { Catalog } from '../screens/catalog';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Styles } from '../styles/Styles';
-import { ClearLoginAction, ClearUser, HidenTabNavigation, LogoutAction, ShowTabNavigation } from '../store/action/action';
+import { Api, ClearLoginAction, ClearUser, HidenTabNavigation, LogoutAction, ShowTabNavigation } from '../store/action/action';
 import { CloseSvg } from '../assets/svg/Svgs';
 import AccauntParametrNavigation from './AccauntParametrNavigation';
 import MyPageNavigation from './MyPageNavigation';
@@ -25,6 +25,8 @@ function CustomDrawerContent(props) {
   const staticdata = useSelector(st => st.static);
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
+
+  const [show, setShow] = useState(false)
 
   const LogOut = async () => {
     setShowModal(false)
@@ -51,6 +53,36 @@ function CustomDrawerContent(props) {
   }, [isDrawerOpen])
 
 
+  const DelateAccaunt = async () => {
+    setShow(false)
+    setLoading(true)
+    let api = `${Api}/delete_account`
+    var myHeaders = new Headers();
+    // myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', `Bearer ${staticdata.token}`);
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    await fetch(api, requestOptions)
+      .then(response => response.json())
+      .then(r => {
+        setLoading(false)
+        if (r.status) {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'LoginScreen1', params: { screen: 'LoginScreen' } }],
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error, '200000000------')
+        setLoading(false)
+      });
+  }
+
+
   return (
     <View style={{ height: '100%', backgroundColor: 'white', }}>
       <DelateModal
@@ -59,6 +91,15 @@ function CustomDrawerContent(props) {
         confirmText={t(mainData.lang).logOut}
         show={showModal}
         setModalVisible={(e) => setShowModal(e)}
+      />
+      <DelateModal
+        Confirm={() => {
+          DelateAccaunt()
+        }}
+        confirmText={t(mainData.lang).Delete}
+        title={"Удалить аккаунт ?"}
+        show={show}
+        setModalVisible={(e) => setShow(e)}
       />
       <DrawerContentScrollView style={{ paddingTop: 40 }} {...props}>
         <TouchableOpacity style={{ paddingLeft: 15, width: 70, height: 30 }} onPress={() => props.navigation.closeDrawer()}>
@@ -103,6 +144,11 @@ function CustomDrawerContent(props) {
           labelStyle={[Styles.darkRegular16]}
           label={t(mainData.lang).logOut}
           onPress={() => setShowModal(true)}
+        />
+        <DrawerItem
+          labelStyle={[Styles.darkRegular16]}
+          label={"Удалить аккаунт"}
+          onPress={() => setShow(true)}
         />
       </DrawerContentScrollView>
       <TouchableOpacity

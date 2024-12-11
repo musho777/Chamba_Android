@@ -54,11 +54,11 @@ export const Settings = () => {
       setModalVisible={(e) => setShow(e)}
     />
     <FieldWithArrow onPress={() => navigation.navigate("Soundsandnotifications")} text={t(mainData.lang).Soundsandnotifications} />
-    <View style={styles.delate}>
+    {/* <View style={styles.delate}>
       <TouchableOpacity disabled={loading} onPress={() => setShow(true)} style={styles.button}>
         <Text style={styles.delateText}>Удалить аккаунт</Text>
       </TouchableOpacity>
-    </View>
+    </View> */}
   </View>
 }
 

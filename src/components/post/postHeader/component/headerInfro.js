@@ -12,9 +12,9 @@ export const HeaderInfo = ({ user, data }) => {
   function canParseJSON(jsonString) {
     try {
       JSON.parse(jsonString);
-      return <Text style={[Styles.whiteSemiBold14, { color: JSON.parse(jsonString)?.color?.title ? JSON.parse(jsonString)?.color?.title : "black", fontFamily: JSON.parse(jsonString)?.font, marginTop: -2 }]}>{JSON.parse(jsonString).name}</Text>
+      return <Text style={[Styles.whiteSemiBold14, { color: JSON.parse(jsonString)?.color?.title ? JSON.parse(jsonString)?.color?.title : "black", fontFamily: JSON.parse(jsonString)?.font }]}>{JSON.parse(jsonString).name}</Text>
     } catch (error) {
-      return <Text style={[Styles.whiteSemiBold14, { marginTop: -2 }]}>{jsonString}</Text>
+      return <Text style={[Styles.whiteSemiBold14]}>{jsonString}</Text>
     }
   }
 
@@ -48,7 +48,7 @@ export const HeaderInfo = ({ user, data }) => {
         source={{ uri: `https://chambaonline.pro/uploads/${data?.user.avatar}` }} />
     </View>
     <View style={styles.nameBlock}>
-      <View style={[Styles.flexAlignItems, { width: '100%', gap: 8 }]}>
+      <View style={[Styles.flexAlignItems, { width: '100%', gap: 2 }]}>
         {canParseJSON(data?.user?.name)}
         {data?.user.star > 0 && <CheckMarkUserSvg />}
       </View>
@@ -65,11 +65,12 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   nameBlock: {
-    // gap: 2,
+    gap: 2,
     width: '75%',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: 40
+    justifyContent: 'center',
+    height: 40,
+    marginBottom: 2
   },
   infoBlock: {
     position: 'absolute',

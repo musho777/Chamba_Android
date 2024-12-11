@@ -211,7 +211,7 @@ export const ProfilImage = ({ user, changeAvatar, setChangeAvatar, }) => {
             bottomSheetRef1.current?.present();
           }, 300);
         }} style={{ marginBottom: 20, marginTop: 10 }} >
-          <Text style={Styles.darkRegular14}>Из библиотеки</Text>
+          <Text style={Styles.darkRegular14}>Готовые изображения</Text>
 
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {

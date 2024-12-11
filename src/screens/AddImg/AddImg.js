@@ -227,7 +227,7 @@ export const AddImg = ({ navigation }) => {
         <TouchableOpacity onPress={() => { delateFoto(index) }} style={{ position: 'absolute', top: 10, right: 10 }}>
           <CloseSvg1 />
         </TouchableOpacity>
-        <TouchableOpacity style={{ position: 'absolute', top: 50, right: 10 }} onPress={() => addPhoto(uri, 1)}>
+        <TouchableOpacity style={{ position: 'absolute', top: 60, right: 10 }} onPress={() => addPhoto(uri, 1)}>
           <AddImage />
         </TouchableOpacity>
       </ScrollView>
@@ -292,7 +292,7 @@ export const AddImg = ({ navigation }) => {
             {"\n"}
             Куда выложить?
             {"\n"}
-            Мы предлагаем такой контент выложить в несколько рубрик (не более 4 - x), где Ваше искусство увидят любители разного.
+            Мы предлагаем такой контент выложить в несколько рубрик (не более 4 - x), где твое искусство увидят любители разного.
           </Text>
           {/* <View style={{ alignItems: 'center' }}>
             <TouchableOpacity onPress={() => addPhoto(uri, 1)}>

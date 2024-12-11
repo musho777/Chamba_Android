@@ -195,7 +195,7 @@ export const Comments = ({ commentData, CommentCount = () => { } }) => {
             width={getSound.data.length}
           />
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-            {/* <TouchableOpacity onPress={() => setIsOpen(true)}>
+            {/* <TouchableOpacity onPress={() => setIsOp en(true)}>
               <Emojy />
             </TouchableOpacity> */}
             <TouchableOpacity onPress={() => bottomSheetRef.current?.present()}>

@@ -27,7 +27,7 @@ export const Post = React.memo(({
   adminStatus,
   setPostUserId = () => { },
   AddToBack,
-
+  scroll = () => { }
 }) => {
   const user = useSelector((st) => st.userData)
   const [openModal, setOpenModal] = useState(false)
@@ -138,7 +138,11 @@ export const Post = React.memo(({
 
   const [isExpanded, setIsExpanded] = useState(false);
   return (
-    <View style={[{ marginVertical: 5, height: height }, (index == indexData && fullScreen) && styles.fullScreen, (index != indexData && fullScreen) && { display: 'none' }]}>
+    <View style={[
+      { marginVertical: 5, height: height },
+      index === indexData && fullScreen ? styles.fullScreen : null,
+      index !== indexData && fullScreen ? { opacity: 0 } : null,
+    ]}>
       {showSave && <ShowSave saveType={saveType} />}
       <View style={styles.block}>
         {!fullScreen && <View style={{ position: 'absolute', zIndex: 111, width: '100%' }}>
@@ -175,6 +179,9 @@ export const Post = React.memo(({
           setIsExpanded={(e) => setIsExpanded(e)}
           isExpanded={isExpanded}
           id={index}
+          big={big}
+          // scroll={scroll}
+          scroll={(e) => scroll({ e: e, index: index })}
           adminStatus={adminStatus}
         /> :
           <View style={{ height: 570, position: 'relative' }}>
@@ -187,7 +194,7 @@ export const Post = React.memo(({
             </View>
           </View>
         }
-        {!isExpanded && !fullScreen && adminStatus != 0 && < View style={styles.PostBody}>
+        {!isExpanded && !fullScreen && < View style={styles.PostBody}>
           <PostBody
             postCount={user.postCount}
             commentCount={data?.comment_count}
@@ -216,8 +223,8 @@ export const Post = React.memo(({
   return (
     prevProps.data?.comment_count === nextProps.data?.comment_count &&
     prevProps.data?.id === nextProps.data?.id &&
-    prevProps.data?.description === nextProps.data?.description
-
+    prevProps.data?.description === nextProps.data?.description &&
+    prevProps.data.scroll === nextProps.data.scroll
   )
 });
 
@@ -239,19 +246,13 @@ const styles = StyleSheet.create({
     height: 570,
   },
   fullScreen: {
-    height: 800,
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 9999,
+    height: 'auto',
+    zIndex: 99999,
   },
   PostBody: {
     zIndex: 999,
     bottom: 40,
-    width: '100%',
-    zIndex: 1
+    width: '100%'
   },
   img: {
     width: windowWidth,
