@@ -54,7 +54,18 @@ export const EditProfilScreen = ({ navigation }) => {
     "Pattaya-Regular",
     "ProstoOne-Regular",
     "RubikSprayPaint-Regular",
-    "SofiaSansExtraCondensed-Regular"
+    "SofiaSansExtraCondensed-Regular",
+
+    "HachiMaruPop-Regular",
+    "JetBrainsMono-Regular",
+    "MontserratUnderline-Regular",
+    "Neucha-Regular",
+    "NotoSansDisplay_Condensed-Regular",
+    "Pangolin-Regular",
+    "RubikBubbles-Regular",
+    "ShantellSans-Regular",
+    "Spectral-Regular",
+    "Tinos-Regular"
   ]
 
   const color = [
@@ -298,7 +309,7 @@ export const EditProfilScreen = ({ navigation }) => {
             <Fild setIsOpen={(e) => setIsOpen(e)} discription multiline={true} value={discription} hadnelChange={(e) => setDiscription(e)} placeholder={accauntType ? t(mainData.lang).Brieflyaboutyourself : "О нас"} />
             <View style={{ width: '100%', borderWidth: 1, marginTop: 10, borderColor: AppColors.Solitude_Color, }} />
             <Text style={[Styles.balihaiMedium10, { paddingHorizontal: 17, marginTop: 5, color: 'red' }]}>
-              Чем больше заполнишь информацию о себе, тем точнее будет предлагаться контент. Помимо выбранных тобой рубрик будет предлагаться контент из твоего города.
+              Чем больше заполнишь информацию о себе, тем точнее будет предлагаться контент. Помимо выбранных тобой рубрик будет предлагаться контент с твоего города.
             </Text>
             <View>
               {accauntType && <DateComponent error={error} mount={mount} setMount={(e) => setMount(e)} day={day} setDay={(e) => setDay(e)} year={year} setYera={(e) => setYear(e)} />}

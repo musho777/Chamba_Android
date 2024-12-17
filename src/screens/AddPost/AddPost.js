@@ -72,7 +72,18 @@ export const AddPost = () => {
     "Pattaya-Regular",
     "ProstoOne-Regular",
     "RubikSprayPaint-Regular",
-    "SofiaSansExtraCondensed-Regular"
+    "SofiaSansExtraCondensed-Regular",
+
+    "HachiMaruPop-Regular",
+    "JetBrainsMono-Regular",
+    "MontserratUnderline-Regular",
+    "Neucha-Regular",
+    "NotoSansDisplay_Condensed-Regular",
+    "Pangolin-Regular",
+    "RubikBubbles-Regular",
+    "ShantellSans-Regular",
+    "Spectral-Regular",
+    "Tinos-Regular"
   ]
   const [emojy, setEmojy] = useState(false)
   const [activeFont, setActiveFont] = useState("Montserrat-Regular")
@@ -212,7 +223,7 @@ export const AddPost = () => {
         error={error}
         Close={() => Close()}
       />
-      <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999 }]}>{t(mainData.lang).Yourcontent}</Text>
+      <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: 'red' }]}>{t(mainData.lang).Yourcontent}</Text>
       <ScrollView contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }} >
         <View style={styles.selectImage}>
           <Text style={{ fontFamily: activeFont, color: color, position: 'absolute', zIndex: 9999, fontSize: fontSize, textAlign: 'center' }}>{text}</Text>

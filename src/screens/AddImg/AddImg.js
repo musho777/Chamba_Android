@@ -215,7 +215,7 @@ export const AddImg = ({ navigation }) => {
     return <View behavior={Platform.OS === 'ios' ? 'padding' : "position"}>
       <ScrollView style={{ height: 550 }}>
         <FastImage
-          style={[styles.img, localheight[index]?.height + 50 >= localheight[index]?.width ? { maxHeight: 550 } : { maxHeight: 393 }]}
+          style={[styles.img, localheight[index]?.height > localheight[index]?.width ? { minHeight: 570 } : { minHeight: 393 }]}
           source={{ uri: item.uri }}
           onLoad={(event) => {
             const { width, height } = event.nativeEvent;
@@ -263,7 +263,7 @@ export const AddImg = ({ navigation }) => {
           setFirst={(e) => setFirst(e)}
           Close={() => Close()}
         />
-        <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999 }]}>{t(mainData.lang).Yourcontent}</Text>
+        <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: 'red' }]}>{t(mainData.lang).Yourcontent}</Text>
         <View style={styles.centeredView}>
           <View style={styles.selectImage}>
             <FlatList
@@ -286,8 +286,8 @@ export const AddImg = ({ navigation }) => {
             ))}
           </View>}
         </View>
-        {!keyboardVisible && <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
-          <Text style={{ color: 'white', fontSize: 10, paddingHorizontal: 20, }}>
+        <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
+          <Text style={{ color: 'red', fontSize: 10, paddingHorizontal: 20, }}>
             Иногда мы затрудняемся в вопросе, в какую рубрику выложить контент, так как в одном посте может быть запечатлен красивый автомобиль, милая собачка, нежное море и белоснежная яхта.
             {"\n"}
             Куда выложить?
@@ -299,8 +299,7 @@ export const AddImg = ({ navigation }) => {
               <AddImage />
             </TouchableOpacity>
           </View> */}
-
-        </View>}
+        </View>
       </View>
     );
   else {
@@ -339,7 +338,7 @@ const styles = StyleSheet.create({
     borderColor: 'red'
   },
   img: {
-    height: 550,
+    // height: 570,
     width: windowWidth,
     borderRadius: 11,
   },

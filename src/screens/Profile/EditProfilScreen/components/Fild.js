@@ -36,7 +36,18 @@ export const Fild = ({ bB = 1, placeholder, value, hadnelChange, svg, multiline,
     "Pattaya-Regular",
     "ProstoOne-Regular",
     "RubikSprayPaint-Regular",
-    "SofiaSansExtraCondensed-Regular"
+    "SofiaSansExtraCondensed-Regular",
+
+    "HachiMaruPop-Regular",
+    "JetBrainsMono-Regular",
+    "MontserratUnderline-Regular",
+    "Neucha-Regular",
+    "NotoSansDisplay_Condensed-Regular",
+    "Pangolin-Regular",
+    "RubikBubbles-Regular",
+    "ShantellSans-Regular",
+    "Spectral-Regular",
+    "Tinos-Regular"
   ]
   const [activeFont, setActicveFont] = useState("Montserrat-Regular")
   const [activeColor, setActiveColor] = useState({ title: '#000000', id: 1 })

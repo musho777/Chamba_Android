@@ -84,7 +84,7 @@ export const Controler = forwardRef(({
         {!volume ?
 
           <MuteSvg /> :
-          <Image style={{ width: 25, height: 25 }} source={require('../../../../assets/img/Sound.png')} />}
+          <Image style={{ width: 25, height: 25, marginTop: 20 }} source={require('../../../../assets/img/Sound.png')} />}
       </TouchableOpacity>
       <View style={styles.playButton}>
         {(showStartButton && !paused) && <TouchableOpacity style={{ transform: [{ rotate: '360deg' }] }} onPress={() => LakeCurrentTime()}>
@@ -114,7 +114,7 @@ export const Controler = forwardRef(({
     <TouchableOpacity style={[styles.voice1, { top: -height }, big && { top: 55, right: 5 }]} activeOpacity={1} onPress={() => setVolume(volume === 0 ? 1 : 0)}>
       {!volume ?
         <MuteSvg /> :
-        <Image style={{ width: 25, height: 25 }} source={require('../../../../assets/img/Sound.png')} />}
+        <Image style={{ width: 25, height: 25, marginTop: 20 }} source={require('../../../../assets/img/Sound.png')} />}
     </TouchableOpacity>
     <TouchableOpacity style={[styles.full1, { top: -height - 40 }]} onPress={() => setFullScreen(!full)}>
       <FullScrenn />
