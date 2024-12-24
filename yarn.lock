@@ -12422,6 +12422,7 @@ __metadata:
     react-native-multiple-select: ^0.5.12
     react-native-pager-view: ^6.2.0
     react-native-permissions: ^3.8.4
+    react-native-privacy-snapshot: ^1.0.0
     react-native-progress: ^5.0.1
     react-native-push-notification: ^8.1.1
     react-native-reanimated: ^3.15.0
@@ -13191,6 +13192,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-privacy-snapshot@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-native-privacy-snapshot@npm:1.0.0"
+  checksum: d3bab7bdcf682522173799ff068ed706672e01336b355727d652621ee43b6dd1d374a60bf1fbd6530280bf40430d00f094cb2a48f1191084d6aaffdd8ef80702
+  languageName: node
+  linkType: hard
+
 "react-native-progress@npm:^5.0.1":
   version: 5.0.1
   resolution: "react-native-progress@npm:5.0.1"
@@ -13305,15 +13313,15 @@ __metadata:
   linkType: hard
 
 "react-native-screens@npm:^3.22.1":
-  version: 3.22.1
-  resolution: "react-native-screens@npm:3.22.1"
+  version: 3.35.0
+  resolution: "react-native-screens@npm:3.35.0"
   dependencies:
     react-freeze: ^1.0.0
     warn-once: ^0.1.0
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 3b592ff31d9dfde5e2ce967f85f3ad17a94f4f3bee2248a3dad9ec791e7cda72a431f86b468b3b2a70ebeffb49b462f8162668a58fb9ddabb10b5a369816850d
+  checksum: cb8a0c8d8a41a8a1065cc2253e4272a970366a7d80bc54e889b2f48de7ccccd3e828e2701de39c0453a67956ec0cad140fb506324cce04419b5e2eb495c038c2
   languageName: node
   linkType: hard
 

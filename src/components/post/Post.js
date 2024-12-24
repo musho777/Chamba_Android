@@ -36,7 +36,7 @@ export const Post = React.memo(({
   const [long, setLong] = useState(false)
   const [activeImage, setActiveImage] = useState(0)
   const { fullScreen, indexData } = useSelector((st) => st.fullScreenData)
-  const [height, setHeight] = useState(570)
+  const [height, setHeight] = useState(580)
   const onLongClikc = () => {
     setLong(true)
   }
@@ -184,10 +184,10 @@ export const Post = React.memo(({
           scroll={(e) => scroll({ e: e, index: index })}
           adminStatus={adminStatus}
         /> :
-          <View style={{ height: 570, position: 'relative' }}>
+          <View style={{ height: 580, position: 'relative' }}>
             <Image
               source={fone[data?.background - 1]}
-              style={[{ height: 570 }, styles.img]}
+              style={[{ height: 580 }, styles.img]}
             />
             <View style={styles.textWrapper}>
               <Text style={{ padding: 10, textAlign: 'center', color: data?.color, fontFamily: data?.font_family, fontSize: JSON.parse(data?.font_size) }}>{JSON.parse(data?.description)}</Text>
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 570,
+    height: 580,
   },
   fullScreen: {
     height: 'auto',

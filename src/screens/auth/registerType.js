@@ -1,4 +1,4 @@
-import { Animated, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
+import { Animated, Linking, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
 import { Styles } from "../../styles/Styles"
 import { useSelector } from "react-redux";
 import { Button } from "../../ui/Button";
@@ -6,7 +6,8 @@ import { t } from '../../components/lang';
 import { useRef, useState } from "react";
 import { TypeBlock } from "./component/typeblock";
 import { useNavigation } from "@react-navigation/native";
-import { DownSvg, TopArrow } from "../../assets/svg/Svgs";
+import { ChecboxUNchekedSvg, CheckedChexbox, DownSvg, TopArrow } from "../../assets/svg/Svgs";
+
 
 export const RegisterType = () => {
   const [collapsed, setCollapsed] = useState(true);
@@ -15,10 +16,16 @@ export const RegisterType = () => {
   const mainData = useSelector(st => st.mainData);
   const navigation = useNavigation()
   const [showAll, setShowAll] = useState(false)
+  const [checked, setChecked] = useState(false)
   const heightAnim = useRef(new Animated.Value(0)).current;
   const GoNextPage = () => {
     navigation.navigate('RegisterScreen', { selected })
   }
+
+  const handlePress = async () => {
+    await Linking.openURL("https://chambaonline.pro/EULA");
+  };
+
 
   const startAnimation = () => {
     setShowAll(!showAll)
@@ -88,9 +95,23 @@ export const RegisterType = () => {
 
 
     </View>
+    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10, gap: 10 }}>
+      <TouchableOpacity activeOpacity={1} onPress={() => setChecked(!checked)} style={{ flexDirection: 'row', alignItems: "center", gap: 10 }}>
+        {!checked ?
+          <ChecboxUNchekedSvg /> :
+          <CheckedChexbox />
+        }
+      </TouchableOpacity>
+      <Text style={{ color: 'black', fontSize: 13 }}>
+        Я согласен с{' '}
+        <Text style={{ color: 'blue' }} onPress={() => handlePress()}>
+          условиями использования
+        </Text>.
+      </Text>
+    </View>
     <View style={styles.buttonBlock}>
       <Button
-        disabled={selected == 0}
+        disabled={!checked || selected == 0}
         onPress={() => GoNextPage()}
         title={t(mainData.lang).Next}
       />

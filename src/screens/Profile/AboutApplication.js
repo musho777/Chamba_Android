@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 import { Styles } from '../../styles/Styles';
-
+import { useSelector } from 'react-redux';
+import { t } from '../../components/lang';
+import { BackArrowWhite } from '../../assets/svg/Svgs';
 
 const { width, height } = Dimensions.get('window');
 
-export const AboutApplication = () => {
+export const AboutApplication = ({ navigation }) => {
+  const mainData = useSelector(st => st.mainData);
 
   const [active, setActive] = useState(0);
   const sliderData = [
@@ -99,6 +102,14 @@ export const AboutApplication = () => {
 
   return (
     <View>
+      {/* <View style={{ position: 'absolute', top: 55, width: '100%', height: 30, zIndex: 9999 }}>
+        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15 }} onPress={() => navigation.goBack()}>
+          <BackArrowWhite />
+          <Text style={[Styles.darkSemiBold16, { marginHorizontal: 15, color: 'white' }]}>
+            {t(mainData.lang).AboutProgram}
+          </Text>
+        </TouchableOpacity>
+      </View> */}
       <View style={styles.paginationWrapper}>
         {sliderData.map((elm, i) => {
           return <View key={i} style={[styles.pagination, active == i && { backgroundColor: '#FFC24B' }]} />

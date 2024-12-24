@@ -1,6 +1,6 @@
 import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import * as Progress from 'react-native-progress';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Styles } from '../../styles/Styles';
 
 export const AddImageLoading = ({ uri }) => {
   const [progress, setProgress] = useState(0);

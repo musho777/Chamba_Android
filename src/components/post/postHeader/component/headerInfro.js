@@ -2,12 +2,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { CheckMarkUserSvg } from "../../../../assets/svg/Svgs"
 import { Styles } from "../../../../styles/Styles";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 export const HeaderInfo = ({ user, data }) => {
   const navigation = useNavigation()
   const mounth = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-  const [day, setDay] = useState('')
+  // const [day, setDay] = useState('')
 
   function canParseJSON(jsonString) {
     try {
@@ -19,23 +19,33 @@ export const HeaderInfo = ({ user, data }) => {
   }
 
 
-  useEffect(() => {
-    const currentDate = new Date(data?.created_at);
-    let dayOfMonth = currentDate.getDate();
-    let hour = currentDate.getHours();
-    let minute = currentDate.getMinutes();
-    const Mounth = currentDate.getMonth()
-    if (minute <= 9) {
-      minute = `0${minute}`
-    }
-    if (hour <= 9) {
-      hour = `0${hour}`
-    }
-    if (dayOfMonth <= 9) {
-      dayOfMonth = `0${dayOfMonth}`
-    }
-    setDay(`${dayOfMonth} ${mounth[Mounth]} в ${hour}:${minute}`)
-  }, [data?.created_at])
+  // useEffect(() => {
+  //   const currentDate = new Date(data?.created_at);
+  //   let dayOfMonth = currentDate.getDate();
+  //   let hour = currentDate.getHours();
+  //   let minute = currentDate.getMinutes();
+  //   const Mounth = currentDate.getMonth()
+  //   if (minute <= 9) {
+  //     minute = `0${minute}`
+  //   }
+  //   if (hour <= 9) {
+  //     hour = `0${hour}`
+  //   }
+  //   if (dayOfMonth <= 9) {
+  //     dayOfMonth = `0${dayOfMonth}`
+  //   }
+  //   setDay(`${dayOfMonth} ${mounth[Mounth]} в ${hour}:${minute}`)
+  // }, [data?.created_at])
+
+  const formatDate = (dateString) => {
+    const currentDate = new Date(dateString);
+    const dayOfMonth = String(currentDate.getDate()).padStart(2, '0');
+    const hour = String(currentDate.getHours()).padStart(2, '0');
+    const minute = String(currentDate.getMinutes()).padStart(2, '0');
+    const month = mounth[currentDate.getMonth()];
+    return `${dayOfMonth} ${month} в ${hour}:${minute}`;
+  };
+
 
   return <TouchableOpacity
     activeOpacity={1}
@@ -52,7 +62,8 @@ export const HeaderInfo = ({ user, data }) => {
         {canParseJSON(data?.user?.name)}
         {data?.user.star > 0 && <CheckMarkUserSvg />}
       </View>
-      <Text style={[Styles.whiteMedium9]}>{day} </Text>
+      {/* <Text style={[Styles.whiteMedium9]}>{day} </Text> */}
+      <Text style={[Styles.whiteMedium9]}>{formatDate(data?.created_at)}</Text>
     </View>
   </TouchableOpacity>
 }
