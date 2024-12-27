@@ -7,8 +7,9 @@ import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
-import { StatusBar, View } from 'react-native';
+import { Platform, StatusBar, View } from 'react-native';
 import PushNotification from 'react-native-push-notification';
+import { enableSecureView, disableSecureView, forbidAndroidShare, allowAndroidShare } from 'react-native-prevent-screenshot-ios-android';
 
 export default App = () => {
 
@@ -135,6 +136,20 @@ export default App = () => {
 
 
 
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      // forbidAndroidShare(); //This function blocks the Screen share/Recording and taking screenshot for android devices.
+      // allowAndroidShare(); //This function allows to provide back the Screen share/Recording and screenshot functionality for android devices
+    }
+    if (Platform.OS == 'ios') {
+      // enableSecureView(); //This function blocks the Screen share/Recording and taking screenshot for iOS devices.
+      // disableSecureView(); //This function allows to provide back the Screen share/Recording and screenshot functionality for iOS devices
+    }
+    return () => {
+      // allowAndroidShare();
+      // disableSecureView() // Clean up when component unmounts
+    };
+  }, []);
 
 
   async function getData() {

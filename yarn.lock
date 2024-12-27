@@ -12422,7 +12422,7 @@ __metadata:
     react-native-multiple-select: ^0.5.12
     react-native-pager-view: ^6.2.0
     react-native-permissions: ^3.8.4
-    react-native-privacy-snapshot: ^1.0.0
+    react-native-prevent-screenshot-ios-android: ^1.1.0
     react-native-progress: ^5.0.1
     react-native-push-notification: ^8.1.1
     react-native-reanimated: ^3.15.0
@@ -13192,10 +13192,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-privacy-snapshot@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "react-native-privacy-snapshot@npm:1.0.0"
-  checksum: d3bab7bdcf682522173799ff068ed706672e01336b355727d652621ee43b6dd1d374a60bf1fbd6530280bf40430d00f094cb2a48f1191084d6aaffdd8ef80702
+"react-native-prevent-screenshot-ios-android@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "react-native-prevent-screenshot-ios-android@npm:1.1.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: ec72e1ab9af8fa192496200b0964e65786b014e371199f058e388f66b7b723beec306003eeba4364e2b74b2a138ec07835c0b9271f4425d4a299b76b4e6b3ea6
   languageName: node
   linkType: hard
 
