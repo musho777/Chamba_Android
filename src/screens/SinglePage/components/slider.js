@@ -10,7 +10,6 @@ import {
 import { AppColors } from '../../../styles/AppColors';
 import { VidioComponent } from '../../../components/post/Vidio/VidioComponent';
 import { Styles } from '../../../styles/Styles';
-import Sliders from '@react-native-community/slider';
 import FastImage from 'react-native-fast-image';
 
 
@@ -22,8 +21,7 @@ export const Slider = ({ photo, music_name, description, setActiveImage, save, s
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   const videoRef = useRef(null);
-  const [showSlider, setShowSlider] = useState(true)
-  const [heights, setHeights] = useState(600)
+  // const [showSlider, setShowSlider] = useState(true)
 
 
   const handleMomentumScrollEnd = (event) => {
@@ -68,18 +66,18 @@ export const Slider = ({ photo, music_name, description, setActiveImage, save, s
         decelerationRate="fast"
         data={photo}
         onScroll={() => {
-          setShowSlider(false)
+          // setShowSlider(false)
         }}
         onMomentumScrollEnd={handleMomentumScrollEnd}
         renderItem={({ item, index }) => {
-          let height = 580
+          let height = 600
           if (item.height < 650) {
             height = 400
-            setHeights(500)
+            // setHeights(500)
             setVertical(false)
           }
           else {
-            height = 650
+            height = 600
             setVertical(true)
           }
           return (
@@ -166,15 +164,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#CCD6DF',
     marginHorizontal: 5,
     borderRadius: 50,
-  },
-  hover: {
-    backgroundColor: 'rgba(0,0,0,0.8)',
-    paddingHorizontal: 5,
-    borderRadius: 10,
-    width: 'auto',
-    // position: 'absolute',
-    left: 3,
-    top: 10,
   },
   slider: {
     bottom: 50,

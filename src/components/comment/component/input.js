@@ -22,6 +22,6 @@ export const InputComponent = ({ sendComment, setSendCommet, sendCommentFunction
 
 const styles = StyleSheet.create({
   InputComponent: {
-    width: '80%',
+    width: '70%',
   }
 });

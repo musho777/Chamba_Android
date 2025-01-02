@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Image,
     Dimensions,
-    StatusBar,
 } from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import { AppColors } from '../styles/AppColors';
@@ -22,7 +21,7 @@ export const ModalSliderImg = ({ photo, activePhoto }) => {
                         resolve(400);
                     }
                     else {
-                        resolve(580);
+                        resolve(600);
                     }
                 },
                 (error) => {

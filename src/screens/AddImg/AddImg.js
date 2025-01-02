@@ -212,10 +212,10 @@ export const AddImg = ({ navigation }) => {
     setUri([])
   }
   const renderItem = ({ item, index }) => {
-    return <View style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 580 } : { height: 393 }} behavior={Platform.OS === 'ios' ? 'padding' : "position"}>
-      <ScrollView style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 580 } : { height: 393 }}>
+    return <View style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 600 } : { height: 393 }} behavior={Platform.OS === 'ios' ? 'padding' : "position"}>
+      <ScrollView style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 600 } : { height: 393 }}>
         <FastImage
-          style={[styles.img, (localheight[index]?.height - localheight[index]?.width) > 220 ? { minHeight: 580 } : { minHeight: 393 }]}
+          style={[styles.img, (localheight[index]?.height - localheight[index]?.width) > 220 ? { minHeight: 600 } : { minHeight: 393 }]}
           source={{ uri: item.uri }}
           onLoad={(event) => {
             const { width, height } = event.nativeEvent;
@@ -279,6 +279,15 @@ export const AddImg = ({ navigation }) => {
               maxToRenderPerBatch={10}
               renderItem={renderItem}
             />
+            <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
+              <Text style={{ color: 'white', fontSize: 12, paddingHorizontal: 20, color: '#FFC24B' }}>
+                Иногда мы затрудняемся в вопросе, в какую рубрику выложить контент, так как в одном публикации может быть запечатлен красивый автомобиль, милая собачка, красивые пальмы и нежное море.
+                {"\n"}
+                Куда выложить?
+                {"\n"}
+                Мы предлагаем такой контент выложить в несколько рубрик (не более 4-x), где твое искусство увидят любители разного.
+              </Text>
+            </View>
           </View>
           {uri?.length > 1 && <View style={styles.paginationWrapper}>
             {uri?.length > 1 && uri?.map((elm, i) => (
@@ -286,15 +295,7 @@ export const AddImg = ({ navigation }) => {
             ))}
           </View>}
         </View>
-        <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
-          <Text style={{ color: 'white', fontSize: 12, paddingHorizontal: 20, color: '#FFC24B' }}>
-            Иногда мы затрудняемся в вопросе, в какую рубрику выложить контент, так как в одном публикации может быть запечатлен красивый автомобиль, милая собачка, красивые пальмы и нежное море.
-            {"\n"}
-            Куда выложить?
-            {"\n"}
-            Мы предлагаем такой контент выложить в несколько рубрик (не более 4-x), где твое искусство увидят любители разного.
-          </Text>
-        </View>
+
       </View>
     );
   else {
