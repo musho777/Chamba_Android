@@ -153,8 +153,8 @@ function CustomDrawerContent(props) {
       </DrawerContentScrollView>
       <TouchableOpacity
         onPress={() => props.navigation.navigate('AboutApplication')}
-        style={[{ marginBottom: 20, height: 40, paddingLeft: 10, justifyContent: 'center', borderColor: "#FFC24B", width: 90, marginLeft: 15 }]}>
-        <Text style={Styles.darkRegular16}>{t(mainData.lang).AboutProgram}</Text>
+        style={[{ marginBottom: 20, height: 40, paddingHorizontal: 10, justifyContent: 'center', borderColor: "#FFC24B", width: 84, marginLeft: 15, borderWidth: 1, }]}>
+        <Text style={Styles.darkSemiBold16}>{t(mainData.lang).AboutProgram}</Text>
       </TouchableOpacity>
     </View>);
 }

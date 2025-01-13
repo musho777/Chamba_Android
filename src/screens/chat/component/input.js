@@ -1,4 +1,3 @@
-import { Text, View } from "react-native"
 import { Input } from "../../../ui/Input"
 import { useEffect, useState } from "react"
 import Sound from "react-native-sound"
@@ -6,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { newMessageAction } from "../../../store/action/action"
 import { t } from '../../../components/lang';
 import { Styles } from "../../../styles/Styles"
+import { AppColors } from "../../../styles/AppColors"
+import { SendMsgSvg } from "../../../assets/svg/Svgs"
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
 
 
 export const InputComponent = ({ sendMSg, setSendMsg, setAddToBlackList, addToblackList, route }) => {
@@ -66,18 +68,58 @@ export const InputComponent = ({ sendMSg, setSendMsg, setAddToBlackList, addTobl
 
   return <View style={{ width: '80%' }}>
     {!showInput ?
-      <Input
-        msg
-        pdR={50}
-        placeholder={'Введите текст'}
-        data={sendMSg}
-        onChange={e => setSendMsg(e)}
-        width={'100%'}
-        sendMsg={() => sendMsgFunction()}
-      /> :
+      <View
+        style={{ width: "100%", }}>
+        <TextInput
+          style={styles.Input}
+          multiline
+          placeholder={'Введите текст'}
+          placeholderTextColor={AppColors.BaliHai_Color}
+          onChangeText={e => setSendMsg(e)}
+          value={sendMSg}
+        />
+        <View style={[Styles.flexAlignItems, styles.eye, { height: '100%' }]}>
+          {sendMSg?.length > 0 &&
+            <TouchableOpacity onPress={() => sendMsgFunction()} style={{ marginLeft: 10 }}>
+              <SendMsgSvg />
+            </TouchableOpacity>
+          }
+        </View>
+      </View>
+      // <Input
+      //   msg
+      //   pdR={50}
+      //   placeholder={'Введите текст'}
+      //   data={sendMSg}
+      //   onChange={e => setSendMsg(e)}
+      //   width={'100%'}
+      //   sendMsg={() => sendMsgFunction()}
+      // /> 
+      :
       <View style={{ marginBottom: 20, justifyContent: 'center', }}>
         <Text style={[Styles.balihaiMedium14, { textAlign: 'center' }]}>{blackListStatus}</Text>
       </View>
     }
   </View>
 }
+
+const styles = StyleSheet.create({
+  Input: {
+    backgroundColor: AppColors.AliceBlue_Color,
+    borderRadius: 50,
+    paddingHorizontal: 20,
+    paddingRight: 45,
+    // paddingTop: 15,
+    color: AppColors.Blcak_Color,
+    position: 'relative',
+    maxHeight: 80,
+    minHeight: 40,
+  },
+  eye: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: 20,
+    height: '70%',
+  },
+});

@@ -36,13 +36,14 @@ export const MsgBlock = ({ msg, from, timestamp }) => {
       style={[styles.block1, from ? { alignSelf: 'flex-start' } : { alignSelf: 'flex-end' },
       ]}>
       <FastImage source={{ uri: msg }} style={styles.image} />
-      <View style={from ?
-        [styles.msgDate,
-        JSON.stringify(getData()).length > 7 ? { right: -35 } : { right: -20 }
-        ] :
-        [styles.msgDate,
-        JSON.stringify(getData()).length > 7 ? { left: -35 } : { left: -20 }
-        ]
+      <View style={
+        from ?
+          [styles.msgDate,
+          JSON.stringify(getData()).length > 7 ? { right: 5, bottom: -15, } : { right: 5, bottom: -15, }
+          ] :
+          [styles.msgDate,
+          JSON.stringify(getData()).length > 7 ? { left: 5, bottom: -15, } : { left: 5, bottom: -15, }
+          ]
       }
       >
         <Text style={Styles.balihaiMedium10}>{getData()}</Text>
@@ -64,13 +65,14 @@ export const MsgBlock = ({ msg, from, timestamp }) => {
           <FastImage source={{ uri: msg }} style={styles.image} /> :
           <Text style={Styles.CharcoalMedium14}>{msg}</Text>
         }
-        <View style={from ?
-          [styles.msgDate,
-          JSON.stringify(getData()).length > 7 ? { right: -35 } : { right: -20 }
-          ] :
-          [styles.msgDate,
-          JSON.stringify(getData()).length > 7 ? { left: -35 } : { left: -20 }
-          ]
+        <View style={
+          from ?
+            [styles.msgDate,
+            JSON.stringify(getData()).length > 7 ? { right: 5, bottom: -15, } : { right: 5, bottom: -15, }
+            ] :
+            [styles.msgDate,
+            JSON.stringify(getData()).length > 7 ? { left: 5, bottom: -15, } : { left: 5, bottom: -15, }
+            ]
         }
         >
           <Text style={Styles.balihaiMedium10}>{getData()}</Text>
@@ -87,13 +89,14 @@ export const MsgBlock = ({ msg, from, timestamp }) => {
           <FastImage source={{ uri: msg }} style={styles.image} /> :
           <Text style={{ fontSize: 35 }}>{msg}</Text>
         }
-        <View style={from ?
-          [styles.msgDate,
-          JSON.stringify(getData()).length > 7 ? { right: -35 } : { right: -20 }
-          ] :
-          [styles.msgDate,
-          JSON.stringify(getData()).length > 7 ? { left: -35 } : { left: -20 }
-          ]
+        <View style={
+          from ?
+            [styles.msgDate,
+            JSON.stringify(getData()).length > 7 ? { right: 5, bottom: -15, } : { right: 5, bottom: -15, }
+            ] :
+            [styles.msgDate,
+            JSON.stringify(getData()).length > 7 ? { left: 5, bottom: -15, } : { left: 5, bottom: -15, }
+            ]
         }
         >
           <Text style={Styles.balihaiMedium10}>{getData()}</Text>
@@ -105,12 +108,13 @@ export const MsgBlock = ({ msg, from, timestamp }) => {
 const styles = StyleSheet.create({
   block: {
     backgroundColor: AppColors.AliceBlue_Color,
-    marginVertical: 10,
     padding: 10,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderBottomEndRadius: 20,
     marginHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 20,
   },
   block1: {
     marginVertical: 10,
@@ -130,3 +134,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
+
+
