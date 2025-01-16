@@ -1,82 +1,75 @@
 import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 import { Styles } from '../../styles/Styles';
-import { useSelector } from 'react-redux';
+import { HeaderWhiteTitle } from '../../headers/HeaderWhiteTitle.';
 import { t } from '../../components/lang';
-import { BackArrowWhite } from '../../assets/svg/Svgs';
+import { useSelector } from 'react-redux';
+import { BackArrow, BackArrowWhite } from '../../assets/svg/Svgs';
+
 
 const { width, height } = Dimensions.get('window');
 
 export const AboutApplication = ({ navigation }) => {
   const mainData = useSelector(st => st.mainData);
-
   const [active, setActive] = useState(0);
   const sliderData = [
     {
       id: '1',
-      title: "Взрывная энергия в фото и видео формате!",
-      image: require('../../assets/img/info.jpg'),
-      description: ""
+      image: require('../../assets/img/2.jpg'),
     },
     {
       id: '2',
       title: '',
-      image: require('../../assets/img/info2.jpg'),
-      description: `Chamba – это приложение для любителей снимать крутые фото и короткие видео событий, происходящих не с тобой, а вокруг тебя!`,
+      image: require('../../assets/img/3.jpg'),
     },
     {
       id: '3',
       title: "",
-      description: "Представляем приложение, которое перевернет твою  ленту и позволит тебе увидеть мир по-новому! Вот то, что мы приготовили для тебя:",
-      image: require('../../assets/img/info3.jpg'),
+      image: require('../../assets/img/4.jpg'),
     },
     {
       id: '4',
-      title: "Персональная лента:",
-      description: " После быстрой регистрации, ты выбираешь любимые рубрики, а их более 35, и получаешь контент, подходящий именно тебе!",
-      image: require('../../assets/img/info1.jpg'),
+      image: require('../../assets/img/5.jpg'),
     },
     {
       id: '5',
-      title: "Попутный контент:",
-      description: "Любишь путешествовать? Выбрав эту рубрику, к красочному контенту будут предложены такие рубрики как фрукты, овощи, еда и напитки, города и страны, активный отдых, экстрим, развлечения, природа, времена года, охота и рыбалка, и релакс.",
-      image: require('../../assets/img/info4.jpg'),
+      image: require('../../assets/img/6.jpg'),
     },
     {
       id: '6',
-      title: "Обожаешь свою любимую собачку?",
-      description: "Мы сразу предложим загрузить ее в рубрику “Животные” и твой контент направится точно тем людям, которые выбрали эту рубрику!",
-      image: require('../../assets/img/info5.jpg'),
+      image: require('../../assets/img/7.jpg'),
     },
     {
       id: '7',
-      title: "Локальный контент:",
-      description: "Получай контент в первую очередь со своего города! интересные места, природные явления и многое другое - все это в твоей ленте!",
-      image: require('../../assets/img/info6.jpg'),
+      image: require('../../assets/img/8.jpg'),
     },
     {
       id: '8',
-      title: "Информация о коллегах по сфере/отрасли",
-      description: "Ты риэлтор, строитель, блогер, бармен, шеф-повар или представляешь товары или услуги? Мы аккуратно предложим тебе контент от твоих коллег по отрасли, как работают другие специалисты, и будь в курсе последних трендов!",
-      image: require('../../assets/img/info7.jpg'),
+      image: require('../../assets/img/9.jpg'),
     },
     {
       id: '9',
-      title: "Уникальный контент:",
-      description: "Мы покажем тебе все самое свежее и интересное, никаких групп, сообществ, фотофильтров и повторяющегося контента!",
-      image: require('../../assets/img/info8.jpg'),
+      image: require('../../assets/img/10.jpg'),
     },
     {
       id: '10',
-      title: "Разнообразие контента:",
-      description: "От спокойных пейзажей до захватывающих событий, у нас найдется что-то для каждого!",
-      image: require('../../assets/img/info9.jpg'),
+      image: require('../../assets/img/11.jpg'),
     },
     {
       id: '11',
-      title: "",
-      description: "Каждый пользователь может посмотреть подробную статистику по загруженной публикации.",
-      image: require('../../assets/img/info10.jpg'),
+      image: require('../../assets/img/12.jpg'),
+    },
+    {
+      id: '12',
+      image: require('../../assets/img/1.jpg'),
+    },
+    {
+      id: '13',
+      image: require('../../assets/img/13.jpg'),
+    },
+    {
+      id: '14',
+      image: require('../../assets/img/14.jpg'),
     },
   ];
 
@@ -91,25 +84,19 @@ export const AboutApplication = ({ navigation }) => {
 
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Image source={item.image} style={styles.image} />
-      <View style={styles.textWrapper}>
-        {item.title && <Text style={[Styles.darkSemiBold14, { color: 'white', textAlign: 'center' }]}>{item.title}</Text>}
-        {item.description && <Text style={[Styles.balihaiMedium13, { color: 'white' }]}>{item.description}</Text>}
-      </View>
-    </View>
+    <Image source={item.image} style={styles.image} />
   );
 
   return (
-    <View>
-      {/* <View style={{ position: 'absolute', top: 55, width: '100%', height: 30, zIndex: 9999 }}>
-        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15 }} onPress={() => navigation.goBack()}>
+    <View style={{ backgroundColor: 'rgb(12,59,78)' }}>
+      <View style={{ position: 'absolute', top: 55, width: '100%', height: 30, zIndex: 9999 }}>
+        {/* <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15 }} onPress={() => navigation.goBack()}>
           <BackArrowWhite />
           <Text style={[Styles.darkSemiBold16, { marginHorizontal: 15, color: 'white' }]}>
             {t(mainData.lang).AboutProgram}
           </Text>
-        </TouchableOpacity>
-      </View> */}
+        </TouchableOpacity> */}
+      </View>
       <View style={styles.paginationWrapper}>
         {sliderData.map((elm, i) => {
           return <View key={i} style={[styles.pagination, active == i && { backgroundColor: '#FFC24B' }]} />
@@ -135,14 +122,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 15,
   },
-  itemContainer: {
-    alignItems: 'center',
-  },
   image: {
     width: width,
     height: height,
     borderRadius: 10,
-    marginBottom: 5,
+    resizeMode: 'contain',
+    marginTop: 15,
   },
   title: {
     fontSize: 14,
@@ -150,7 +135,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   pagination: {
-    width: width / 14,
+    width: width / 18,
     height: 3,
     backgroundColor: '#CCD6DF',
     borderRadius: 10,
@@ -165,13 +150,4 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center'
   },
-  textWrapper: {
-    position: 'absolute',
-    marginTop: 100,
-    gap: 20,
-    paddingHorizontal: 10,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    paddingVertical: 10,
-    borderRadius: 10
-  }
 });

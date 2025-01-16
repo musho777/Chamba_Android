@@ -72,7 +72,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
                     }
                     }
                     style={[Styles.darkMedium16, { paddingBottom: 4 }]}>{t(mainData.lang).Addphoto}
-                    <Text style={{ fontSize: 10 }}>  (не более 1-й минуты)</Text>
+                    {/* <Text style={{ fontSize: 10 }}>  (не более 1-й минуты)</Text> */}
                   </Text>
                 </TouchableOpacity>
               </View>

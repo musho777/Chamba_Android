@@ -36,23 +36,23 @@ const windowWidth = Dimensions.get('window').width;
 export const AddImg = ({ navigation }) => {
   const insets = useSafeAreaInsets();
 
-  const [keyboardVisible, setKeyboardVisible] = useState(false);
+  // const [keyboardVisible, setKeyboardVisible] = useState(false);
   const ref = useRef()
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      setKeyboardVisible(true);
-    });
+  // useEffect(() => {
+  //   const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+  //     setKeyboardVisible(true);
+  //   });
 
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      setKeyboardVisible(false);
-    });
+  //   const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+  //     setKeyboardVisible(false);
+  //   });
 
-    // Cleanup listeners on unmount
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
-    };
-  }, []);
+  //   // Cleanup listeners on unmount
+  //   return () => {
+  //     keyboardDidHideListener.remove();
+  //     keyboardDidShowListener.remove();
+  //   };
+  // }, []);
 
   const mainData = useSelector(st => st.mainData);
   const [uri, setUri] = useState([]);
@@ -121,6 +121,7 @@ export const AddImg = ({ navigation }) => {
       doneTitle: "Добавить",
       usedCameraButton: false,
       isPreview: false,
+      mediaType: "photo",
     }
     try {
       const response = await openPicker(options);

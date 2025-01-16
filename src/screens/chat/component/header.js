@@ -146,7 +146,7 @@ export const Header = ({ data, route, user, askdelateModal }) => {
 }
 const styles = StyleSheet.create({
   header: {
-    marginBottom: 30,
+    marginBottom: 5,
     paddingHorizontal: 15,
     zIndex: 999,
     backgroundColor: 'white'
