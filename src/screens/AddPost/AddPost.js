@@ -223,7 +223,7 @@ export const AddPost = () => {
         error={error}
         Close={() => Close()}
       />
-      <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B' }]}>{t(mainData.lang).Yourcontent}</Text>
+      <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B', borderWidth: 1, borderColor: "white" }]}>{t(mainData.lang).Yourcontent}</Text>
       <ScrollView contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }} >
         <View style={styles.selectImage}>
           <Text style={{ fontFamily: activeFont, color: color, position: 'absolute', zIndex: 9999, fontSize: fontSize, textAlign: 'center' }}>{text}</Text>
@@ -334,7 +334,7 @@ export const AddPost = () => {
 
 const styles = StyleSheet.create({
   img: {
-    height: 580,
+    height: 540,
     width: windowWidth,
     borderRadius: 11,
   },

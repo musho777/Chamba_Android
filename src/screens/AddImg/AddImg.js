@@ -213,10 +213,10 @@ export const AddImg = ({ navigation }) => {
     setUri([])
   }
   const renderItem = ({ item, index }) => {
-    return <View style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 580 } : { height: 393 }} behavior={Platform.OS === 'ios' ? 'padding' : "position"}>
-      <ScrollView style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 580 } : { height: 393 }}>
+    return <View style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 540 } : { height: 393 }} behavior={Platform.OS === 'ios' ? 'padding' : "position"}>
+      <ScrollView style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 540 } : { height: 393 }}>
         <FastImage
-          style={[styles.img, (localheight[index]?.height - localheight[index]?.width) > 220 ? { minHeight: 580 } : { minHeight: 393 }]}
+          style={[styles.img, (localheight[index]?.height - localheight[index]?.width) > 220 ? { minHeight: 540 } : { minHeight: 393 }]}
           source={{ uri: item.uri }}
           onLoad={(event) => {
             const { width, height } = event.nativeEvent;
@@ -264,7 +264,7 @@ export const AddImg = ({ navigation }) => {
           setFirst={(e) => setFirst(e)}
           Close={() => Close()}
         />
-        <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B' }]}>{t(mainData.lang).Yourcontent}</Text>
+        <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B', borderWidth: 1, borderColor: "white", paddingHorizontal: 5, marginHorizontal: 5 }]}>{t(mainData.lang).Yourcontent}</Text>
         <View style={styles.centeredView}>
           <View style={styles.selectImage}>
             <FlatList
@@ -281,7 +281,7 @@ export const AddImg = ({ navigation }) => {
               renderItem={renderItem}
             />
             <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
-              <Text style={{ fontFamily: 'Montserrat-Medium', color: 'white', fontSize: 9, paddingHorizontal: 20, color: '#FFC24B' }}>
+              <Text style={{ fontFamily: 'Montserrat-Medium', color: 'white', fontSize: 9, paddingHorizontal: 10, color: '#FFC24B', borderWidth: 1, borderColor: "white", marginHorizontal: 5 }}>
                 Иногда мы затрудняемся в вопросе, в какую рубрику выложить контент, так как в одном публикации может быть запечатлен красивый автомобиль, милая собачка, красивые пальмы и нежное море.
                 {"\n"}
                 Куда выложить?

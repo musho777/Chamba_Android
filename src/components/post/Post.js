@@ -184,10 +184,10 @@ export const Post = React.memo(({
           scroll={(e) => scroll({ e: e, index: index })}
           adminStatus={adminStatus}
         /> :
-          <View style={{ height: 580, position: 'relative' }}>
+          <View style={{ height: 540, position: 'relative' }}>
             <Image
               source={fone[data?.background - 1]}
-              style={[{ height: 580 }, styles.img]}
+              style={[{ height: 540 }, styles.img]}
             />
             <View style={styles.textWrapper}>
               <Text style={{ padding: 10, textAlign: 'center', color: data?.color, fontFamily: data?.font_family, fontSize: JSON.parse(data?.font_size) }}>{JSON.parse(data?.description)}</Text>
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 580,
+    height: 540,
   },
   fullScreen: {
     height: 'auto',
