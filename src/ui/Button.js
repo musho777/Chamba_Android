@@ -21,12 +21,12 @@ export const Button = ({
         styles.button,
         { marginVertical: marginV, width: width, paddingVertical: paddingV },
         disabled && { backgroundColor: AppColors.PattenseBlue_Color },
-        bg && { backgroundColor: AppColors.PattensBlue_Color }
+        bg && { backgroundColor: '#A3B4C0' }
       ]}>
       {!loading ? <Text
         style={[
           Styles.darkMedium12,
-          disabled && { color: AppColors.White_Color },
+          disabled && { color: "#FDFEFF" },
         ]}>
         {title}
       </Text> :

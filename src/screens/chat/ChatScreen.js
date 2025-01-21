@@ -53,7 +53,7 @@ export const ChatScreen = ({ route }) => {
 
   useEffect(() => {
     const date = new Date(lastItem.updated_at);
-    const month = date.getMonth() + 1;
+    const month = date.getMonth();
     const day = date.getDate();
     if (day && month)
       setDate(`${day} ${monthsInRussian[month]}`)

@@ -70,14 +70,14 @@ export const Slider = ({ photo, music_name, description, setActiveImage, save, s
         }}
         onMomentumScrollEnd={handleMomentumScrollEnd}
         renderItem={({ item, index }) => {
-          let height = 540
+          let height = 525
           if (item.height < 650) {
             height = 400
             // setHeights(500)
             setVertical(false)
           }
           else {
-            height = 540
+            height = 525
             setVertical(true)
           }
           return (

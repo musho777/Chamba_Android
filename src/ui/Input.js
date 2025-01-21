@@ -66,7 +66,7 @@ export const Input = forwardRef(
           ]}
           multiline={msg || send}
           placeholder={placeholder}
-          placeholderTextColor={AppColors.BaliHai_Color}
+          placeholderTextColor={"#4C5A69"}
           secureTextEntry={pass && securyty}
           onChangeText={e => onChange(e)}
           value={value ? value : data}

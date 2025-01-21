@@ -213,10 +213,10 @@ export const AddImg = ({ navigation }) => {
     setUri([])
   }
   const renderItem = ({ item, index }) => {
-    return <View style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 540 } : { height: 393 }} behavior={Platform.OS === 'ios' ? 'padding' : "position"}>
-      <ScrollView style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 540 } : { height: 393 }}>
+    return <View style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 525 } : { height: 393 }} behavior={Platform.OS === 'ios' ? 'padding' : "position"}>
+      <ScrollView style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 525 } : { height: 393 }}>
         <FastImage
-          style={[styles.img, (localheight[index]?.height - localheight[index]?.width) > 220 ? { minHeight: 540 } : { minHeight: 393 }]}
+          style={[styles.img, (localheight[index]?.height - localheight[index]?.width) > 220 ? { minHeight: 525 } : { minHeight: 393 }]}
           source={{ uri: item.uri }}
           onLoad={(event) => {
             const { width, height } = event.nativeEvent;

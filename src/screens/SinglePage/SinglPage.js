@@ -110,7 +110,7 @@ export const SinglPageScreen = ({ route }) => {
   }
   return (
     <SafeAreaView style={[{ backgroundColor: 'black', alignItems: 'center', justifyContent: 'center', height: '100%', }]}>
-      <ScrollView contentContainerStyle={{ marginTop: (windowWidth + insets.top - (!horiznotal ? 540 : 380) / 2), marginBottom: 500 }}>
+      <ScrollView contentContainerStyle={{ marginTop: (windowWidth + insets.top - (!horiznotal ? 525 : 380) / 2), marginBottom: 500 }}>
         <Post
           data={data}
           setHoriznotal={(e) => setHoriznotal(e)}

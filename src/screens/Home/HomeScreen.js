@@ -49,13 +49,12 @@ export const HomeScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      const timer = setTimeout(() => {
-        if (userData.data.show_category_pop_up == 1) {
-
-          setShowModal(true);
-        }
-      }, 20000);
-      return () => clearTimeout(timer);
+      // const timer = setTimeout(() => {
+      if (userData.data.show_category_pop_up == 1) {
+        setShowModal(true);
+      }
+      // }, 20000);
+      // return () => clearTimeout(timer);
     }, [userData.data.show_category_pop_up])
   );
 

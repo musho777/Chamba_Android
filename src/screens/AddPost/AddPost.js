@@ -334,7 +334,7 @@ export const AddPost = () => {
 
 const styles = StyleSheet.create({
   img: {
-    height: 540,
+    height: 525,
     width: windowWidth,
     borderRadius: 11,
   },
