@@ -64,7 +64,7 @@ export const Catalog = () => {
 
   const SendData = () => {
     setLiading(true)
-    dispatch(ShowPopUpLocal())
+    // dispatch(ShowPopUpLocal())
     dispatch(ChangeCatalog(staticdata.token, {
       category_ids: selected,
       settings: 1,

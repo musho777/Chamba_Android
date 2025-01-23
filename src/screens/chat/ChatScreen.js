@@ -55,7 +55,7 @@ export const ChatScreen = ({ route }) => {
     const date = new Date(lastItem.updated_at);
     const month = date.getMonth();
     const day = date.getDate();
-    if (day && month)
+    if (day && monthsInRussian[month])
       setDate(`${day} ${monthsInRussian[month]}`)
   }, [lastItem])
 

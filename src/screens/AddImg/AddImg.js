@@ -342,7 +342,8 @@ const styles = StyleSheet.create({
   input: {
     borderColor: 'red',
     width: '90%',
-    height: 40,
+    maxHeight: 80,
+    minHeight: 40,
     backgroundColor: 'rgba(0,0,0,0.7)',
     position: 'absolute',
     bottom: 10,

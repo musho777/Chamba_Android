@@ -105,10 +105,9 @@ export default Navigation = ({ token, initialRouteName, id }) => {
             //   }),
             // );
           }
-          else {
-            if (JSON.parse(event.data).message.receiver_user.id == id) {
-              dispatch(AddMessageCount())
-            }
+          // else {
+          if (JSON.parse(event.data).message.receiver_user.id == id) {
+            dispatch(AddMessageCount())
             dispatch(
               AddMsgAction({
                 message: JSON.parse(event.data)?.message?.message,
@@ -118,6 +117,7 @@ export default Navigation = ({ token, initialRouteName, id }) => {
               }),
             );
           }
+          // }
         }
         else if (JSON.parse(event.data).message.type == 'delete_chat') {
           dispatch(

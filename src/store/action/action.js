@@ -1572,7 +1572,8 @@ export const ChangeCatalog = (token, data) => {
       .then(response => response.json())
       .then(r => {
         if (r.status) {
-          dispatch(GetLentsAction(token))
+          // dispatch(GetLentsAction(token))
+          dispatch(getUserInfoAction(token));
           dispatch(SuccessChangeCatalog(r))
         }
         else {

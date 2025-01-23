@@ -47,16 +47,21 @@ export const HomeScreen = () => {
   const { fullScreen } = useSelector((st) => st.fullScreenData)
   const [postUserId, setPostUserId] = useState(null)
 
-  useFocusEffect(
-    useCallback(() => {
-      // const timer = setTimeout(() => {
-      if (userData.data.show_category_pop_up == 1) {
-        setShowModal(true);
-      }
-      // }, 20000);
-      // return () => clearTimeout(timer);
-    }, [userData.data.show_category_pop_up])
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     if (userData.data.show_category_pop_up == 1) {
+  //       setShowModal(true);
+  //     }
+  //   }, [userData.data.show_category_pop_up])
+  // );
+
+
+  useEffect(() => {
+    if (userData.data.show_category_pop_up == 1) {
+      setShowModal(true);
+    }
+  }, [userData.data.show_category_pop_up])
+
 
   useEffect(() => {
     if (staticdata.token && !getLents?.data.length) {

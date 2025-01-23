@@ -33,7 +33,7 @@ export const ChatUser = ({
       onPress={() => {
         navigation.navigate('ChatScreen', { id: otherUserId, chatId: id })
       }}
-      style={[Styles.flexSpaceBetween, { marginVertical: 20 }]}>
+      style={[Styles.flexSpaceBetween, { marginVertical: 10 }]}>
       <View style={Styles.flexAlignItems}>
         <View>
           <Image style={styles.img} source={{ uri: img }} />

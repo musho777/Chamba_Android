@@ -119,7 +119,7 @@ export const ModalComponent = ({ showModal, token, close }) => {
                 <Text style={Styles.balihaiMedium13}>-Природа (самые красивые и сказочные места)</Text>
                 <Text style={Styles.balihaiMedium13}>-Релакс (расслабления на отдыхе)</Text>
                 <Text style={Styles.balihaiMedium13}>-Охота и рыбалка (о рыбных местах и охоте)</Text>
-                <Text style={Styles.balihaiMedium13}>Выбрав другие рубрики, Вам будет предложен связанный контент.</Text>
+                <Text style={Styles.balihaiMedium13}>Выбрав другие рубрики, будет предложен связанный контент.</Text>
               </View>
             </View>
           </View>
