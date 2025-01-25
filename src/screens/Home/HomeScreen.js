@@ -92,15 +92,15 @@ export const HomeScreen = () => {
     flatListRef.current.scrollToOffset({ offset: 0, animated: true });
   }
 
-  const Scroll = async (e) => {
-    if (e.e) {
-      flatListRef.current?.scrollToIndex({
-        index: e.index,
-        animated: false,
-        viewPosition: 0.1,
-      });
-    }
-  }
+  // const Scroll = async (e) => {
+  //   if (e.e) {
+  //     flatListRef.current?.scrollToIndex({
+  //       index: e.index,
+  //       animated: false,
+  //       viewPosition: 0.1,
+  //     });
+  //   }
+  // }
 
 
 
@@ -182,7 +182,7 @@ export const HomeScreen = () => {
             data={item}
             adminStatus={item.admin_status}
             index={index}
-            scroll={(e) => Scroll(e)}
+            // scroll={(e) => Scroll(e)}
             viewableItems={viewableItems}
             setShowLike={() => setLikeClose(true)}
             setShowView={() => setShowView(true)}

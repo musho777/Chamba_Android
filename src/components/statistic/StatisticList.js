@@ -194,7 +194,7 @@ export const StatisticList = ({ id, token, vidio }) => {
     <BottomSheetScrollView showsVerticalScrollIndicator={false}>
       <Text style={[{ textAlign: 'center' }, Styles.darkMedium16]}>СТАТИСТИКА</Text>
       <View style={{ gap: 20, paddingHorizontal: 5, marginBottom: 50, justifyContent: 'center' }}>
-        <Accordion headerTitleStyle={[Styles.darkMedium12, { textAlign: "center" }]} headerTitle="Статистика по публикации">
+        <Accordion headerTitleStyle={[Styles.darkMedium12, { textAlign: "center" }]} headerTitle="Статистика по публикации ↓">
           <View style={{ gap: 10, marginTop: 20, }}>
             <Text style={Styles.darkSemiBold14}>Лайков - {getStatistic1.data.get_like_count}</Text>
             <Text style={Styles.darkSemiBold14}>Комментариев - {getStatistic1.data.get_comment_count}</Text>
@@ -242,7 +242,7 @@ export const StatisticList = ({ id, token, vidio }) => {
 
 
         </Accordion>
-        <Accordion headerTitleStyle={[Styles.darkMedium12, { textAlign: "center" }]} headerTitle="Активность просмотров">
+        <Accordion headerTitleStyle={[Styles.darkMedium12, { textAlign: "center" }]} headerTitle="Активность просмотров ↓">
           <ScrollView contentContainerStyle={{ justifyContent: 'center', width: '100%' }} style={{ marginTop: 20 }} horizontal={true}>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
               <Table >

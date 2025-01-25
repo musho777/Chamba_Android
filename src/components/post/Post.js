@@ -24,10 +24,10 @@ export const Post = React.memo(({
   big = false,
   index,
   setShowInfo,
-  adminStatus,
+  // adminStatus,
   setPostUserId = () => { },
   AddToBack,
-  scroll = () => { }
+  // scroll = () => { }
 }) => {
   const user = useSelector((st) => st.userData)
   const [openModal, setOpenModal] = useState(false)
@@ -180,9 +180,9 @@ export const Post = React.memo(({
           isExpanded={isExpanded}
           id={index}
           big={big}
-          // scroll={scroll}
-          scroll={(e) => scroll({ e: e, index: index })}
-          adminStatus={adminStatus}
+        // scroll={scroll}
+        // scroll={(e) => scroll({ e: e, index: index })}
+        // adminStatus={adminStatus}
         /> :
           <View style={{ height: 525, position: 'relative' }}>
             <Image

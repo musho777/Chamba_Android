@@ -70,8 +70,8 @@ export const ModalComponent = ({ showModal, token, close }) => {
       <View style={styles.popup}>
         <View style={[styles.card, styles.shadowProp]}>
           <View style={{ justifyContent: 'center', alignItems: 'center', gap: 6 }}>
-            {!firstTime && <Text style={Styles.darkMedium16}>Вы поменяли рубрики!</Text>}
-            <Text style={[Styles.darkMedium14, { marginTop: -5 }]}>Предложить Вам попутный контент?</Text>
+            {!firstTime && <Text style={Styles.darkMedium16}>Ты добавил(а) новые рубрики!</Text>}
+            <Text style={[Styles.darkMedium14, { marginTop: -5 }]}>Предложить попутный контент?</Text>
             <Text onPress={() => setShowText(true)} style={[Styles.balihaiMedium10, { borderBottomWidth: 0.5, paddingBottom: 2, borderColor: '#8C9CAB' }]}>(Что такое попутный контент?)</Text>
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 30 }}>

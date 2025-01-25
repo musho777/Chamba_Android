@@ -5,20 +5,20 @@ import {
   FlatList,
   Dimensions,
   TouchableOpacity,
-  Text,
+  // Text,
 } from 'react-native';
 import { AppColors } from '../styles/AppColors';
 import { SliderModal } from './SliderModal';
 import { LikePostAction } from '../store/action/action';
 import { useDispatch, useSelector } from 'react-redux';
 import SliderImage from './sliderImage';
-import { VidioComponent } from './post/Vidio/VidioComponent';
-import { Styles } from '../styles/Styles';
-import Sliders from '@react-native-community/slider';
+// import { VidioComponent } from './post/Vidio/VidioComponent';
+// import { Styles } from '../styles/Styles';
+// import Sliders from '@react-native-community/slider';
 import LottieView from 'lottie-react-native';
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+// const windowHeight = Dimensions.get('window').height;
 
 
 export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItems, setOpenModal, user, onLongClikc, long, onPressOut, setActiveImage, data, setHoriznotal = () => { }, description, setIsExpanded, isExpanded, setHeight, big }) => {
@@ -32,36 +32,35 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
   const DOUBLE_CLICK_DELAY = 300;
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const dispatch = useDispatch()
-  const [showSlider, setShowSlider] = useState(true)
-  const [duration, setDuration] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-  const videoRef = useRef(null);
-  const videoRef1 = useRef(null);
-  const videoRef2 = useRef(null);
-  const videoRef3 = useRef(null);
-  const videoRef4 = useRef(null);
-  const videoRef5 = useRef(null);
-  const videoRef6 = useRef(null);
-  const videoRef7 = useRef(null);
-  const videoRef8 = useRef(null);
-  const videoRef9 = useRef(null);
+  // const [showSlider, setShowSlider] = useState(true)
+  // const [duration, setDuration] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  // const videoRef = useRef(null);
+  // const videoRef1 = useRef(null);
+  // const videoRef2 = useRef(null);
+  // const videoRef3 = useRef(null);
+  // const videoRef4 = useRef(null);
+  // const videoRef5 = useRef(null);
+  // const videoRef6 = useRef(null);
+  // const videoRef7 = useRef(null);
+  // const videoRef8 = useRef(null);
+  // const videoRef9 = useRef(null);
 
-  const [reff, setReff] = useState([videoRef, videoRef1, videoRef2, videoRef3, videoRef4, videoRef5, videoRef6, videoRef7, videoRef8, videoRef9])
+  // const [reff, setReff] = useState([videoRef, videoRef1, videoRef2, videoRef3, videoRef4, videoRef5, videoRef6, videoRef7, videoRef8, videoRef9])
 
-  const [currentTime, setCurrentTime] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  // const [currentTime, setCurrentTime] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   const animation = useRef(null);
-  const [paused, setPaused] = useState([true, true, true, true, true, true, true, true, true, true]);
+  // const [paused, setPaused] = useState([true, true, true, true, true, true, true, true, true, true]);
 
-  const onSeek = (value) => {
-    let item = [...currentTime]
-    item[active] = value
-    setCurrentTime(item)
-    console.log(reff[active], 'value')
-    reff[active]?.current?.seek(value);
-  };
+  // const onSeek = (value) => {
+  //   let item = [...currentTime]
+  //   item[active] = value
+  //   setCurrentTime(item)
+  //   // reff[active]?.current?.seek(value);
+  // };
 
-  useEffect(() => {
-    setPaused([true, true, true, true, true, true, true, true, true, true])
-  }, [active])
+  // useEffect(() => {
+  //   setPaused([true, true, true, true, true, true, true, true, true, true])
+  // }, [active])
 
   const LikePost = useCallback(() => {
     dispatch(LikePostAction({ post_id: data?.id }, staticdata.token, user.data?.id));
@@ -92,7 +91,7 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
   };
 
   const handleMomentumScrollEnd = (event) => {
-    setShowSlider(true)
+    // setShowSlider(true)
     const index = Math.floor(
       Math.floor(event.nativeEvent.contentOffset.x) /
       Math.floor(event.nativeEvent.layoutMeasurement.width)
@@ -103,35 +102,35 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
 
 
 
-  const CurrentTimeSet = (i, e) => {
-    let item = [...currentTime]
-    let temp = [...paused]
-    if (item[i] <= duration[i]) {
-      item[i] = e
-      setCurrentTime(item)
-    }
-    else {
-      item[i] = 0
-      setCurrentTime(item)
-      temp[i] = true
-      setPaused(temp)
-    }
-  }
+  // const CurrentTimeSet = (i, e) => {
+  //   let item = [...currentTime]
+  //   let temp = [...paused]
+  //   if (item[i] <= duration[i]) {
+  //     item[i] = e
+  //     setCurrentTime(item)
+  //   }
+  //   else {
+  //     item[i] = 0
+  //     setCurrentTime(item)
+  //     temp[i] = true
+  //     setPaused(temp)
+  //   }
+  // }
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  };
+  // const formatTime = (time) => {
+  //   const minutes = Math.floor(time / 60);
+  //   const seconds = Math.floor(time % 60);
+  //   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  // };
 
 
-  const GetDuration = (e, i) => {
-    let item = [...duration]
-    item[i] = e
-    setDuration(item)
-  }
+  // const GetDuration = (e, i) => {
+  //   let item = [...duration]
+  //   item[i] = e
+  //   setDuration(item)
+  // }
 
-  const { fullScreen } = useSelector((st) => st.fullScreenData)
+  // const { fullScreen } = useSelector((st) => st.fullScreenData)
 
   const renderItem = ({ item, index }) => {
     let height = 525
@@ -151,11 +150,11 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
     }
 
 
-    const ChangePauesd = (e, index) => {
-      let temp = [...paused]
-      temp[index] = e
-      setPaused(temp)
-    }
+    // const ChangePauesd = (e, index) => {
+    //   let temp = [...paused]
+    //   temp[index] = e
+    //   setPaused(temp)
+    // }
 
 
 
@@ -163,11 +162,13 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
       <TouchableOpacity
         onLongPress={() => onLongClikc()}
         activeOpacity={1}
-        disabled={fullScreen}
+        // disabled={fullScreen}
         onPressOut={() => onPressOut()}
         onPress={(e) => handleClick(e, item)}
-        style={[styles.img, { height: !fullScreen ? height : windowHeight }]}>
-        {(item.video && active == index) ?
+        // style={[styles.img, { height: !fullScreen ? height : windowHeight }]}>
+        style={[styles.img, { height: height }]}>
+
+        {/* {(item.video && active == index) ?
           <VidioComponent
             active={active}
             viewableItems={viewableItems}
@@ -190,17 +191,17 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
             setIsExpanded={(e) => setIsExpanded(e)}
           />
           :
-          <SliderImage
-            long={long}
-            description={description}
-            index={index}
-            item={item}
-            height={height}
-            isExpanded={isExpanded}
-            adminStatus={adminStatus}
-            setIsExpanded={(e) => setIsExpanded(e)}
-          />
-        }
+        } */}
+        <SliderImage
+          long={long}
+          description={description}
+          index={index}
+          item={item}
+          height={height}
+          isExpanded={isExpanded}
+          // adminStatus={adminStatus}
+          setIsExpanded={(e) => setIsExpanded(e)}
+        />
 
         {showLikeIcone && <View style={{ position: 'absolute', left: position.x, top: position.y }}>
           <LottieView
@@ -242,17 +243,18 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
         removeClippedSubviews={false}
         maxToRenderPerBatch={10}
         onMomentumScrollEnd={handleMomentumScrollEnd}
-        onScroll={() => {
-          setShowSlider(false)
-        }}
+        // onScroll={() => {
+        //   setShowSlider(false)
+        // }}
         renderItem={renderItem}
       />
-      {photo?.length > 1 && !fullScreen && <View style={styles.paginationWrapper}>
-        {photo?.map((elm, i) => (
-          <View key={i} style={[styles.pagination, i === active && { backgroundColor: AppColors.GoldenTainoi_Color, borderRadius: 50 }]}></View>
-        ))}
-      </View>}
-      {!fullScreen && <View>
+      {photo?.length > 1 &&
+        <View style={styles.paginationWrapper}>
+          {photo?.map((elm, i) => (
+            <View key={i} style={[styles.pagination, i === active && { backgroundColor: AppColors.GoldenTainoi_Color, borderRadius: 50 }]}></View>
+          ))}
+        </View>}
+      {/* {!fullScreen && <View>
         {(photo[active]?.video && showSlider) && !isExpanded &&
           <View style={styles.slider}>
             <Text style={[Styles.whiteSemiBold13, { textAlign: 'center' }]}>{formatTime(currentTime[active])}</Text>
@@ -269,7 +271,7 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
             <Text style={[Styles.whiteSemiBold13, { textAlign: 'center' }]}>{formatTime(duration[active])}</Text>
           </View>
         }
-      </View>}
+      </View>} */}
       {openSlider && (
         <SliderModal
           modalVisible={openSlider}
