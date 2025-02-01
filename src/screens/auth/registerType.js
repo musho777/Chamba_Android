@@ -52,7 +52,7 @@ export const RegisterType = () => {
   });
 
   return <View style={styles.authScreen}>
-    <Text style={[Styles.darkSemiBold16, { marginBottom: 30, textAlign: 'center' }]}>Вы регистрируетесь как:</Text>
+    <Text style={[Styles.darkSemiBold16, { marginBottom: 30, textAlign: 'center' }]}>Ты регистрируешься как:</Text>
     <View style={{ gap: 30 }}>
       <TypeBlock
         selected={selected}
@@ -69,34 +69,36 @@ export const RegisterType = () => {
     </View>
     <View >
       <View style={{ marginTop: 10, marginLeft: 10 }} >
-        <TouchableOpacity activeOpacity={1} onPress={() => startAnimation()} style={{ flexDirection: 'row', gap: 10 }}>
-          <Text style={Styles.balihaiMedium10}>(В чём разница между регистрацией физического и юридического лица?)</Text>
-          <View style={{ position: 'absolute', bottom: -1, left: 130 }}>
+        <View activeOpacity={1} onPress={() => startAnimation()} style={{ flexDirection: 'row', gap: 10 }}>
+          <Text style={[Styles.balihaiMedium10, { color: 'black' }]}>(В чём разница между регистрацией физического и юридического лица?)</Text>
+          {/* <View style={{ position: 'absolute', bottom: -1, left: 130 }}>
             {!showAll &&
               <DownSvg />
               // <TopArrow />
             }
-          </View>
-        </TouchableOpacity>
-        <Animated.View style={[styles.animatedBox, { height: heightAnim }]} >
-          <Text style={Styles.balihaiMedium10}>Chamba - это открытая платформа для всех.
-            Обычные пользователи могут наслаждаться общением и находить единомышленников, создавая яркий контент, который отражает их индивидуальность.
-            А для бизнеса мы предлагаем сладкое предложение: добавляйте свои товары и услуги, график работы и местоположение, чтобы Ваши клиенты всегда могли легко вас найти и быть в курсе ваших предложений. Присоединяйтесь к нам и позвольте своему бизнесу быть узнаваемым!
-          </Text>
-          <TouchableOpacity onPress={() => startAnimation()} style={{ position: 'absolute', bottom: -1, right: 0 }}>
+          </View> */}
+        </View>
+        {/* <Animated.View style={[styles.animatedBox, { height: heightAnim }]} > */}
+        <Text style={[Styles.balihaiMedium10, { color: 'black' }]}>Chamba - это открытая платформа для всех.
+          Обычные пользователи могут наслаждаться общением и находить единомышленников, создавая яркий контент, который отражает их индивидуальность.
+          А для бизнеса мы предлагаем сладкое предложение: добавляйте свои товары и услуги, график работы и местоположение, чтобы Ваши клиенты всегда могли легко вас найти и быть в курсе ваших предложений. Присоединяйтесь к нам и позвольте своему бизнесу быть узнаваемым!
+        </Text>
+        {/* <TouchableOpacity onPress={() => startAnimation()} style={{ position: 'absolute', bottom: -1, right: 0 }}>
             {showAll &&
               <TopArrow />
             }
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
-        </Animated.View>
+        {/* </Animated.View> */}
       </View>
 
 
 
     </View>
     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10, gap: 10 }}>
-      <TouchableOpacity activeOpacity={1} onPress={() => setChecked(!checked)} style={{ flexDirection: 'row', alignItems: "center", gap: 10 }}>
+      <TouchableOpacity
+        accessibilityLabel="CheckBox"
+        activeOpacity={1} onPress={() => setChecked(!checked)} style={{ width: 48, height: 48, flexDirection: 'row', alignItems: "center", gap: 10 }}>
         {!checked ?
           <ChecboxUNchekedSvg /> :
           <CheckedChexbox />
@@ -129,5 +131,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40
+  },
+  animatedBox: {
+    minHeight: 48,
   }
 })

@@ -11,10 +11,14 @@ export const HomeHeader = forwardRef(({ onPress }, ref) => {
     const user = useSelector(st => st.userData);
     return <SafeAreaView>
         <View style={[Styles.flexSpaceBetween, { paddingHorizontal: 10, paddingBottom: 10 }, Platform.OS == 'android' && { paddingTop: 10 }]}>
-            <TouchableOpacity activeOpacity={1} onPress={() => onPress()}>
+            <TouchableOpacity
+                accessibilityLabel="GoBack"
+                activeOpacity={1} onPress={() => onPress()}>
                 <Icon />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('NotificationScreen')}>
+            <TouchableOpacity
+                accessibilityLabel="Notification"
+                onPress={() => navigation.navigate('NotificationScreen')}>
                 <Notification />
                 {user.allData.notification_count > 0 &&
                     <View style={styles.countView}>

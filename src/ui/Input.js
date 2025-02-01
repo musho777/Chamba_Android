@@ -58,9 +58,9 @@ export const Input = forwardRef(
           onBlur={onBlur}
           style={[
             styles.Input,
-            { paddingRight: send ? 50 : 30 },
+            { paddingRight: send ? 50 : 50 },
             { paddingRight: pdR },
-            { paddingRight: pass ? 70 : 30 },
+            { paddingRight: pass ? 90 : 50 },
             (msg || send) && { paddingRight: 50 },
 
           ]}
@@ -73,6 +73,7 @@ export const Input = forwardRef(
         />
         {pass && (
           <TouchableOpacity
+            accessibilityLabel="Tap me!"
             style={[styles.eye, clear ? { right: 45 } : { right: 20 }]}
             onPress={() => setSecuryty(!securyty)}>
             <Eye />
@@ -80,6 +81,7 @@ export const Input = forwardRef(
         )}
         {search && (
           <TouchableOpacity
+            accessibilityLabel="Tap me!"
             style={styles.eye}
             onPress={() => setSecuryty(!securyty)}>
             <SearchInputSvg />
@@ -88,7 +90,9 @@ export const Input = forwardRef(
         {msg && (
           <View style={[Styles.flexAlignItems, styles.eye, { height: '100%' }]}>
             {data?.length > 0 &&
-              <TouchableOpacity onPress={sendMsg} style={{ marginLeft: 10 }}>
+              <TouchableOpacity
+                accessibilityLabel="Tap me!"
+                onPress={sendMsg} style={{ marginLeft: 10 }}>
                 <SendMsgSvg />
               </TouchableOpacity>
             }
@@ -96,7 +100,9 @@ export const Input = forwardRef(
         )}
         {send && (
           <View style={[Styles.flexAlignItems, styles.eye, { height: '100%' }]}>
-            <TouchableOpacity onPress={sendCom}>
+            <TouchableOpacity
+              accessibilityLabel="Tap me!"
+              onPress={sendCom}>
               <SendMsgSvg />
             </TouchableOpacity>
           </View>
@@ -107,13 +113,13 @@ export const Input = forwardRef(
             {error}
           </Text>
         )}
-        {clear && (
+        {/* {clear && (
           <View style={[Styles.flexAlignItems, styles.clear]}>
             <TouchableOpacity onPress={clearText} style={styles.clearText}>
               <Text style={{ fontSize: 17 }}>x</Text>
             </TouchableOpacity>
           </View>
-        )}
+        )} */}
       </View>
 
     );
@@ -125,24 +131,27 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 7,
     paddingHorizontal: 20,
+    paddingRight: 50,
     color: AppColors.Blcak_Color,
     position: 'relative',
-    height: 40,
+    height: 48,
   },
   eye: {
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
     right: 20,
-    height: '70%',
+    height: 48,
+    width: 48
   },
   clear: {
     position: 'absolute',
-    right: 20,
-    height: '65%',
-    top: 0,
+    right: 0,
+    top: -2,
     bottom: 0,
     margin: 'auto',
+    height: 48,
+    width: 48,
   },
   clearText: {
     height: '100%',

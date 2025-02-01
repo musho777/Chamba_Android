@@ -78,8 +78,8 @@ android {
         applicationId "com.photohost"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 7
-        versionName "7.1"
+        versionCode 14
+        versionName "1.1"
     }
     signingConfigs {
         release {
@@ -107,6 +107,11 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+    }
+}
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.errorprone:error_prone_annotations:2.5.1' // Try a different version
     }
 }
 

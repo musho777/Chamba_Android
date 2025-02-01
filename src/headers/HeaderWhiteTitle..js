@@ -19,7 +19,9 @@ export const HeaderWhiteTitle = ({
           { height: 50, paddingHorizontal: 10, backgroundColor: '#FFF' },
           transparent && { backgroundColor: 'transparent' },
         ]}>
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity
+          accessibilityLabel="Tap me!"
+          onPress={onPress}>
           <BackArrow />
         </TouchableOpacity>
         <Text style={[Styles.darkSemiBold16, { marginHorizontal: 15 }]}>
@@ -32,7 +34,9 @@ export const HeaderWhiteTitle = ({
         ) : (
           <View style={{ position: 'absolute', right: 10 }}>
             {check && (
-              <TouchableOpacity disabled={loading || disabled} onPress={onCheck}>
+              <TouchableOpacity
+                accessibilityLabel="Tap me!"
+                disabled={loading || disabled} onPress={onCheck}>
                 <CheckMarkSvg />
               </TouchableOpacity>
             )}

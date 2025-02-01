@@ -10,12 +10,14 @@ export const Button = ({
   width = 220,
   paddingV = 15,
   bg,
-  loading
+  loading,
+  accessibilityLabel = "tipe"
 }) => {
   return (
     <TouchableOpacity
       activeOpacity={1}
       onPress={onPress}
+      accessibilityLabel={accessibilityLabel}
       disabled={disabled || loading}
       style={[
         styles.button,
@@ -26,11 +28,11 @@ export const Button = ({
       {!loading ? <Text
         style={[
           Styles.darkMedium12,
-          disabled && { color: "#FDFEFF" },
+          disabled && { color: "#2E3238" },
         ]}>
         {title}
       </Text> :
-        <ActivityIndicator size={15} color="#fff" />
+        <ActivityIndicator size={15} color="#5C3D00" />
       }
     </TouchableOpacity>
   );
@@ -42,5 +44,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: AppColors.Mustard_Color,
     borderRadius: 50,
+    height: 48,
   },
 });

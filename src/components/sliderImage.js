@@ -70,7 +70,7 @@ const SliderImage = React.memo(({ adminStatus, item, height, description, index,
             {Description[index].length > MAX_Height && <TouchableOpacity
               onPress={() => startAnimation(true)}
             >
-              <Text style={[Styles.balihaiMedium13, { color: 'white' }]}>Показать больше</Text>
+              <Text style={[Styles.balihaiMedium13, { color: 'white' }]}>Развернуть</Text>
             </TouchableOpacity>}
           </View>
         </View>

@@ -67,6 +67,7 @@ export const ProfesionsModal = ({ visible, close, onPress }) => {
     "Продюсер",
     "Программист",
     "Преподаватель",
+    "Повар",
     "Редактор",
     "Режиссер",
     "Риэлтор",
@@ -552,6 +553,7 @@ export const ProfesionsModal = ({ visible, close, onPress }) => {
     "Специалист по правам человека и правам человека",
     "Специалист по правам человека и правам граждан",
     "Специалист по правам человека и правам человека",
+    "Шеф-повар"
   ];
 
 
@@ -642,7 +644,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     width: '80%',
-    height: 300,
+    height: 500,
   },
   modalText: {
     marginBottom: 15,

@@ -105,13 +105,13 @@ export const LoginScreen = ({ navigation }) => {
       <View style={[[Styles.flexSpaceBetween, { paddingHorizontal: 10 }]]}>
         <TouchableOpacity
           onPress={() => navigation.navigate('RecoveryPassword')}>
-          <Text style={Styles.darkSemiBold12}>{t(mainData.lang).Forgotpassword}</Text>
+          <Text style={[Styles.darkSemiBold12, { minHeight: 48 }]}>{t(mainData.lang).Forgotpassword}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('RegisterType')}>
-          <Text style={Styles.darkSemiBold12}>{t(mainData.lang).Registration}</Text>
+          <Text style={[Styles.darkSemiBold12, { minHeight: 48 }]}>{t(mainData.lang).Registration}</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity activeOpacity={1} onPress={() => setChecked(!checked)} style={{ flexDirection: 'row', alignItems: "center", gap: 10, marginTop: 30 }}>
+      <TouchableOpacity activeOpacity={1} onPress={() => setChecked(!checked)} style={{ flexDirection: 'row', alignItems: "center", gap: 10, marginTop: 30, minHeight: 48 }}>
         {!checked ?
           <ChecboxUNchekedSvg /> :
           <CheckedChexbox />
@@ -122,6 +122,7 @@ export const LoginScreen = ({ navigation }) => {
         {loginData.error}
       </Text>
       <Button
+        accessibilityLabel={"Login"}
         disabled={send}
         onPress={() => loginUser()}
         title={t(mainData.lang).Login}

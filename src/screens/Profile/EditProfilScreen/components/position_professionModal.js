@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     width: '80%',
-    height: 300,
+    height: 500,
   },
   modalText: {
     marginBottom: 15,
