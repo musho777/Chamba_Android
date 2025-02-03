@@ -60,9 +60,8 @@ export const Input = forwardRef(
             styles.Input,
             { paddingRight: send ? 50 : 50 },
             { paddingRight: pdR },
-            { paddingRight: pass ? 90 : 50 },
+            { paddingRight: pass ? 50 : 50 },
             (msg || send) && { paddingRight: 50 },
-
           ]}
           multiline={msg || send}
           placeholder={placeholder}
@@ -74,7 +73,7 @@ export const Input = forwardRef(
         {pass && (
           <TouchableOpacity
             accessibilityLabel="Tap me!"
-            style={[styles.eye, clear ? { right: 45 } : { right: 20 }]}
+            style={[styles.eye]}
             onPress={() => setSecuryty(!securyty)}>
             <Eye />
           </TouchableOpacity>
@@ -140,7 +139,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    right: 20,
+    right: 10,
     height: 48,
     width: 48
   },

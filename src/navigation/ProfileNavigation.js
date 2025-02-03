@@ -6,14 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { t } from '../components/lang';
 import { Catalog } from '../screens/catalog';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Linking, Text, TouchableOpacity, View } from 'react-native';
 import { Styles } from '../styles/Styles';
 import { Api, ClearLoginAction, ClearUser, HidenTabNavigation, LogoutAction, ShowTabNavigation } from '../store/action/action';
 import { CloseSvg } from '../assets/svg/Svgs';
 import AccauntParametrNavigation from './AccauntParametrNavigation';
 import MyPageNavigation from './MyPageNavigation';
 import { ContactsPage } from '../screens/contacts';
-import { AboutApplication } from '../screens/Profile/AboutApplication';
 import { SettingsNavigation } from './SettingsNavigation';
 import { useDrawerStatus } from '@react-navigation/drawer';
 import { useEffect, useState } from 'react';
@@ -77,11 +76,19 @@ function CustomDrawerContent(props) {
         }
       })
       .catch(error => {
-        console.log(error, '200000000------')
         setLoading(false)
       });
   }
 
+  const handleOpenMail = () => {
+    const email = 'Сhamba.online@mail.ru'; // Replace with the recipient's email
+    const subject = 'Привет'; // Subject of the email
+    const body = 'Помогите стать нам лучше'; // Email body
+
+    const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    Linking.openURL(mailto).catch(err => console.error('Error opening mail app:', err));
+  };
 
   return (
     <View style={{ height: '100%', backgroundColor: 'white', }}>
@@ -144,6 +151,11 @@ function CustomDrawerContent(props) {
           labelStyle={[Styles.darkRegular16]}
           label={t(mainData.lang).logOut}
           onPress={() => setShowModal(true)}
+        />
+        <DrawerItem
+          labelStyle={[Styles.darkRegular16]}
+          label={"Помогите стать нам лучше"}
+          onPress={() => handleOpenMail()}
         />
         <DrawerItem
           labelStyle={[Styles.darkRegular16]}
