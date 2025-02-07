@@ -17,8 +17,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CommmentModal } from '../../components/comment/CommmentModal';
 import { SpamModal } from '../../components/spamModal';
-const windowHeight = Dimensions.get('window').height;
-
 
 
 export const HomeScreen = () => {

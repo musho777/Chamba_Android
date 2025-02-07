@@ -98,7 +98,7 @@ export const RecoveryPassword = ({ navigation }) => {
             Мы отправили вам на почту комбинацию цифр, впишите её ниже.
           </Text>
           <ConfirmCode clear={confirm.error !== ''} code={e => setCode(e)} />
-          <Text style={[[Styles.tomatoMedium10]]}>{confirm.error}</Text>
+          {confirm?.error && <Text style={[[Styles.tomatoMedium10]]}>{confirm.error}</Text>}
         </View>
       )}
     </View>

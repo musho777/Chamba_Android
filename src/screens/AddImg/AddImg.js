@@ -115,13 +115,11 @@ export const AddImg = ({ navigation }) => {
 
   const addPhoto = async (data, i) => {
     const options = {
-      compressVideo: true,
-      maxVideoDuration: 60,
       maxSelectedAssets: 10,
       doneTitle: "Добавить",
       usedCameraButton: false,
       isPreview: false,
-      mediaType: "photo",
+      mediaType: "image",
     }
     try {
       const response = await openPicker(options);
@@ -142,19 +140,8 @@ export const AddImg = ({ navigation }) => {
           setFirst(true)
         }
         response?.map((elm, i) => {
-          if (elm?.mime.startsWith('video')) {
-            if (elm.duration <= 60883) {
-              item.push({ uri: elm.path, mime: elm.mime })
-            }
-            else {
-              setError('видео должен быть меньше чем 60 с')
-              setShowError(true)
-            }
-          }
-          else {
-            if (item.length <= 10) {
-              item.push({ uri: elm.path, mime: elm.mime });
-            }
+          if (item.length <= 10) {
+            item.push({ uri: elm.path, mime: elm.mime });
           }
         })
         setUri(item);

@@ -156,19 +156,20 @@ export const ProfilImage = ({ user, changeAvatar, setChangeAvatar, }) => {
 
 
   const renderItem1 = ({ item, index }) => {
-    return <TouchableOpacity activeOpacity={1} onPress={() => {
-      setShowAllPhoto(true)
-      setImageData(item.photo_array)
-      setSelectedName(item.name)
-    }} style={[{ width: '100%', paddingHorizontal: 0 }, index == mainImageData.length - 1 && { marginBottom: 10 }]}>
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={[Styles.darkSemiBold14, { marginTop: 5, marginBottom: 2 }]}>{item.name}</Text>
-        <Image
-          style={styles.bgImage1}
-          source={{ uri: `https://chambaonline.pro/uploads/${item.photo_array[0].photo}`, }}
-        />
-      </View>
-    </TouchableOpacity>
+    if (item?.photo_array[0]?.photo)
+      return <TouchableOpacity activeOpacity={1} onPress={() => {
+        setShowAllPhoto(true)
+        setImageData(item?.photo_array)
+        setSelectedName(item?.name)
+      }} style={[{ width: '100%', paddingHorizontal: 0 }, index == mainImageData?.length - 1 && { marginBottom: 10 }]}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={[Styles.darkSemiBold14, { marginTop: 5, marginBottom: 2 }]}>{item?.name}</Text>
+          <Image
+            style={styles.bgImage1}
+            source={{ uri: `https://chambaonline.pro/uploads/${item?.photo_array[0]?.photo}`, }}
+          />
+        </View>
+      </TouchableOpacity>
 
   }
 

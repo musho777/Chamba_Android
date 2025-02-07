@@ -113,52 +113,52 @@ function CustomDrawerContent(props) {
           <CloseSvg />
         </TouchableOpacity>
         <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
+          labelStyle={[Styles.darkRegular14]}
           label={t(mainData.lang).Catalog}
           onPress={() => props.navigation.navigate('Catalog', { id: 'accaunt' })}
         />
         <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
+          labelStyle={[Styles.darkRegular14]}
           label={t(mainData.lang).Bookmarks}
           onPress={() => props.navigation.navigate('SavedPostScreen')}
         />
         <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
+          labelStyle={[Styles.darkRegular14]}
           label={t(mainData.lang).Contacts}
           onPress={() => props.navigation.navigate('Contacts')}
         />
         <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
+          labelStyle={[Styles.darkRegular14]}
           label={t(mainData.lang).Editprofile}
           onPress={() => props.navigation.navigate('EditProfilScreen')}
         />
         <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
+          labelStyle={[Styles.darkRegular14]}
           label={t(mainData.lang).Accountsettings}
           onPress={() => props.navigation.navigate('ParametrScreen')}
         />
         <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
+          labelStyle={[Styles.darkRegular14]}
           label={t(mainData.lang).Settings}
           onPress={() => props.navigation.navigate('SettingsNavigation')}
         />
         <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
+          labelStyle={[Styles.darkRegular14]}
           label={t(mainData.lang).Blacklist}
           onPress={() => props.navigation.navigate('BlackListScreen')}
         />
         <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
-          label={t(mainData.lang).logOut}
-          onPress={() => setShowModal(true)}
-        />
-        <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
+          labelStyle={[Styles.darkRegular14]}
           label={"Помогите стать нам лучше"}
           onPress={() => handleOpenMail()}
         />
         <DrawerItem
-          labelStyle={[Styles.darkRegular16]}
+          labelStyle={[Styles.darkRegular14]}
+          label={t(mainData.lang).logOut}
+          onPress={() => setShowModal(true)}
+        />
+        <DrawerItem
+          labelStyle={[Styles.darkRegular14]}
           label={"Удалить аккаунт"}
           onPress={() => setShow(true)}
         />

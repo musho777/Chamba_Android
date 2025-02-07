@@ -1,8 +1,8 @@
-import {useEffect, useRef, useState} from 'react';
-import {View, TextInput, StyleSheet, Keyboard} from 'react-native';
-import {AppColors} from '../styles/AppColors';
+import { useEffect, useRef, useState } from 'react';
+import { View, TextInput, StyleSheet, Keyboard } from 'react-native';
+import { AppColors } from '../styles/AppColors';
 
-export const ConfirmCode = ({code, clear}) => {
+export const ConfirmCode = ({ code, clear }) => {
   const ref = useRef();
   const ref1 = useRef();
   const ref2 = useRef();
@@ -35,22 +35,23 @@ export const ConfirmCode = ({code, clear}) => {
     }
   }, [clear]);
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={{ flexDirection: 'row' }}>
       <TextInput
         style={styles.input}
         autoFocus
         value={data.value}
         ref={ref}
+        accessibilityLabel="number 1"
         keyboardType="numeric"
         onChangeText={e => {
           if (e !== '') {
-            setData({...data, value: e[e.length - 1]});
+            setData({ ...data, value: e[e.length - 1] });
             ref1.current.focus();
           }
         }}
-        onKeyPress={({nativeEvent}) => {
+        onKeyPress={({ nativeEvent }) => {
           if (nativeEvent.key === 'Backspace') {
-            setData({...data, value: ''});
+            setData({ ...data, value: '' });
           }
         }}
       />
@@ -59,15 +60,16 @@ export const ConfirmCode = ({code, clear}) => {
         ref={ref1}
         value={data.value1}
         keyboardType="numeric"
+        accessibilityLabel="number 2"
         onChangeText={e => {
           if (e !== '') {
-            setData({...data, value1: e[e.length - 1]});
+            setData({ ...data, value1: e[e.length - 1] });
             ref2.current.focus();
           }
         }}
-        onKeyPress={({nativeEvent}) => {
+        onKeyPress={({ nativeEvent }) => {
           if (nativeEvent.key === 'Backspace') {
-            setData({...data, value1: ''});
+            setData({ ...data, value1: '' });
             if (data.value1 === '') {
               ref.current.focus();
             }
@@ -79,15 +81,16 @@ export const ConfirmCode = ({code, clear}) => {
         ref={ref2}
         value={data.value2}
         keyboardType="numeric"
+        accessibilityLabel="number 3"
         onChangeText={e => {
           if (e !== '') {
-            setData({...data, value2: e[e.length - 1]});
+            setData({ ...data, value2: e[e.length - 1] });
             ref3.current.focus();
           }
         }}
-        onKeyPress={({nativeEvent}) => {
+        onKeyPress={({ nativeEvent }) => {
           if (nativeEvent.key === 'Backspace') {
-            setData({...data, value2: ''});
+            setData({ ...data, value2: '' });
             if (data.value2 === '') {
               ref1.current.focus();
             }
@@ -99,15 +102,16 @@ export const ConfirmCode = ({code, clear}) => {
         ref={ref3}
         value={data.value3}
         keyboardType="numeric"
+        accessibilityLabel="number 4"
         onChangeText={e => {
           if (e !== '') {
-            setData({...data, value3: e[e.length - 1]});
+            setData({ ...data, value3: e[e.length - 1] });
             ref4.current.focus();
           }
         }}
-        onKeyPress={({nativeEvent}) => {
+        onKeyPress={({ nativeEvent }) => {
           if (nativeEvent.key === 'Backspace') {
-            setData({...data, value3: ''});
+            setData({ ...data, value3: '' });
             if (data.value3 === '') {
               ref2.current.focus();
             }
@@ -119,14 +123,15 @@ export const ConfirmCode = ({code, clear}) => {
         ref={ref4}
         value={data.value4}
         keyboardType="numeric"
+        accessibilityLabel="number 5"
         onChangeText={e => {
           if (e !== '') {
-            setData({...data, value4: e[e.length - 1]});
+            setData({ ...data, value4: e[e.length - 1] });
           }
         }}
-        onKeyPress={({nativeEvent}) => {
+        onKeyPress={({ nativeEvent }) => {
           if (nativeEvent.key === 'Backspace') {
-            setData({...data, value4: ''});
+            setData({ ...data, value4: '' });
             if (data.value4 === '') {
               ref3.current.focus();
             }
@@ -138,8 +143,8 @@ export const ConfirmCode = ({code, clear}) => {
 };
 const styles = StyleSheet.create({
   input: {
-    width: 31,
-    height: 44,
+    width: 48,
+    height: 48,
     borderColor: AppColors.PattenseBlue_Color,
     borderWidth: 2,
     marginVertical: 15,

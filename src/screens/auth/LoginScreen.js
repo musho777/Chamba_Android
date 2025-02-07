@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { Styles } from '../../styles/Styles';
 import { Button } from '../../ui/Button';
 import { Input } from '../../ui/Input';
@@ -9,8 +9,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ChecboxUNchekedSvg, CheckedChexbox } from '../../assets/svg/Svgs';
 import { t } from '../../components/lang';
 import { CommonActions } from '@react-navigation/native';
-import DeviceInfo from 'react-native-device-info';
-
 
 export const LoginScreen = ({ navigation }) => {
   const [login, setLogin] = useState({ error: '', value: '' });
@@ -71,6 +69,10 @@ export const LoginScreen = ({ navigation }) => {
       setLoginPassword()
     }
   }, [loginData.status])
+
+
+
+
   const setLoginPassword = async () => {
     if (checked) {
       await AsyncStorage.setItem('login', login.value)
