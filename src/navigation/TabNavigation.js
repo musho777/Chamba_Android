@@ -64,7 +64,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
             <View style={{ marginTop: 20, gap: 15, paddingHorizontal: 10, }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
                 <AddPhotoSvg />
-                <TouchableOpacity style={{ width: '100%' }}>
+                <TouchableOpacity accessibilityLabel="AddPhoto" style={{ width: '100%' }}>
                   <Text
                     onPress={() => {
                       bottomSheetRef.current?.close();
@@ -160,6 +160,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
               <TouchableOpacity
                 key={index}
                 accessibilityRole="button"
+                accessibilityLabel={route.name}
                 style={{ width: '20%' }}
                 accessibilityState={isFocused ? { selected: true } : {}}
                 testID={options.tabBarTestID}

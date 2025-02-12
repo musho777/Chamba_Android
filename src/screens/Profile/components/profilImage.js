@@ -133,17 +133,19 @@ export const ProfilImage = ({ user, changeAvatar, setChangeAvatar, }) => {
 
 
   const renderItem = ({ item }) => {
-    return <TouchableOpacity activeOpacity={1} onPress={() => {
-      bottomSheetRef.current?.close()
-      // setTimeout(() => {
-      //   bottomSheetRef1.current?.present();
-      // }, 300);
+    return <TouchableOpacity
+      accessibilityLabel="Photo"
+      activeOpacity={1} onPress={() => {
+        bottomSheetRef.current?.close()
+        // setTimeout(() => {
+        //   bottomSheetRef1.current?.present();
+        // }, 300);
 
-      setBgPhoto(item.photo)
-      setBg("")
-      dispatch(UpdateBackroundPhoto("", staticdata.token, item.photo));
-      bottomSheetRef1.current?.close()
-    }} style={{ width: '100%', paddingHorizontal: 0 }}>
+        setBgPhoto(item.photo)
+        setBg("")
+        dispatch(UpdateBackroundPhoto("", staticdata.token, item.photo));
+        bottomSheetRef1.current?.close()
+      }} style={{ width: '100%', paddingHorizontal: 0 }}>
       <View style={{ marginBottom: 15, justifyContent: 'center', alignItems: 'center' }}>
         <Image
           style={styles.bgImage1}
@@ -157,11 +159,13 @@ export const ProfilImage = ({ user, changeAvatar, setChangeAvatar, }) => {
 
   const renderItem1 = ({ item, index }) => {
     if (item?.photo_array[0]?.photo)
-      return <TouchableOpacity activeOpacity={1} onPress={() => {
-        setShowAllPhoto(true)
-        setImageData(item?.photo_array)
-        setSelectedName(item?.name)
-      }} style={[{ width: '100%', paddingHorizontal: 0 }, index == mainImageData?.length - 1 && { marginBottom: 10 }]}>
+      return <TouchableOpacity
+        accessibilityLabel="Photo1"
+        activeOpacity={1} onPress={() => {
+          setShowAllPhoto(true)
+          setImageData(item?.photo_array)
+          setSelectedName(item?.name)
+        }} style={[{ width: '100%', paddingHorizontal: 0 }, index == mainImageData?.length - 1 && { marginBottom: 10 }]}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Text style={[Styles.darkSemiBold14, { marginTop: 5, marginBottom: 2 }]}>{item?.name}</Text>
           <Image
@@ -246,6 +250,7 @@ export const ProfilImage = ({ user, changeAvatar, setChangeAvatar, }) => {
         /> :
         <View>
           <TouchableOpacity
+            accessibilityLabel="Photo2"
             onPress={() => {
               setTimeout(() => {
                 setShowPhoto(true)
@@ -274,18 +279,20 @@ export const ProfilImage = ({ user, changeAvatar, setChangeAvatar, }) => {
 
     <BootomModal ref={bottomSheetRef2} snapPoints={snapPoints}>
       <View style={{ gap: 20, paddingHorizontal: 10, }}>
-        <TouchableOpacity style={styles.iconWrapper} onPress={() => {
-          setChangeAvatar(false)
-          setOpenSlider(true)
-        }}>
+        <TouchableOpacity
+          accessibilityLabel="Photo3"
+          style={styles.iconWrapper} onPress={() => {
+            setChangeAvatar(false)
+            setOpenSlider(true)
+          }}>
           <Image style={styles.icon} source={require('../../../assets/img/user1.png')} />
           <Text style={styles.text}>Открыть фото</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconWrapper}>
+        <TouchableOpacity accessibilityLabel="Photo4" style={styles.iconWrapper}>
           <Image style={styles.icon} source={require('../../../assets/img/edit.png')} />
           <Text style={styles.text} onPress={() => changeImg()}>{t(mainData.lang).ChangePhoto}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconWrapper} onPress={() => DelatePhoto()}>
+        <TouchableOpacity accessibilityLabel="Photo5" style={styles.iconWrapper} onPress={() => DelatePhoto()}>
           <Image style={styles.icon} source={require('../../../assets/img/delete.png')} />
           <Text style={styles.text}>Удалить фото</Text>
         </TouchableOpacity>

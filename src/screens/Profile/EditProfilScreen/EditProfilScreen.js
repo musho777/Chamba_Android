@@ -290,18 +290,22 @@ export const EditProfilScreen = ({ navigation }) => {
             <View style={{ marginBottom: 10 }}>
               <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', marginVertical: 10 }}>
                 {fontFamily.map((elm, i) => {
-                  return <Text onPress={() => {
-                    setName({ ...name, font: elm })
-                  }} key={i} style={{ fontSize: 10, fontFamily: elm }}>{elm}</Text>
+                  return <Text
+                    accessibilityLabel={elm}
+                    onPress={() => {
+                      setName({ ...name, font: elm })
+                    }} key={i} style={{ fontSize: 10, fontFamily: elm }}>{elm}</Text>
                 })}
               </ScrollView>
               <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', height: 20 }}>
                 {color.map((elm, i) => {
-                  return <TouchableOpacity onPress={() => {
-                    // ChnageData(localValue, activeFont, elm)
-                    // setActiveColor(elm)
-                    setName({ ...name, color: elm })
-                  }} key={i} style={{ width: 20, height: 20, backgroundColor: elm.title, borderRadius: 20, }} />
+                  return <TouchableOpacity
+                    accessibilityLabel={elm}
+                    onPress={() => {
+                      // ChnageData(localValue, activeFont, elm)
+                      // setActiveColor(elm)
+                      setName({ ...name, color: elm })
+                    }} key={i} style={{ width: 20, height: 20, backgroundColor: elm.title, borderRadius: 20, }} />
                 })}
               </ScrollView>
             </View>

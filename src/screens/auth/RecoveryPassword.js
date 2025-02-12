@@ -94,7 +94,7 @@ export const RecoveryPassword = ({ navigation }) => {
       )}
       {send && (
         <View style={{ alignItems: 'center', marginTop: 15 }}>
-          <Text style={[Styles.balihaiMedium13, { textAlign: 'center' }]}>
+          <Text style={[Styles.darkMedium13, { textAlign: 'center' }]}>
             Мы отправили вам на почту комбинацию цифр, впишите её ниже.
           </Text>
           <ConfirmCode clear={confirm.error !== ''} code={e => setCode(e)} />

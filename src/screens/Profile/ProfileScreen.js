@@ -69,6 +69,7 @@ export const ProfileScreen = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <TouchableOpacity
         activeOpacity={1}
+        accessibilityLabel={"Avatar"}
         onPress={() => setChangeAvatar(false)}
       >
         <StatusBar

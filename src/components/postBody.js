@@ -63,6 +63,7 @@ export const PostBody = ({
   return <View style={styles.bostBody}>
     {(!likeClose && !showShare) && <View style={{ gap: 5, position: 'absolute', bottom: 0, right: 5, }}>
       <TouchableOpacity
+        accessibilityLabel="PostLike"
         onPress={() => {
           dispatch(GetPostLikeAction({ post_id: id }, staticdata.token, 1));
           setShowLike(true)
@@ -84,6 +85,7 @@ export const PostBody = ({
 
       <TouchableOpacity onPress={() => {
         setShowComment(true)
+        accessibilityLabel = "commentCount"
         setCommentData({ parentId: id, categoryId: categoryId })
         // navigation.navigate('coment', { parentId: id, categoryId: categoryId })
       }} style={styles.hover}>
@@ -94,6 +96,7 @@ export const PostBody = ({
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.hover}
+        accessibilityLabel="Shear"
         onPress={() => {
           dispatch(GetFollowerAction({ search: "", user_id: user.allData.data.id }, staticdata.token, 1));
           setShowShare(true)
@@ -103,15 +106,18 @@ export const PostBody = ({
       </TouchableOpacity>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 1, right: 0 }}>
         {(showViewText && view > 0) &&
-          <TouchableOpacity onPress={() => {
-            setShowView(true)
-            setSelectidId(id)
-          }} style={[styles.hover, { position: 'absolute', right: 50, height: 36 }]}>
+          <TouchableOpacity
+            accessibilityLabel="ststistic"
+            onPress={() => {
+              setShowView(true)
+              setSelectidId(id)
+            }} style={[styles.hover, { position: 'absolute', right: 50, height: 36 }]}>
             <Text style={[Styles.whiteRegular12]}>Посмотреть статистику?</Text>
           </TouchableOpacity>
         }
         <TouchableOpacity
           activeOpacity={my ? 0 : 1}
+          accessibilityLabel="WhiteViewSvg"
           onPress={() => {
             if (my && view > 0) {
               setShowView(true)

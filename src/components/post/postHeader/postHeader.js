@@ -69,6 +69,7 @@ export const PostHeader = ({
     <HeaderInfo data={data} user={user} />
     <TouchableOpacity
       activeOpacity={1}
+      accessibilityLabel="WhiteMenu"
       onPress={() => {
         setOpenModal(!openModal)
         handlePresentModalPress()

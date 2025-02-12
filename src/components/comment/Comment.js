@@ -195,13 +195,13 @@ export const Comments = ({ commentData, CommentCount = () => { } }) => {
             width={getSound.data.length}
           />
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-            <TouchableOpacity onPress={() => setIsOpen(true)}>
+            <TouchableOpacity accessibilityLabel="Emojy" onPress={() => setIsOpen(true)}>
               <Emojy />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => bottomSheetRef.current?.present()}>
+            <TouchableOpacity accessibilityLabel="Sticker" onPress={() => bottomSheetRef.current?.present()}>
               <Sticker />
             </TouchableOpacity>
-            {getSound.data.length > 0 && <TouchableOpacity onPress={() => bottomSheetRef1.current?.present()}>
+            {getSound.data.length > 0 && <TouchableOpacity accessibilityLabel="Sticker3" onPress={() => bottomSheetRef1.current?.present()}>
               <Nota />
             </TouchableOpacity>}
           </View>

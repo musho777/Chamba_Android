@@ -51,7 +51,7 @@ export const CommentBlock = ({
           categoryID={categoryID}
           token={staticdata.token} onPressAnsswer={onPressAnsswer} commentData={replay} />
       }
-      <TouchableOpacity onPress={() => setShowAnswers(!showAnswrs)}>
+      <TouchableOpacity accessibilityLabel="Close" onPress={() => setShowAnswers(!showAnswrs)}>
         {replay_count != 0 && <Text
           style={[Styles.balihaiMedium9, { marginLeft: 70, marginTop: 20 }]}>
           {showAnswrs ? 'Скрыть ответы' : `Смотреть ещё ${replay_count} Ответа`}

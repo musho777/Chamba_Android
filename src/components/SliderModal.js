@@ -1,6 +1,5 @@
-import { Modal, StyleSheet, View, TouchableOpacity, StatusBar } from 'react-native';
+import { Modal, StyleSheet, View, StatusBar } from 'react-native';
 import { ModalSliderImg } from './ModalSliderImg';
-import { CloseSvg1 } from '../assets/svg/Svgs';
 export const SliderModal = ({ modalVisible, photo, activePhoto, close }) => {
 
     return <View >
@@ -14,6 +13,7 @@ export const SliderModal = ({ modalVisible, photo, activePhoto, close }) => {
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => close()}
+            accessibilityLabel="Tap me!"
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>

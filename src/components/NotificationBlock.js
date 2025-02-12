@@ -20,6 +20,7 @@ export const NotificationBlock = ({ description, avatar, name, photo, id }) => {
   const navigation = useNavigation()
   return (
     <TouchableOpacity
+      accessibilityLabel="SinglPageScreen"
       onPress={() => {
         if (photo?.length)
           navigation.navigate('SinglPageScreen', { id: photo[0].post_id })

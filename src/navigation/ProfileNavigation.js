@@ -109,7 +109,9 @@ function CustomDrawerContent(props) {
         setModalVisible={(e) => setShow(e)}
       />
       <DrawerContentScrollView style={{ paddingTop: 40 }} {...props}>
-        <TouchableOpacity style={{ paddingLeft: 15, width: 70, height: 30 }} onPress={() => props.navigation.closeDrawer()}>
+        <TouchableOpacity
+          accessibilityLabel="Close"
+          style={{ paddingLeft: 15, width: 70, height: 30 }} onPress={() => props.navigation.closeDrawer()}>
           <CloseSvg />
         </TouchableOpacity>
         <DrawerItem

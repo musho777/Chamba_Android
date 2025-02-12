@@ -36,6 +36,7 @@ export const BigBgImage = forwardRef(({ changeAvatar, setChangeAvatar, user, bg,
       />
     }
     <TouchableOpacity
+      accessibilityLabel="Menu"
       onPress={() => navigation.openDrawer()}
       style={{ width: 50, height: 50, position: "absolute", top: 30, right: 0, zIndex: 9999, justifyContent: 'center', alignItems: 'center' }}
     >
@@ -43,6 +44,7 @@ export const BigBgImage = forwardRef(({ changeAvatar, setChangeAvatar, user, bg,
     </TouchableOpacity>
     <View style={{ width: '100%' }}>
       <TouchableOpacity
+        accessibilityLabel="bgPhoto"
         activeOpacity={1}
         onPress={() => setOpenBg()}>
         <FastImage
@@ -54,6 +56,7 @@ export const BigBgImage = forwardRef(({ changeAvatar, setChangeAvatar, user, bg,
         />
       </TouchableOpacity>
       <TouchableOpacity
+        accessibilityLabel="EditSvg"
         onPress={(e) => {
           e.preventDefault()
           e.stopPropagation()
@@ -65,7 +68,9 @@ export const BigBgImage = forwardRef(({ changeAvatar, setChangeAvatar, user, bg,
 
 
       <View style={styles.avatarWrapper1} activeOpacity={1} >
-        <TouchableOpacity onPress={() => setChangeAvatar(!changeAvatar)} style={[styles.shadow, styles.avatar]}>
+        <TouchableOpacity
+          accessibilityLabel="img"
+          onPress={() => setChangeAvatar(!changeAvatar)} style={[styles.shadow, styles.avatar]}>
           <Image
             style={styles.img}
             source={{ uri: imgUrl ? imgUrl : `https://chambaonline.pro/uploads/${user.avatar}`, }}

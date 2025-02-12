@@ -106,10 +106,12 @@ export const ImageComponent = React.memo(({ adminStatus, background, video, phot
     }, [])
   );
   if (background) {
-    return <TouchableOpacity disabled={disabled} activeOpacity={1} onPress={() => {
-      onPress()
-      setDisabled(true)
-    }}>
+    return <TouchableOpacity
+      accessibilityLabel="img2"
+      disabled={disabled} activeOpacity={1} onPress={() => {
+        onPress()
+        setDisabled(true)
+      }}>
       <View style={[styles.img, { justifyContent: 'center', alignItems: 'center' }]}>
         <Text style={{ position: 'absolute', zIndex: 9999, color: color, paddingHorizontal: 10, fontFamily: fontFamily }}>{text}</Text>
         <Image
@@ -119,7 +121,7 @@ export const ImageComponent = React.memo(({ adminStatus, background, video, phot
       </View>
     </TouchableOpacity>
   }
-  return <TouchableOpacity disabled={disabled} activeOpacity={1} onPress={() => {
+  return <TouchableOpacity accessibilityLabel="img3" disabled={disabled} activeOpacity={1} onPress={() => {
     onPress()
     setDisabled(true)
   }}>

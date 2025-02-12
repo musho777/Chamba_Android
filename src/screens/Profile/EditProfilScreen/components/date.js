@@ -17,6 +17,7 @@ export const DateComponent = ({ setDay, day, mount, setMount, year, setYera, err
         <Text style={styles.clandatLable}>{t(mainData.lang).Day}</Text>
         <TextInput
           value={day}
+          accessibilityLabel="calendarInput"
           onChangeText={((e) => {
             if (e <= 31) {
               setDay(e)
@@ -26,7 +27,7 @@ export const DateComponent = ({ setDay, day, mount, setMount, year, setYera, err
       <View style={{ width: '28%', height: 45 }}>
         <Text style={styles.clandatLable}>{t(mainData.lang).Month}</Text>
         <View style={styles.clandarTochable}>
-          <TouchableOpacity onPress={() => setOpenMout(true)} style={styles.calendarInput} >
+          <TouchableOpacity accessibilityLabel="mount" onPress={() => setOpenMout(true)} style={styles.calendarInput} >
             <Text style={styles.calsendarText}>{mount?.name}</Text>
           </TouchableOpacity>
           <View style={styles.calsendarVector}>
@@ -39,6 +40,7 @@ export const DateComponent = ({ setDay, day, mount, setMount, year, setYera, err
         <TextInput
           keyboardType='numeric'
           value={year}
+          accessibilityLabel="year"
           onChangeText={(e) => {
             if (e <= 2024) { setYera(e) }
           }}
