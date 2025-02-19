@@ -12,7 +12,7 @@ export const ChnageGender = ({ value, setValue }) => {
   const mainData = useSelector(st => st.mainData);
   const handlePresentModalPress = useCallback(() => { bottomSheetRef.current?.present(); }, []);
   const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => ['16%'], []);
+  const snapPoints = useMemo(() => ['20%'], []);
 
   return <View>
     <TouchableOpacity onPress={() => handlePresentModalPress()} style={[styles.textWrapper2]}>

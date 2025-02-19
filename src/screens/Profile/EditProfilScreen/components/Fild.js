@@ -120,7 +120,7 @@ export const Fild = ({ bB = 1, placeholder, value, hadnelChange, svg, multiline,
         <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', height: 20 }}>
           {color.map((elm, i) => {
             return <TouchableOpacity
-              accessibilityLabel={elm}
+              accessibilityLabel={elm.title}
               onPress={() => {
                 ChnageData(localValue, activeFont, elm)
                 setActiveColor(elm)

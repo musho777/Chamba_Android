@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { StyleSheet, View, Text, ScrollView, SafeAreaView, KeyboardAvoidingView, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, SafeAreaView, KeyboardAvoidingView, StatusBar, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { EmailSvg, NetWorkSvg, PhoneSvg, WatchSvg, WorkLocation, WorkLocationSvg } from '../../../assets/svg/Svgs';
@@ -259,153 +259,150 @@ export const EditProfilScreen = ({ navigation }) => {
     setDiscription(JSON.stringify(item))
   }
 
-  if (accauntType) {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
-          <ScrollView
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}>
-            <View style={{ marginBottom: 20 }}>
-              <HeaderWhiteTitle
-                loading={changeProfil.loading}
-                onCheck={() => chnageProfil()}
-                check
-                onPress={() => { navigation.goBack() }}
-                title={t(mainData.lang).Editprofile}
-              />
-            </View>
-            <View style={[styles.textWrapper]}>
-              <TextInput
-                multiline
-                value={name.name}
-                maxLength={30}
-                onChangeText={e => setName({ ...name, name: e })}
-                style={[Styles.balihaiMedium14, { height: 'auto', width: '90%', color: name?.color?.title, fontFamily: name?.font }]}
-              />
-            </View>
-            <Text style={[Styles.balihaiMedium10, { paddingHorizontal: 17, marginTop: 10 }]}>
-              Выбери шрифт и цвет для имени и фамилии или названия канала
-            </Text>
-            <View style={{ marginBottom: 10 }}>
-              <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', marginVertical: 10 }}>
-                {fontFamily.map((elm, i) => {
-                  return <Text
-                    accessibilityLabel={elm}
-                    onPress={() => {
-                      setName({ ...name, font: elm })
-                    }} key={i} style={{ fontSize: 10, fontFamily: elm }}>{elm}</Text>
-                })}
-              </ScrollView>
-              <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', height: 20 }}>
-                {color.map((elm, i) => {
-                  return <TouchableOpacity
-                    accessibilityLabel={elm}
-                    onPress={() => {
-                      // ChnageData(localValue, activeFont, elm)
-                      // setActiveColor(elm)
-                      setName({ ...name, color: elm })
-                    }} key={i} style={{ width: 20, height: 20, backgroundColor: elm.title, borderRadius: 20, }} />
-                })}
-              </ScrollView>
-            </View>
-
-            <Fild setIsOpen={(e) => setIsOpen(e)} discription multiline={true} value={discription} hadnelChange={(e) => setDiscription(e)} placeholder={accauntType ? t(mainData.lang).Brieflyaboutyourself : "О нас"} />
-            <View style={{ width: '100%', borderWidth: 1, marginTop: 10, borderColor: AppColors.Solitude_Color, }} />
-            <Text style={[Styles.balihaiMedium10, { paddingHorizontal: 17, marginTop: 5, color: '#FFC24B' }]}>
-              Чем больше заполнишь информацию о себе, тем точнее будет предлагаться контент. Помимо выбранных тобой рубрик будет предлагаться контент с твоего города.
-            </Text>
-            <View>
-              {accauntType && <DateComponent error={error} mount={mount} setMount={(e) => setMount(e)} day={day} setDay={(e) => setDay(e)} year={year} setYera={(e) => setYear(e)} />}
-              {accauntType && <ChnageGender value={gender} setValue={(e) => setGender(e)} />}
-              {!accauntType && <Fild value={email} hadnelChange={(e) => setEmail(e)} svg={<EmailSvg />} placeholder={t(mainData.lang).Mail} />}
-              <Fild value={phonNumber} hadnelChange={(e) => setPhonNumber(e)} svg={<PhoneSvg />} placeholder={t(mainData.lang).Phonenumber} />
-              <Location setLocation={(e) => setLocation(e)} loaction={loaction} />
-              <Position_profession setLocation={(e) => setOtrasl(e)} loaction={otrasl} />
-              {accauntType && <Fild bB={0} value={workLocation} hadnelChange={(e) => setWorkLocation(e)} svg={<WorkLocation />} placeholder={t(mainData.lang).Placeofwork} />}
-
-              <Fild multiline={true} value={ooo} hadnelChange={(e) => setOoo(e)} svg={<WorkLocationSvg />} placeholder={!accauntType ? `Адрес компании` : 'Адрес предприятия'} />
 
 
+  try {
+    if (accauntType) {
+      return (
+        <SafeAreaView style={{ flex: 1 }}>
+          <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}>
+              <View style={{ marginBottom: 20 }}>
+                <HeaderWhiteTitle
+                  loading={changeProfil.loading}
+                  onCheck={() => chnageProfil()}
+                  check
+                  onPress={() => { navigation.goBack() }}
+                  title={t(mainData.lang).Editprofile}
+                />
+              </View>
+              <View style={[styles.textWrapper]}>
+                <TextInput
+                  multiline
+                  value={name.name}
+                  maxLength={30}
+                  onChangeText={e => setName({ ...name, name: e })}
+                  style={[Styles.balihaiMedium14, { height: 'auto', width: '90%', color: name?.color?.title, fontFamily: name?.font }]}
+                />
+              </View>
+              <Text style={[Styles.balihaiMedium10, { paddingHorizontal: 17, marginTop: 10 }]}>
+                Выбери шрифт и цвет для имени и фамилии или названия канала
+              </Text>
+              <View style={{ marginBottom: 10 }}>
+                <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', marginVertical: 10 }}>
+                  {fontFamily.map((elm, i) => {
+                    return <Text
+                      accessibilityLabel={elm}
+                      onPress={() => {
+                        setName({ ...name, font: elm })
+                      }} key={i} style={{ fontSize: 10, fontFamily: elm }}>{elm}</Text>
+                  })}
+                </ScrollView>
 
-
-
-
-              <Profiesions setLocation={(e) => setProfation(e)} loaction={profation} />
-              {!accauntType && <Fild value={graf} hadnelChange={(e) => setGraf(e)} svg={<WatchSvg />} placeholder={'График работы'} />}
-              {!accauntType && <Fild value={web} hadnelChange={(e) => setWeb(e)} svg={<NetWorkSvg />} placeholder={t(mainData.lang).Website} />}
-              <View style={{ height: 55, width: '100%' }}></View>
-            </View>
-            {/* <Text
-            style={[[Styles.tomatoMedium10, { textAlign: 'center', marginTop: 10 }]]}>
-            {error || changeProfil.error}
-          </Text> */}
-          </ScrollView>
-        </KeyboardAvoidingView>
-        <EmojiPicker onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
-      </SafeAreaView>
-    );
-  }
-  else {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
-          <ScrollView
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}>
-            <View style={{ marginBottom: 20 }}>
-              <HeaderWhiteTitle
-                loading={changeProfil.loading}
-                onCheck={() => chnageProfil()}
-                check
-                onPress={() => {
-                  navigation.goBack()
-                }}
-                title=
-                {t(mainData.lang).Editprofile}
-              />
-            </View>
-            <View style={styles.textWrapper}>
-              <TextInput
-                value={name}
-                onChangeText={e => setName(e)}
-                style={Styles.darkMedium14}
-              />
-              <View style={{ backgroundColor: 'red' }}>
+                <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', height: 20 }}>
+                  {color.map((elm, i) => {
+                    return <TouchableOpacity
+                      accessibilityLabel={elm.title}
+                      onPress={() => {
+                        setName({ ...name, color: elm })
+                      }} key={i} style={{ width: 20, height: 20, backgroundColor: elm.title, borderRadius: 20, }} />
+                  })}
+                </ScrollView>
               </View>
 
-            </View>
+              <Fild setIsOpen={(e) => setIsOpen(e)} discription multiline={true} value={discription} hadnelChange={(e) => setDiscription(e)} placeholder={accauntType ? t(mainData.lang).Brieflyaboutyourself : "О нас"} />
+              <View style={{ width: '100%', borderWidth: 1, marginTop: 10, borderColor: AppColors.Solitude_Color, }} />
+              <Text style={[Styles.balihaiMedium10, { paddingHorizontal: 17, marginTop: 5, color: '#FFC24B' }]}>
+                Чем больше заполнишь информацию о себе, тем точнее будет предлагаться контент. Помимо выбранных тобой рубрик будет предлагаться контент с твоего города.
+              </Text>
+              <View>
+                {accauntType && <DateComponent error={error} mount={mount} setMount={(e) => setMount(e)} day={day} setDay={(e) => setDay(e)} year={year} setYera={(e) => setYear(e)} />}
+                {accauntType && <ChnageGender value={gender} setValue={(e) => setGender(e)} />}
+                {!accauntType && <Fild value={email} hadnelChange={(e) => setEmail(e)} svg={<EmailSvg />} placeholder={t(mainData.lang).Mail} />}
+                <Fild value={phonNumber} hadnelChange={(e) => setPhonNumber(e)} svg={<PhoneSvg />} placeholder={t(mainData.lang).Phonenumber} />
+                <Location setLocation={(e) => setLocation(e)} loaction={loaction} />
+                <Position_profession setLocation={(e) => setOtrasl(e)} loaction={otrasl} />
+                {accauntType && <Fild bB={0} value={workLocation} hadnelChange={(e) => setWorkLocation(e)} svg={<WorkLocation />} placeholder={t(mainData.lang).Placeofwork} />}
+
+                <Fild multiline={true} value={ooo} hadnelChange={(e) => setOoo(e)} svg={<WorkLocationSvg />} placeholder={!accauntType ? `Адрес компании` : 'Адрес предприятия'} />
 
 
 
 
-            <Fild setIsOpen={(e) => setIsOpen(e)} multiline={true} value={discription} hadnelChange={(e) => setDiscription(e)} placeholder={accauntType ? t(mainData.lang).Brieflyaboutyourself : "О нас"} />
-            <Text style={[Styles.balihaiMedium8, { paddingHorizontal: 17, marginTop: 5 }]}>
-              (Чем больше заполните информацию о компании, тем более точный контент будет предлагаться)
-              Помимо выбранных Вами рубрик, будет предлагаться контент от ваших конкурентов с вашего города)
-            </Text>
-            <View>
-              <Location setLocation={(e) => setLocation(e)} loaction={loaction} />
-              <Position_profession setLocation={(e) => setOtrasl(e)} loaction={otrasl} />
-              <Fild multiline={true} value={ooo} hadnelChange={(e) => setOoo(e)} svg={<WorkLocationSvg />} placeholder={`Адрес компании`} />
-              <Fild value={web} hadnelChange={(e) => setWeb(e)} svg={<NetWorkSvg />} placeholder={t(mainData.lang).Website} />
-              <Fild value={graf} hadnelChange={(e) => setGraf(e)} svg={<WatchSvg />} placeholder={'График работы'} />
-              <Fild value={phonNumber} hadnelChange={(e) => setPhonNumber(e)} svg={<PhoneSvg />} placeholder={t(mainData.lang).Phonenumber} />
-              <Fild value={email} hadnelChange={(e) => setEmail(e)} svg={<EmailSvg />} placeholder={t(mainData.lang).Mail} />
 
-              {/* <Profiesions setLocation={(e) => setProfation(e)} loaction={profation} /> */}
-              <View style={{ height: 55, width: '100%' }}></View>
-            </View>
-            {/* <Text
-            style={[[Styles.tomatoMedium10, { textAlign: 'center', marginTop: 10 }]]}>
-            {error || changeProfil.error}
-          </Text> */}
-          </ScrollView>
-        </KeyboardAvoidingView>
-        <EmojiPicker onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
-      </SafeAreaView>
-    );
+
+                <Profiesions setLocation={(e) => setProfation(e)} loaction={profation} />
+                {!accauntType && <Fild value={graf} hadnelChange={(e) => setGraf(e)} svg={<WatchSvg />} placeholder={'График работы'} />}
+                {!accauntType && <Fild value={web} hadnelChange={(e) => setWeb(e)} svg={<NetWorkSvg />} placeholder={t(mainData.lang).Website} />}
+                <View style={{ height: 55, width: '100%' }}></View>
+              </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
+          <EmojiPicker onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
+        </SafeAreaView>
+      );
+    }
+    else {
+      return (
+        <SafeAreaView style={{ flex: 1 }}>
+          <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}>
+              <View style={{ marginBottom: 20 }}>
+                <HeaderWhiteTitle
+                  loading={changeProfil.loading}
+                  onCheck={() => chnageProfil()}
+                  check
+                  onPress={() => {
+                    navigation.goBack()
+                  }}
+                  title=
+                  {t(mainData.lang).Editprofile}
+                />
+              </View>
+              <View style={styles.textWrapper}>
+                <TextInput
+                  value={name}
+                  onChangeText={e => setName(e)}
+                  style={Styles.darkMedium14}
+                />
+                <View style={{ backgroundColor: 'red' }}>
+                </View>
+
+              </View>
+
+
+
+
+              <Fild setIsOpen={(e) => setIsOpen(e)} multiline={true} value={discription} hadnelChange={(e) => setDiscription(e)} placeholder={accauntType ? t(mainData.lang).Brieflyaboutyourself : "О нас"} />
+              <Text style={[Styles.balihaiMedium8, { paddingHorizontal: 17, marginTop: 5 }]}>
+                (Чем больше заполните информацию о компании, тем более точный контент будет предлагаться)
+                Помимо выбранных Вами рубрик, будет предлагаться контент от ваших конкурентов с вашего города)
+              </Text>
+              <View>
+                <Location setLocation={(e) => setLocation(e)} loaction={loaction} />
+                <Position_profession setLocation={(e) => setOtrasl(e)} loaction={otrasl} />
+                <Fild multiline={true} value={ooo} hadnelChange={(e) => setOoo(e)} svg={<WorkLocationSvg />} placeholder={`Адрес компании`} />
+                <Fild value={web} hadnelChange={(e) => setWeb(e)} svg={<NetWorkSvg />} placeholder={t(mainData.lang).Website} />
+                <Fild value={graf} hadnelChange={(e) => setGraf(e)} svg={<WatchSvg />} placeholder={'График работы'} />
+                <Fild value={phonNumber} hadnelChange={(e) => setPhonNumber(e)} svg={<PhoneSvg />} placeholder={t(mainData.lang).Phonenumber} />
+                <Fild value={email} hadnelChange={(e) => setEmail(e)} svg={<EmailSvg />} placeholder={t(mainData.lang).Mail} />
+
+                <View style={{ height: 55, width: '100%' }}></View>
+              </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
+          <EmojiPicker onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
+        </SafeAreaView>
+      );
+    }
+  } catch (error) {
+    Alert.alert(JSON.stringify(error))
   }
+
 };
 
 const styles = StyleSheet.create({
