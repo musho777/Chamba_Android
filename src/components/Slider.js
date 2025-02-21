@@ -21,7 +21,7 @@ const windowWidth = Dimensions.get('window').width;
 // const windowHeight = Dimensions.get('window').height;
 
 
-export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItems, setOpenModal, user, onLongClikc, long, onPressOut, setActiveImage, data, setHoriznotal = () => { }, description, setIsExpanded, isExpanded, setHeight, big }) => {
+export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItems, setOpenModal, user, onLongClikc, long, onPressOut, setActiveImage, data, setHoriznotal = () => { }, description, setIsExpanded, isExpanded, setHeight, big, color, font }) => {
   const [active, setActive] = useState(0);
   const [openSlider, setOpenSlider] = useState(false);
   const [showLikeIcone, setShowLikeICone] = useState(false)
@@ -199,6 +199,8 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
           item={item}
           height={height}
           isExpanded={isExpanded}
+          color={color}
+          font={font}
           // adminStatus={adminStatus}
           setIsExpanded={(e) => setIsExpanded(e)}
         />
@@ -276,6 +278,7 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
         <SliderModal
           modalVisible={openSlider}
           activePhoto={active}
+
           photo={photo}
           close={() => setOpenSlider(false)}
         />
@@ -288,7 +291,9 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
     prevProps.index === nextProps.index &&
     prevProps.data === nextProps.data &&
     process.viewableItems === nextProps.viewableItems &&
-    prevProps.long === nextProps.long
+    prevProps.long === nextProps.long,
+    prevProps.color === nextProps.color &&
+    prevProps.font === nextProps.font
   )
 });
 

@@ -27,7 +27,7 @@ export const ConfirmCode = ({ code, clear }) => {
   }, [clear]);
   return (
     <View >
-      <Text style={[Styles.darkMedium10, { marginTop: 10, marginBottom: 3 }]} nativeID="inputLabel">Введите данные</Text>
+      {/* <Text style={[Styles.darkMedium10, { marginTop: 10, marginBottom: 3 }]} nativeID="inputLabel">Введите данные</Text> */}
       <TextInput
         value={data}
         maxLength={5}

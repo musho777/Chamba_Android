@@ -19,7 +19,9 @@ export const Header = ({
   uri,
   error,
   setFirst,
-  Close
+  Close,
+  color,
+  font_family,
 }) => {
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => ['50%'], [],);
@@ -64,22 +66,23 @@ export const Header = ({
     let form = new FormData();
     uri.length &&
       uri.forEach((el, i) => {
-        if (!el.mime.includes('video')) {
-          form.append('photos[]', {
-            uri: el.uri,
-            type: el.mime,
-            name: 'photo',
-          });
-        }
-        else {
-          form.append(`video[][video]`, {
-            uri: el.uri,
-            type: 'video/mp4',
-            name: 'video.mp4',
-          })
-        }
+        form.append('photos[]', {
+          uri: el.uri,
+          type: el.mime,
+          name: 'photo',
+        });
+        // if (!el.mime.includes('video')) {
+        // }
+        // else {
+        //   form.append(`video[][video]`, {
+        //     uri: el.uri,
+        //     type: 'video/mp4',
+        //     name: 'video.mp4',
+        //   })
+        // }
       });
-
+    color && form.append('color', color);
+    font_family && form.append("font_family", font_family)
     description && form.append('description', JSON.stringify(description));
     selectedCatalog.forEach(id => form.append('category_ids[]', id));
 

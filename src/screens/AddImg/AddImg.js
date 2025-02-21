@@ -35,6 +35,8 @@ const windowWidth = Dimensions.get('window').width;
 
 export const AddImg = ({ navigation }) => {
   const insets = useSafeAreaInsets();
+  const [descriptionColor, setDescriptionColor] = useState("white")
+  const [descriptionFontFamily, setDescriptionFontFamily] = useState()
 
   // const [keyboardVisible, setKeyboardVisible] = useState(false);
   const ref = useRef()
@@ -53,6 +55,61 @@ export const AddImg = ({ navigation }) => {
   //     keyboardDidShowListener.remove();
   //   };
   // }, []);
+
+  const fontFamily = [
+    "Montserrat-Regular",
+    "PlaywriteGBS-Regular",
+    'RussoOne-Regular',
+    'Agdasima-Regular',
+    'Caveat-Regular',
+    'Comfortaa-Regular',
+    'CormorantGaramond-Regular',
+    'Jost-Regular',
+    'Lobster-Regular',
+    'NotoSansHK-Regular',
+    'Pacifico-Regular',
+    'Tiny5-Regular',
+    "AdventPro_Expanded-Regular",
+    "Alice-Regular",
+    "AmaticSC-Regular",
+    "BadScript-Regular",
+    "DelaGothicOne-Regular",
+    "Geologica_Auto-Regular",
+    "PlayfairDisplaySC-Regular",
+    "RubikMonoOne-Regular",
+    "Unbounded-Regular",
+    "YanoneKaffeesatz-Regular",
+    "AlegreyaSansSC-Regular",
+    "BalsamiqSans-Regular",
+    "CormorantInfant-Regular",
+    "DaysOne-Regular",
+    "MarckScript-Regular",
+    "Pattaya-Regular",
+    "ProstoOne-Regular",
+    "RubikSprayPaint-Regular",
+    "SofiaSansExtraCondensed-Regular"
+  ]
+
+  const color = [
+    // { title: '#000000', id: 1 },
+    { title: '#808080', id: 3 },
+    { title: '#FF5733', id: 4 },
+    { title: '#1E90FF', id: 6 },
+    { title: '#4682B4', id: 7 },
+    { title: '#4CAF50', id: 8 },
+    { title: '#FFD700', id: 9 },
+    { title: '#FF69B4', id: 10 },
+    { title: '#800080', id: 11 },
+    { title: '#8B0000', id: 12 },
+
+    { title: '#FFA500', id: 13 },
+    { title: '#87CEEB', id: 14 },
+    { title: '#FF4500', id: 16 },
+    { title: '#32CD32', id: 17 },
+    { title: '#DA70D6', id: 18 },
+    { title: '#708090', id: 19 },
+  ]
+
 
   const mainData = useSelector(st => st.mainData);
   const [uri, setUri] = useState([]);
@@ -223,7 +280,7 @@ export const AddImg = ({ navigation }) => {
         <TextInput
           placeholderTextColor="white"
           placeholder={t(mainData.lang).adddescription}
-          style={styles.input}
+          style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
           value={description[active]}
           onFocus={() => {
             ref.current?.scrollToEnd({ animated: true });
@@ -244,6 +301,8 @@ export const AddImg = ({ navigation }) => {
         <Status setShowError={(e) => setShowError(e)} showError={showError} error={error} />
         <Header
           uri={uri}
+          color={descriptionColor}
+          font_family={descriptionFontFamily}
           selectedCatalog={selectedCatalog}
           description={description}
           setSelectedCatalog={(e) => setSelectedCatalog(e)}
@@ -267,7 +326,7 @@ export const AddImg = ({ navigation }) => {
               maxToRenderPerBatch={10}
               renderItem={renderItem}
             />
-            <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
+            {/* <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
               <Text style={{ fontFamily: 'Montserrat-Medium', color: 'white', fontSize: 9, paddingHorizontal: 10, color: '#FFC24B', borderWidth: 1, borderColor: "white", marginHorizontal: 5 }}>
                 Иногда мы затрудняемся в вопросе, в какую рубрику выложить контент, так как в одном публикации может быть запечатлен красивый автомобиль, милая собачка, красивые пальмы и нежное море.
                 {"\n"}
@@ -275,7 +334,7 @@ export const AddImg = ({ navigation }) => {
                 {"\n"}
                 Мы предлагаем такой контент выложить в несколько рубрик (не более 4-x), где твое искусство увидят любители разного.
               </Text>
-            </View>
+            </View> */}
           </View>
           {uri?.length > 1 && <View style={styles.paginationWrapper}>
             {uri?.length > 1 && uri?.map((elm, i) => (
@@ -283,7 +342,22 @@ export const AddImg = ({ navigation }) => {
             ))}
           </View>}
         </View>
-
+        <View style={{ marginBottom: 10 }}>
+          <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', marginVertical: 10 }}>
+            {fontFamily.map((elm, i) => {
+              return <Text onPress={() => {
+                setDescriptionFontFamily(elm)
+              }} key={i} style={{ fontSize: 10, fontFamily: elm, color: "white" }}>{elm}</Text>
+            })}
+          </ScrollView>
+          <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', height: 20 }}>
+            {color.map((elm, i) => {
+              return <TouchableOpacity onPress={() => {
+                setDescriptionColor(elm.title)
+              }} key={i} style={{ width: 20, height: 20, backgroundColor: elm.title, borderRadius: 20, }} />
+            })}
+          </ScrollView>
+        </View>
       </View >
     );
   else {

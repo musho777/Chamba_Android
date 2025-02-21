@@ -27,6 +27,8 @@ export const Post = React.memo(({
   // adminStatus,
   setPostUserId = () => { },
   AddToBack,
+  showStatisitc = 0,
+  setShowStatistic = () => { },
   // scroll = () => { }
 }) => {
   const user = useSelector((st) => st.userData)
@@ -171,6 +173,8 @@ export const Post = React.memo(({
           onLongClikc={() => onLongClikc()}
           photo={data?.photo ? data?.photo : []}
           setOpenModal={setOpenModal}
+          font={data.font_family}
+          color={data.color}
           data={data}
           description={data?.description}
           setHoriznotal={setHoriznotal}
@@ -211,6 +215,8 @@ export const Post = React.memo(({
             my={user?.data.id != data?.user.id ? false : true}
             userId={data?.user.id}
             like={data?.like_count}
+            setShowStatistic={() => setShowStatistic()}
+            showStatisitc={showStatisitc}
             id={data?.id}
             user={user}
             categoryId={data?.many_category}
@@ -224,7 +230,10 @@ export const Post = React.memo(({
     prevProps.data?.comment_count === nextProps.data?.comment_count &&
     prevProps.data?.id === nextProps.data?.id &&
     prevProps.data?.description === nextProps.data?.description &&
-    prevProps.data.scroll === nextProps.data.scroll
+    prevProps.data.scroll === nextProps.data.scroll &&
+    prevProps.data?.showStatisitc === nextProps.data?.showStatisitc &&
+    prevProps.data?.color === nextProps.data?.color &&
+    prevProps.data?.font_family === nextProps.data?.font_family
   )
 });
 

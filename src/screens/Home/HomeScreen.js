@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { View, FlatList, RefreshControl, Text, ActivityIndicator, BackHandler, StatusBar, Dimensions } from 'react-native';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Post } from '../../components/post/Post';
-import { AddPostViewCount, DelatePostAction, FullScreenAction, GetLentsAction, getUserInfoAction, ShowTabNavigation } from '../../store/action/action';
+import { AddPostViewCount, Api, DelatePostAction, FullScreenAction, GetLentsAction, getUserInfoAction, ShowTabNavigation } from '../../store/action/action';
 import { ModalComponent } from './modal';
 import { PostLoading } from '../../components/post/Loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -40,25 +40,36 @@ export const HomeScreen = () => {
   const [likeClose, setLikeClose] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [isFetching, setIsFetching] = useState(false);
-
+  const [showStatisitc, setShowStatistic] = useState(0)
   const [showComment, setShowComment] = useState(false)
   const { fullScreen } = useSelector((st) => st.fullScreenData)
   const [postUserId, setPostUserId] = useState(null)
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     if (userData.data.show_category_pop_up == 1) {
-  //       setShowModal(true);
-  //     }
-  //   }, [userData.data.show_category_pop_up])
-  // );
-
 
   useEffect(() => {
     if (userData.data.show_category_pop_up == 1) {
       setShowModal(true);
     }
-  }, [userData.data.show_category_pop_up])
+    setShowStatistic(userData.allData.data?.view_statistics_open_text)
+  }, [userData.data])
+
+  const ChangeViewStatisticsOpenText = () => {
+    setShowStatistic(0)
+    if (showStatisitc) {
+      var myHeaders = new Headers();
+      myHeaders.append('Content-Type', 'application/json');
+      myHeaders.append('Authorization', `Bearer ${staticdata.token}`);
+      fetch(`${Api}/view_statistics_open_text`, {
+        method: 'POST',
+        headers: myHeaders,
+      })
+        .then(response => response.json())
+        .then(r => {
+        })
+        .catch(error => {
+        });
+    }
+  }
+
 
 
   useEffect(() => {
@@ -180,6 +191,8 @@ export const HomeScreen = () => {
             data={item}
             adminStatus={item.admin_status}
             index={index}
+            setShowStatistic={() => ChangeViewStatisticsOpenText()}
+            showStatisitc={showStatisitc}
             // scroll={(e) => Scroll(e)}
             viewableItems={viewableItems}
             setShowLike={() => setLikeClose(true)}
