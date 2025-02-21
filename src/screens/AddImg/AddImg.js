@@ -326,15 +326,11 @@ export const AddImg = ({ navigation }) => {
               maxToRenderPerBatch={10}
               renderItem={renderItem}
             />
-            {/* <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
+            <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
               <Text style={{ fontFamily: 'Montserrat-Medium', color: 'white', fontSize: 9, paddingHorizontal: 10, color: '#FFC24B', borderWidth: 1, borderColor: "white", marginHorizontal: 5 }}>
-                Иногда мы затрудняемся в вопросе, в какую рубрику выложить контент, так как в одном публикации может быть запечатлен красивый автомобиль, милая собачка, красивые пальмы и нежное море.
-                {"\n"}
-                Куда выложить?
-                {"\n"}
-                Мы предлагаем такой контент выложить в несколько рубрик (не более 4-x), где твое искусство увидят любители разного.
+                Подбери свой шрифт и цвет к описанию публикации
               </Text>
-            </View> */}
+            </View>
           </View>
           {uri?.length > 1 && <View style={styles.paginationWrapper}>
             {uri?.length > 1 && uri?.map((elm, i) => (
@@ -392,7 +388,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'black',
     // height: '100%',
-    height: 550,
+    // height: 550,
+    height: 'auto',
     borderColor: 'red'
   },
   img: {

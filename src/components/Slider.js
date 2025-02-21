@@ -291,9 +291,10 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
     prevProps.index === nextProps.index &&
     prevProps.data === nextProps.data &&
     process.viewableItems === nextProps.viewableItems &&
-    prevProps.long === nextProps.long,
+    prevProps.long === nextProps.long &&
     prevProps.color === nextProps.color &&
-    prevProps.font === nextProps.font
+    prevProps.font === nextProps.font &&
+    prevProps.data?.description === nextProps.data?.description
   )
 });
 

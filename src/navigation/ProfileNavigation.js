@@ -83,7 +83,7 @@ function CustomDrawerContent(props) {
   const handleOpenMail = () => {
     const email = 'Сhamba.online@mail.ru'; // Replace with the recipient's email
     const subject = 'Привет'; // Subject of the email
-    const body = 'Помогите стать нам лучше'; // Email body
+    const body = 'Помогите нам стать лучше'; // Email body
 
     const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
@@ -151,7 +151,7 @@ function CustomDrawerContent(props) {
         />
         <DrawerItem
           labelStyle={[Styles.darkRegular14]}
-          label={"Помогите стать нам лучше"}
+          label={"Помогите нам стать лучше"}
           onPress={() => handleOpenMail()}
         />
         <DrawerItem

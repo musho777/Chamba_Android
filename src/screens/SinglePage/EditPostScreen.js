@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Styles } from '../../styles/Styles';
 import { HeaderWhiteTitle } from '../../headers/HeaderWhiteTitle.';
@@ -30,10 +30,11 @@ export const EditPostScreen = ({ route }) => {
 
   useEffect(() => {
     setPhotos(data.photo)
-    console.log(data.color)
     setActiveColor(data.color)
-    setActiveFont(data.font_family)
-  }, [data.photo])
+    if (data.font_family) {
+      setActiveFont(data.font_family)
+    }
+  }, [data])
 
   useEffect(() => {
     if (route.params.index) {
@@ -110,7 +111,6 @@ export const EditPostScreen = ({ route }) => {
 
 
   const color = [
-    { title: '#000000', id: 1 },
     { title: '#808080', id: 3 },
     { title: '#FF5733', id: 4 },
     { title: '#1E90FF', id: 6 },
@@ -197,7 +197,7 @@ export const EditPostScreen = ({ route }) => {
         value={activeDescription}
         multiline
         onChangeText={e => changeDescription(e)}
-        style={[Styles.darkMedium14, { padding: 10, color: activecolor, fontFamily: activeFont }]}
+        style={[Styles.darkMedium14, { padding: 10, color: activecolor === "white" ? "black" : activecolor, fontFamily: activeFont }]}
         placeholder={t(mainData.lang).adddescription}
         placeholderTextColor={'#8C9CAB'}
       />
