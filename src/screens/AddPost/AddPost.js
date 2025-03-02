@@ -83,7 +83,13 @@ export const AddPost = () => {
     "RubikBubbles-Regular",
     "ShantellSans-Regular",
     "Spectral-Regular",
-    "Tinos-Regular"
+    "Tinos-Regular",
+
+    "RubikLines-Regular",
+    "RubikDoodleTriangles-Regular",
+    "RubikBrokenFax-Regular",
+    "RubikBeastly-Regular",
+    "Monomakh-Regular",
   ]
   const [emojy, setEmojy] = useState(false)
   const [activeFont, setActiveFont] = useState("Montserrat-Regular")

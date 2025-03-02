@@ -45,7 +45,8 @@ export const CommmentModal = ({ close, commentData, CommentCount = () => { } }) 
         close()
       }}
       enablePanDownToClose={true}
-      backdropComponent={renderBackdrop}>
+      backdropComponent={renderBackdrop}
+    >
       <View
         style={{ alignItems: 'center', justifyContent: 'space-between', }}>
         <Text style={[Styles.darkMedium16, { marginHorizontal: 10, position: 'absolute' }]}>

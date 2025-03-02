@@ -87,7 +87,14 @@ export const AddImg = ({ navigation }) => {
     "Pattaya-Regular",
     "ProstoOne-Regular",
     "RubikSprayPaint-Regular",
-    "SofiaSansExtraCondensed-Regular"
+    "SofiaSansExtraCondensed-Regular",
+
+
+    "RubikLines-Regular",
+    "RubikDoodleTriangles-Regular",
+    "RubikBrokenFax-Regular",
+    "RubikBeastly-Regular",
+    "Monomakh-Regular",
   ]
 
   const color = [
@@ -108,6 +115,15 @@ export const AddImg = ({ navigation }) => {
     { title: '#32CD32', id: 17 },
     { title: '#DA70D6', id: 18 },
     { title: '#708090', id: 19 },
+    { title: '#221b63', id: 20 },
+
+    { title: '#147558', id: 21 },
+    { title: '#147558', id: 22 },
+    { title: '#753414', id: 23 },
+    { title: '#753414', id: 24 },
+    { title: '#5d1475', id: 25 },
+
+
   ]
 
 
@@ -328,7 +344,7 @@ export const AddImg = ({ navigation }) => {
             />
             <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
               <Text style={{ fontFamily: 'Montserrat-Medium', color: 'white', fontSize: 9, paddingHorizontal: 10, color: '#FFC24B', borderWidth: 1, borderColor: "white", marginHorizontal: 5 }}>
-                Подбери свой шрифт и цвет к описанию публикации
+                Вырази свою публикацию особенным шрифтом и цветом.
               </Text>
             </View>
           </View>

@@ -106,7 +106,13 @@ export const EditPostScreen = ({ route }) => {
     "Pattaya-Regular",
     "ProstoOne-Regular",
     "RubikSprayPaint-Regular",
-    "SofiaSansExtraCondensed-Regular"
+    "SofiaSansExtraCondensed-Regular",
+
+    "RubikLines-Regular",
+    "RubikDoodleTriangles-Regular",
+    "RubikBrokenFax-Regular",
+    "RubikBeastly-Regular",
+    "Monomakh-Regular",
   ]
 
 

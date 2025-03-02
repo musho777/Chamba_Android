@@ -47,7 +47,14 @@ export const Fild = ({ bB = 1, placeholder, value, hadnelChange, svg, multiline,
     "RubikBubbles-Regular",
     "ShantellSans-Regular",
     "Spectral-Regular",
-    "Tinos-Regular"
+    "Tinos-Regular",
+
+
+    "RubikLines-Regular",
+    "RubikDoodleTriangles-Regular",
+    "RubikBrokenFax-Regular",
+    "RubikBeastly-Regular",
+    "Monomakh-Regular",
   ]
   const [activeFont, setActicveFont] = useState("Montserrat-Regular")
   const [activeColor, setActiveColor] = useState({ title: '#000000', id: 1 })

@@ -65,7 +65,16 @@ export const EditProfilScreen = ({ navigation }) => {
     "RubikBubbles-Regular",
     "ShantellSans-Regular",
     "Spectral-Regular",
-    "Tinos-Regular"
+    "Tinos-Regular",
+
+
+
+
+    "RubikLines-Regular",
+    "RubikDoodleTriangles-Regular",
+    "RubikBrokenFax-Regular",
+    "RubikBeastly-Regular",
+    "Monomakh-Regular"
   ]
 
   const color = [
@@ -86,6 +95,13 @@ export const EditProfilScreen = ({ navigation }) => {
     { title: '#32CD32', id: 17 },
     { title: '#DA70D6', id: 18 },
     { title: '#708090', id: 19 },
+
+    { title: '#147558', id: 21 },
+    { title: '#147558', id: 22 },
+    { title: '#753414', id: 23 },
+    { title: '#753414', id: 24 },
+    { title: '#5d1475', id: 25 },
+
   ]
 
   const mountDate = [
@@ -288,7 +304,7 @@ export const EditProfilScreen = ({ navigation }) => {
                 />
               </View>
               <Text style={[Styles.balihaiMedium10, { paddingHorizontal: 17, marginTop: 10 }]}>
-                Выбери шрифт и цвет для имени и фамилии или названия канала
+                Вырази свой аккаунт особенным шрифтом и цветом.
               </Text>
               <View style={{ marginBottom: 10 }}>
                 <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', marginVertical: 10 }}>
