@@ -4,11 +4,15 @@ import FastImage from 'react-native-fast-image';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Styles } from '../styles/Styles';
 import { InReview } from './InReview'
+import RenderHtml from 'react-native-render-html';
 
 const windowWidth = Dimensions.get('window').width;
 
 const SliderImage = React.memo(({ adminStatus, item, height, description, index, setIsExpanded, color, font }) => {
-
+  const isHTML = (str) => {
+    const htmlPattern = /<\/?[a-z][\s\S]*>/i;
+    return htmlPattern.test(str);
+  };
   // const [loading, setLoading] = useState(true)
   const heightAnim = useRef(new Animated.Value(0)).current;
   // const [isExpanded, setIsExpanded] = useState(false);
@@ -33,7 +37,23 @@ const SliderImage = React.memo(({ adminStatus, item, height, description, index,
       useNativeDriver: false,
     }).start();
   };
+  const textOnly = Description[index]?.replace(/<[^>]+>/g, '');
+  const truncateText = (text) => {
+    let modifiedContent = Description[index];
+    if (!modifiedContent?.includes('color:')) {
+      // Add a default white color to the body if no color is specified
+      modifiedContent = `<div style="color: white;">${modifiedContent}</div>`;
+    } else {
+      // If color is defined, ensure all color: black is replaced with white
+      modifiedContent = modifiedContent?.replace(/color:\s*(black|#000000|#000)/g, 'color: white');
+    }
 
+    if (textOnly?.length > MAX_Height) {
+      return modifiedContent.slice(0, MAX_Height);
+    }
+    return modifiedContent;
+  };
+  const truncatedText = truncateText(Description[index]);
   return <View >
     {/* {loading && <View style={[styles.loading, { height: height }]}>
       <ActivityIndicator color='#FFC24B' size={"large"} />
@@ -62,16 +82,41 @@ const SliderImage = React.memo(({ adminStatus, item, height, description, index,
           <View>
             {Description[index] &&
               <View>
-                <Text style={[Styles.darkMedium13, { color: color ?? "white", fontFamily: font }]}>
+                {isHTML(Description[index]) ?
+                  // textOnly?.length
+                  <RenderHtml
+                    contentWidth={Description[index].length}
+                    source={{ html: truncatedText }}
+                  /> :
+                  <Text style={[Styles.darkMedium13, { color: color ?? "white", fontFamily: font }]}>
+                    {`${Description[index].slice(0, MAX_Height)}`}
+                  </Text>
+                }
+                {/* <Text style={[Styles.darkMedium13, { color: color ?? "white", fontFamily: font }]}>
                   {`${Description[index].slice(0, MAX_Height)}`}
-                </Text>
+                </Text> */}
               </View>
             }
-            {Description[index].length > MAX_Height && <TouchableOpacity
+            {isHTML(Description[index]) ?
+              <View style={{ marginBottom: 3 }}>
+                {truncatedText > MAX_Height && <TouchableOpacity
+                  onPress={() => startAnimation(true)}
+                >
+                  <Text style={[Styles.balihaiMedium13, { color: 'white' }]}>Показать больше</Text>
+                </TouchableOpacity>}
+              </View> :
+              <View style={{ marginBottom: 3 }}>
+                {Description[index].length > MAX_Height && <TouchableOpacity
+                  onPress={() => startAnimation(true)}
+                >
+                  <Text style={[Styles.balihaiMedium13, { color: 'white' }]}>Показать больше</Text>
+                </TouchableOpacity>}
+              </View>}
+            {/* {Description[index].length > MAX_Height && <TouchableOpacity
               onPress={() => startAnimation(true)}
             >
               <Text style={[Styles.balihaiMedium13, { color: 'white' }]}>Развернуть</Text>
-            </TouchableOpacity>}
+            </TouchableOpacity>} */}
           </View>
         </View>
       }
@@ -86,9 +131,18 @@ const SliderImage = React.memo(({ adminStatus, item, height, description, index,
         <TouchableOpacity style={{ padding: 10 }} activeOpacity={1}>
           {Description && Description[index] &&
             <View>
-              <Text style={[Styles.darkMedium13]}>
+              {isHTML(Description[index]) ?
+                <RenderHtml
+                  contentWidth={100}
+                  source={{ html: Description[index] }}
+                /> :
+                <Text style={[Styles.darkMedium13]}>
+                  {Description[index]}
+                </Text>
+              }
+              {/* <Text style={[Styles.darkMedium13]}>
                 {Description[index]}
-              </Text>
+              </Text> */}
             </View>
           }
           {Description && Description[index] && <TouchableOpacity onPress={() => startAnimation(false)}>

@@ -50,12 +50,12 @@ export const HeaderInfo = ({ user, data }) => {
   return <TouchableOpacity
     activeOpacity={1}
     onPress={() =>
-      user?.data?.id != data?.user.id ? navigation.push('SearchProfil', { screen: "SearchProfils", params: { id: data.user.id, post_id: data.id } }) :
+      user?.data?.id != data?.user?.id ? navigation.push('SearchProfil', { screen: "SearchProfils", params: { id: data?.user?.id, post_id: data?.id } }) :
         navigation.navigate('TabNavigation', { screen: "ProfileNavigation" })
     } style={[Styles.flexAlignItems]}>
     <View>
       <Image style={styles.userImg}
-        source={{ uri: `https://chambaonline.pro/uploads/${data?.user.avatar}` }} />
+        source={{ uri: `https://chambaonline.pro/uploads/${data?.user?.avatar}` }} />
     </View>
     <View style={styles.nameBlock}>
       <View style={[Styles.flexAlignItems, { width: '100%', gap: 2 }]}>

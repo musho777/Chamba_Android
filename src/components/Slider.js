@@ -148,8 +148,6 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
         setHeight(393)
       }
     }
-
-
     // const ChangePauesd = (e, index) => {
     //   let temp = [...paused]
     //   temp[index] = e

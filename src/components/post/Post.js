@@ -173,8 +173,8 @@ export const Post = React.memo(({
           onLongClikc={() => onLongClikc()}
           photo={data?.photo ? data?.photo : []}
           setOpenModal={setOpenModal}
-          font={data.font_family}
-          color={data.color}
+          font={data?.font_family}
+          color={data?.color}
           data={data}
           description={data?.description}
           setHoriznotal={setHoriznotal}

@@ -90,6 +90,21 @@ export const AddPost = () => {
     "RubikBrokenFax-Regular",
     "RubikBeastly-Regular",
     "Monomakh-Regular",
+
+    "RubikPuddles-Regular",
+    "RubikPixels-Regular",
+    "RubikMicrobe-Regular",
+    "RubikMaze-Regular",
+    "RubikMaps-Regular",
+    "RubikLines-Regular",
+    "RubikGemstones-Regular",
+    "RubikDoodleTriangles-Regular",
+    "RubikDistressed-Regular",
+    "RubikBurned-Regular",
+    "RubikBrokenFax-Regular",
+    "RubikBeastly-Regular",
+    "Oi-Regular",
+    "AlumniSansCollegiateOne-Regular",
   ]
   const [emojy, setEmojy] = useState(false)
   const [activeFont, setActiveFont] = useState("Montserrat-Regular")

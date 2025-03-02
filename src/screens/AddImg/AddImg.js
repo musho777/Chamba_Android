@@ -11,9 +11,12 @@ import {
   FlatList,
   ScrollView,
   StatusBar,
-  Keyboard,
   KeyboardAvoidingView,
+  Image,
+  Alert,
 } from 'react-native';
+import QuillEditor, { QuillToolbar } from 'react-native-cn-quill';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { GetCatalogAction } from '../../store/action/action';
 import { Styles } from '../../styles/Styles';
@@ -27,6 +30,7 @@ import { openPicker } from '@baronha/react-native-multiple-image-picker';
 import FastImage from 'react-native-fast-image';
 import { Header } from './component/header';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import RenderHtml from 'react-native-render-html';
 
 
 
@@ -37,6 +41,7 @@ export const AddImg = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const [descriptionColor, setDescriptionColor] = useState("white")
   const [descriptionFontFamily, setDescriptionFontFamily] = useState()
+  const user = useSelector((st) => st.userData)
 
   // const [keyboardVisible, setKeyboardVisible] = useState(false);
   const ref = useRef()
@@ -95,6 +100,21 @@ export const AddImg = ({ navigation }) => {
     "RubikBrokenFax-Regular",
     "RubikBeastly-Regular",
     "Monomakh-Regular",
+
+    "RubikPuddles-Regular",
+    "RubikPixels-Regular",
+    "RubikMicrobe-Regular",
+    "RubikMaze-Regular",
+    "RubikMaps-Regular",
+    "RubikLines-Regular",
+    "RubikGemstones-Regular",
+    "RubikDoodleTriangles-Regular",
+    "RubikDistressed-Regular",
+    "RubikBurned-Regular",
+    "RubikBrokenFax-Regular",
+    "RubikBeastly-Regular",
+    "Oi-Regular",
+    "AlumniSansCollegiateOne-Regular",
   ]
 
   const color = [
@@ -139,6 +159,7 @@ export const AddImg = ({ navigation }) => {
   const [localheight, setLocalHeight] = useState([])
 
   const [showError, setShowError] = useState(false)
+  const _editor = React.createRef();
 
   const [error, setError] = useState('')
   const [first, setFirst] = useState(false)
@@ -152,7 +173,7 @@ export const AddImg = ({ navigation }) => {
 
   useFocusEffect(
     useCallback(() => {
-
+      _editor?.current?.setPlaceholder("Добавить описание");
       setError('')
       setShowError(false)
       dispatch(ClearCreatPost())
@@ -187,6 +208,7 @@ export const AddImg = ({ navigation }) => {
   }, [createPost.status]);
 
   const addPhoto = async (data, i) => {
+    _editor?.current?.setPlaceholder("Добавить описание");
     const options = {
       maxSelectedAssets: 10,
       doneTitle: "Добавить",
@@ -228,7 +250,10 @@ export const AddImg = ({ navigation }) => {
 
   }
 
-
+  const isHTML = (str) => {
+    const htmlPattern = /<\/?[a-z][\s\S]*>/i;
+    return htmlPattern.test(str);
+  };
 
   const delateFoto = index => {
     let item = [...uri];
@@ -272,105 +297,298 @@ export const AddImg = ({ navigation }) => {
     setFirst(false)
     setUri([])
   }
+
+  const fullOptions = [
+    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+    // ['blockquote', 'code-block'],
+    // [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+
+    // [{ header: 1 }, { header: 2 }], // custom button values
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+    [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+    [{ direction: 'rtl' }], // text direction
+
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    // [{ font: [] }],
+    // [{ align: [] }],
+    // ['image', 'video'],
+    // ["clean"], // remove formatting button
+  ];
+
+
   const renderItem = ({ item, index }) => {
-    return <View style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 525 } : { height: 393 }} behavior={Platform.OS === 'ios' ? 'padding' : "position"}>
-      <ScrollView style={(localheight[index]?.height - localheight[index]?.width) > 220 ? { height: 525 } : { height: 393 }}>
-        <FastImage
-          style={[styles.img, (localheight[index]?.height - localheight[index]?.width) > 220 ? { minHeight: 525 } : { minHeight: 393 }]}
-          source={{ uri: item.uri }}
-          onLoad={(event) => {
-            const { width, height } = event.nativeEvent;
-            let item = [...localheight]
-            item.push({ width: width, height: height })
-            setLocalHeight(item)
-          }}
-        />
-        <TouchableOpacity onPress={() => { delateFoto(index) }} style={{ position: 'absolute', top: 10, right: 10 }}>
+    let modifiedContent = description[active];
+    if (!modifiedContent?.includes('color:')) {
+      // Add a default white color to the body if no color is specified
+      modifiedContent = `<div style="color: white;">${modifiedContent}</div>`;
+    } else {
+      // If color is defined, ensure all color: black is replaced with white
+      modifiedContent = modifiedContent?.replace(/color:\s*(black|#000000|#000)/g, 'color: white');
+    }
+
+    function canParseJSON(jsonString) {
+      try {
+        JSON.parse(jsonString);
+        return <Text style={[Styles.whiteSemiBold14, { color: JSON.parse(jsonString)?.color?.title ? JSON.parse(jsonString)?.color?.title : "black", fontFamily: JSON.parse(jsonString)?.font, marginTop: -2 }]}>{JSON.parse(jsonString).name}</Text>
+      } catch (error) {
+        return <Text style={[Styles.whiteSemiBold14, { marginTop: -2 }]}>{jsonString}</Text>
+      }
+    }
+
+
+    return <View>
+      <View keyboardShouldPersistTaps='handled' style={(localheight[index]?.height - localheight[index]?.width) >= 0 ? { maxHeight: 525 } : { maxHeight: 393 }}>
+        <TouchableOpacity activeOpacity={1} onPress={() => {
+          _editor.current?.blur();
+        }}>
+          <View style={styles.hover} >
+            <View
+              activeOpacity={1}
+              style={[Styles.flexAlignItems]}>
+              <View>
+                <Image style={styles.userImg}
+                  source={{ uri: `https://chambaonline.pro/uploads/${user.avatar}` }} />
+              </View>
+              <View style={styles.nameBlock}>
+                <View style={[Styles.flexAlignItems, { width: '100%', gap: 8 }]}>
+                  {canParseJSON(user?.name)}
+                </View>
+              </View>
+            </View>
+          </View>
+          <FastImage
+            style={[styles.img, (localheight[index]?.height - localheight[index]?.width) >= 0 ? { maxHeight: 525 } : { maxHeight: 393 }]}
+            source={{ uri: item.uri }}
+            onLoad={(event) => {
+              const { width, height } = event.nativeEvent;
+              let item = [...localheight]
+              item.push({ width: width, height: height })
+              setLocalHeight(item)
+            }}
+          />
+        </TouchableOpacity>
+        {isHTML(description[active]) && description[active]?.length > 0 && <View
+          style={{ position: 'absolute', top: 60, left: 10, paddingRight: 60, backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 10, paddingHorizontal: 10 }}>
+          <RenderHtml
+            contentWidth={1}
+            source={{ html: modifiedContent }}
+          />
+        </View>
+        }
+        <TouchableOpacity onPress={() => { delateFoto(index) }} style={{ position: 'absolute', top: 60, right: 10 }}>
           <CloseSvg1 />
         </TouchableOpacity>
-        <TouchableOpacity style={{ position: 'absolute', top: 60, right: 10 }} onPress={() => addPhoto(uri, 1)}>
+        <TouchableOpacity style={{ position: 'absolute', top: 90, right: 10 }} onPress={() => addPhoto(uri, 1)}>
           <AddImage />
         </TouchableOpacity>
-      </ScrollView>
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <TextInput
-          placeholderTextColor="white"
-          placeholder={t(mainData.lang).adddescription}
-          style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
-          value={description[active]}
-          onFocus={() => {
-            ref.current?.scrollToEnd({ animated: true });
-          }}
-          multiline
-          onChangeText={(e) => addDescription(e, active)}
-        />
       </View>
     </View >
   }
 
 
-
-
   if (first)
     return (
-      <View style={[{ flex: 1, backgroundColor: 'black' }, insets.top ? { marginTop: insets.top } : Styles.statusBar]}>
-        <Status setShowError={(e) => setShowError(e)} showError={showError} error={error} />
-        <Header
-          uri={uri}
-          color={descriptionColor}
-          font_family={descriptionFontFamily}
-          selectedCatalog={selectedCatalog}
-          description={description}
-          setSelectedCatalog={(e) => setSelectedCatalog(e)}
-          error={error}
-          setFirst={(e) => setFirst(e)}
-          Close={() => Close()}
-        />
-        <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B', borderWidth: 1, borderColor: "white", paddingHorizontal: 5, marginHorizontal: 5 }]}>{t(mainData.lang).Yourcontent}</Text>
-        <View style={styles.centeredView}>
-          <View style={styles.selectImage}>
-            <FlatList
-              horizontal
-              pagingEnabled
-              ref={flatListRef}
-              showsHorizontalScrollIndicator={true}
-              decelerationRate="normal"
-              data={uri}
-              windowSize={5}
-              onScroll={handleMomentumScrollEnd}
-              initialNumToRender={5}
-              maxToRenderPerBatch={10}
-              renderItem={renderItem}
-            />
-            <View style={{ marginTop: uri?.length > 1 ? 20 : 10, gap: 15 }}>
-              <Text style={{ fontFamily: 'Montserrat-Medium', color: 'white', fontSize: 9, paddingHorizontal: 10, color: '#FFC24B', borderWidth: 1, borderColor: "white", marginHorizontal: 5 }}>
-                Вырази свою публикацию особенным шрифтом и цветом.
-              </Text>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1, backgroundColor: 'black' }}
+      >
+        <ScrollView style={[{ backgroundColor: 'black' }, insets.top ? { paddingTop: insets.top } : Styles.statusBar]}>
+          <Status setShowError={(e) => setShowError(e)} showError={showError} error={error} />
+          <Header
+            uri={uri}
+            selectedCatalog={selectedCatalog}
+            description={description}
+            color={descriptionColor}
+            font_family={descriptionFontFamily}
+            setSelectedCatalog={(e) => setSelectedCatalog(e)}
+            error={error}
+            setFirst={(e) => setFirst(e)}
+            Close={() => Close()}
+          />
+          <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B', borderWidth: 1, borderColor: 'white', paddingHorizontal: 5 }]}>{t(mainData.lang).Yourcontent}</Text>
+          {/* <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B', borderWidth: 1, borderColor: 'white', paddingHorizontal: 5 }]}>{t(mainData.lang).Yourcontent}</Text> */}
+          <View style={styles.centeredView}>
+            <View style={styles.selectImage}>
+              <FlatList
+                horizontal
+                pagingEnabled
+                ref={flatListRef}
+                showsHorizontalScrollIndicator={true}
+                decelerationRate="normal"
+                data={uri}
+                windowSize={5}
+                onScroll={handleMomentumScrollEnd}
+                initialNumToRender={5}
+                maxToRenderPerBatch={10}
+                renderItem={renderItem}
+              />
             </View>
+            {uri?.length > 1 && <View style={styles.paginationWrapper}>
+              {uri?.length > 1 && uri?.map((elm, i) => (
+                <View key={i} style={[styles.pagination, i === active && { backgroundColor: AppColors.GoldenTainoi_Color, borderRadius: 50 }]}></View>
+              ))}
+            </View>}
           </View>
-          {uri?.length > 1 && <View style={styles.paginationWrapper}>
-            {uri?.length > 1 && uri?.map((elm, i) => (
-              <View key={i} style={[styles.pagination, i === active && { backgroundColor: AppColors.GoldenTainoi_Color, borderRadius: 50 }]}></View>
-            ))}
-          </View>}
-        </View>
-        <View style={{ marginBottom: 10 }}>
-          <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', marginVertical: 10 }}>
-            {fontFamily.map((elm, i) => {
-              return <Text onPress={() => {
-                setDescriptionFontFamily(elm)
-              }} key={i} style={{ fontSize: 10, fontFamily: elm, color: "white" }}>{elm}</Text>
-            })}
-          </ScrollView>
-          <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', height: 20 }}>
-            {color.map((elm, i) => {
-              return <TouchableOpacity onPress={() => {
-                setDescriptionColor(elm.title)
-              }} key={i} style={{ width: 20, height: 20, backgroundColor: elm.title, borderRadius: 20, }} />
-            })}
-          </ScrollView>
-        </View>
-      </View >
+        </ScrollView >
+        {active == 0 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 0)}
+              initialHtml={description[0]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options={'full'}
+            theme="light"
+
+          />
+        </View>}
+        {active == 1 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 1)}
+              initialHtml={description[1]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options={'full'}
+            theme="light"
+          />
+        </View>}
+        {active == 2 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 2)}
+              initialHtml={description[2]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options="full"
+            theme="light"
+          />
+        </View>}
+        {active == 3 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 3)}
+              initialHtml={description[2]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options="full"
+            theme="light"
+          />
+        </View>}
+        {active == 4 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 4)}
+              initialHtml={description[2]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options="full"
+            theme="light"
+          />
+        </View>}
+        {active == 5 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 5)}
+              initialHtml={description[2]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options="full"
+            theme="light"
+          />
+        </View>}
+        {active == 6 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 6)}
+
+              initialHtml={description[2]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options="full"
+            theme="light"
+          />
+        </View>}
+        {active == 7 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 7)}
+
+              initialHtml={description[2]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options="full"
+            theme="light"
+          />
+        </View>}
+        {active == 8 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 8)}
+
+              initialHtml={description[2]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options="full"
+            theme="light"
+          />
+        </View>}
+        {active == 9 && < View style={{ width: '100%', height: 120, marginBottom: 20 }}>
+          <View style={{ height: 60, width: '100%' }}>
+            <QuillEditor
+              style={[styles.input, { color: descriptionColor, fontFamily: descriptionFontFamily }]}
+              ref={_editor}
+              onHtmlChange={({ html }) => addDescription(html, 9)}
+              initialHtml={description[2]}
+            />
+          </View>
+          <QuillToolbar
+            editor={_editor}
+            options="full"
+            theme="light"
+          />
+
+        </View>}
+      </KeyboardAvoidingView >
     );
   else {
     return
@@ -404,20 +622,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'black',
     // height: '100%',
-    // height: 550,
-    height: 'auto',
+    height: 550,
     borderColor: 'red'
   },
+  editItem: {
+    backgroundColor: '#D9D9D9',
+    width: 60,
+    height: 60,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    gap: 5,
+  },
   img: {
-    // height: 570,
+    height: 550,
+    width: windowWidth,
+    borderRadius: 11,
+  },
+  Vidio: {
+    height: 550,
     width: windowWidth,
     borderRadius: 11,
   },
   input: {
     borderColor: 'red',
-    width: '90%',
-    maxHeight: 80,
-    minHeight: 40,
+    width: '100%',
+    height: 40,
     backgroundColor: 'rgba(0,0,0,0.7)',
     position: 'absolute',
     bottom: 10,
@@ -444,5 +673,41 @@ const styles = StyleSheet.create({
     height: 30,
     marginTop: 10,
     backgroundColor: '#FFD953',
+  },
+  editor: {
+    flex: 1,
+    padding: 0,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginVertical: 5,
+    fontSize: 10,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+
+  hover: {
+    padding: 5,
+    paddingLeft: 7,
+    position: 'relative',
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: "rgba(0,0,0,0.2)",
+    position: 'absolute',
+    zIndex: 999999,
+    height: 50,
+  },
+  userImg: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+    borderRadius: 50,
+  },
+  nameBlock: {
+    // gap: 2,
+    width: '75%',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: 40
   },
 });

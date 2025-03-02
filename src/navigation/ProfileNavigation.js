@@ -18,12 +18,14 @@ import { useDrawerStatus } from '@react-navigation/drawer';
 import { useEffect, useState } from 'react';
 import { DelateModal } from '../components/DelateModel';
 import DeviceInfo from 'react-native-device-info';
+import { SendMail } from '../components/SendMail';
 
 function CustomDrawerContent(props) {
   const mainData = useSelector(st => st.mainData);
   const staticdata = useSelector(st => st.static);
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
+  const [showCommentModal, setShowCommentModal] = useState(false)
 
   const [show, setShow] = useState(false)
 
@@ -108,6 +110,10 @@ function CustomDrawerContent(props) {
         show={show}
         setModalVisible={(e) => setShow(e)}
       />
+      <SendMail
+        visible={showCommentModal}
+        onClose={(e) => setShowCommentModal(false)}
+      />
       <DrawerContentScrollView style={{ paddingTop: 40 }} {...props}>
         <TouchableOpacity
           accessibilityLabel="Close"
@@ -152,7 +158,7 @@ function CustomDrawerContent(props) {
         <DrawerItem
           labelStyle={[Styles.darkRegular14]}
           label={"Помогите нам стать лучше"}
-          onPress={() => handleOpenMail()}
+          onPress={() => setShowCommentModal(true)}
         />
         <DrawerItem
           labelStyle={[Styles.darkRegular14]}
