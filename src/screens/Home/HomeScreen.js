@@ -17,6 +17,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CommmentModal } from '../../components/comment/CommmentModal';
 import { SpamModal } from '../../components/spamModal';
+import { Posts } from '../../components/Posts';
 
 
 export const HomeScreen = () => {
@@ -184,29 +185,63 @@ export const HomeScreen = () => {
 
   const loadingData = ['', '']
   const renderItem = useMemo(
-    () => ({ item, index }) => {
+    () => ({ item }) => {
       if (!blackList.includes(item.user.id)) {
         return (
-          <Post
-            data={item}
-            adminStatus={item.admin_status}
-            index={index}
-            setShowStatistic={() => ChangeViewStatisticsOpenText()}
-            showStatisitc={showStatisitc}
-            // scroll={(e) => Scroll(e)}
-            viewableItems={viewableItems}
-            setShowLike={() => setLikeClose(true)}
-            setShowView={() => setShowView(true)}
-            addToblack={(e) => AddToBack(e)}
-            setShowComment={() => setShowComment(true)}
+          <Posts
+            photos={item?.photo}
+            surname={item?.user.surname}
+            avatar={item?.user.avatar}
+            auth_user_book={item.auth_user_book}
+            created_at={item?.created_at}
+            name={item?.user.name}
+            description={JSON.parse(item.description)}
+            id={item?.id}
+            userID={item?.user.id}
+            liked={item?.like_auth_user.findIndex((elm, i) => elm?.user_id == userData?.data.id) >= 0}
+            comment_count={item?.comment_count}
+            like_count={item?.like_count}
+            view_count={item?.view_count}
+            color={item?.color}
+            podcherknuti={item?.podcherknuti}
+            font_family={item?.font_family}
             deletData={(e) => deletData(e)}
-            setSelectidId={(id) => setSelectidId(id)}
-            setShowInfo={(e) => setShowInfo(e)}
             setShowShare={(e) => setShowShare(e)}
-            setSelectedVidioId={(e) => setSelectedVidioId(e)}
+            setShowLike={() => setLikeClose(true)}
+            setSelectidId={(id) => setSelectidId(id)}
+            setShowView={() => setShowView(true)}
+            setShowComment={() => setShowComment(true)}
+            setShowStatistic={() => ChangeViewStatisticsOpenText()}
             setCommentData={(e) => setCommentData(e)}
+            many_category={item?.many_category}
+            font_size={item?.font_size}
+            addToblack={(e) => AddToBack(e)}
+            setShowInfo={(e) => setShowInfo(e)}
             setPostUserId={(e) => setPostUserId(e)}
+            background={item?.background}
+            my={userData?.data.id != item?.user.id ? false : true}
+            showStatisitc={showStatisitc}
           />
+          // <Post
+          //   data={item}
+          //   adminStatus={item.admin_status}
+          //   index={index}
+          //   setShowStatistic={() => ChangeViewStatisticsOpenText()}
+          //   showStatisitc={showStatisitc}
+          //   // scroll={(e) => Scroll(e)}
+          //   viewableItems={viewableItems}
+          //   setShowLike={() => setLikeClose(true)}
+          //   setShowView={() => setShowView(true)}
+          //   addToblack={(e) => AddToBack(e)}
+          //   setShowComment={() => setShowComment(true)}
+          //   deletData={(e) => deletData(e)}
+          //   setSelectidId={(id) => setSelectidId(id)}
+          //   setShowInfo={(e) => setShowInfo(e)}
+          //   setShowShare={(e) => setShowShare(e)}
+          //   setSelectedVidioId={(e) => setSelectedVidioId(e)}
+          //   setCommentData={(e) => setCommentData(e)}
+          //   setPostUserId={(e) => setPostUserId(e)}
+          // />
         );
       }
       return null;

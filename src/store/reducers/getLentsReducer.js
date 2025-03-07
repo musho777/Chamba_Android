@@ -50,6 +50,7 @@ const GetLentsReducer = (state = initialState, action) => {
         item.data[index].description = action.data.description
         item.data[index].color = action.data.color
         item.data[index].font_family = action.data.font_family
+        item.data[index].podcherknuti = action.data.podcherknuti
       }
       break
 

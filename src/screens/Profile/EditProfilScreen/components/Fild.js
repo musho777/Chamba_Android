@@ -2,7 +2,6 @@ import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 
 import { Styles } from "../../../../styles/Styles"
 import { AppColors } from "../../../../styles/AppColors";
 import { useEffect, useState } from "react";
-import { Emojy } from "../../../../assets/svg/Svgs";
 
 export const Fild = ({ bB = 1, placeholder, value, hadnelChange, svg, multiline, discription, setIsOpen }) => {
   const fontFamily = [
