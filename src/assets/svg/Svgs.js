@@ -1815,8 +1815,8 @@ export const TextSvg = () => {
 
 export const SelectColor = () => {
   return <Svg
-    width={30}
-    height={30}
+    width={25}
+    height={25}
     viewBox="0 0 18 18"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -1828,8 +1828,8 @@ export const SelectColor = () => {
 }
 export const FontFemalySvg = () => {
   return <Svg
-    width={28}
-    height={38}
+    width={25}
+    height={25}
     viewBox="0 0 16 12"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -1845,8 +1845,8 @@ export const FontFemalySvg = () => {
 export const TextSvg2 = () => {
   return <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width="30px"
-    height="32px"
+    width="25px"
+    height="25px"
     viewBox="0 0 16 16"
     fill="none"
     aria-label="TextSvg2 icon"

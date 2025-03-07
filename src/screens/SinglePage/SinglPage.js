@@ -140,6 +140,7 @@ export const SinglPageScreen = ({ route }) => {
           avatar={data?.user.avatar}
           auth_user_book={data?.auth_user_book}
           created_at={data?.created_at}
+          cveta={data?.cveta}
           name={data?.user.name}
           description={data?.description && JSON.parse(data?.description)}
           id={data?.id}

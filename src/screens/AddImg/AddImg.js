@@ -167,10 +167,30 @@ export const AddImg = ({ navigation }) => {
     { title: '#800080', id: 11 },
   ]
 
+  const color3 = [
+    { title: '#FFA500', id: 13 },
+    { title: '#DA70D6', id: 18 },
+    { title: '#4682B4', id: 7 },
+    { title: '#4CAF50', id: 8 },
+    { title: '#800080', id: 11 },
+    { title: '#FFD700', id: 9 },
+    { title: '#FF69B4', id: 10 },
+    { title: '#87CEEB', id: 14 },
+
+    { title: '#708090', id: 19 },
+    { title: '#FF5733', id: 4 },
+    { title: '#8B0000', id: 12 },
+    { title: '#1E90FF', id: 6 },
+    { title: '#32CD32', id: 17 },
+    { title: '#808080', id: 3 },
+    { title: '#FF4500', id: 16 },
+
+  ]
+
 
   const mainData = useSelector(st => st.mainData);
   const [uri, setUri] = useState([]);
-  const [description, setDescription] = useState([]);
+  const [description, setDescription] = useState(["", "", "", "", "", "", "", "", "", ""]);
   const createPost = useSelector(st => st.createPost);
   const staticData = useSelector(st => st.static);
   const [selectedCatalog, setSelectedCatalog] = useState([])
@@ -184,9 +204,11 @@ export const AddImg = ({ navigation }) => {
   const [error, setError] = useState('')
   const [first, setFirst] = useState(false)
   const dispatch = useDispatch();
-  const [font, setFont] = useState("", "", "", "", "", "", "", "", "", "")
-  const [activecolor, setActiveColor] = useState("", "", "", "", "", "", "", "")
-  const [begraund, setBegraund] = useState("", "", "", "", "", "", "", "", "", "")
+
+  const [font, setFont] = useState(["", "", "", "", "", "", "", "", "", ""])
+  const [activecolor, setActiveColor] = useState(["white", "white", "white", "white", "white", "white", "white", "white"])
+  const [begraund, setBegraund] = useState(["", "", "", "", "", "", "", "", "", ""])
+  const [fonColor, setFonColor] = useState(["rgba(0,0,0,0.5)", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.5)"])
 
 
   useEffect(() => {
@@ -320,6 +342,12 @@ export const AddImg = ({ navigation }) => {
     item[i] = e
     setActiveColor(item)
   }
+  const changeFontColor = (e, i) => {
+    let item = [...fonColor]
+    item[i] = e
+    setFonColor(item)
+  }
+
   const changeFont = (e, i) => {
     let item = [...font]
     item[i] = e
@@ -373,7 +401,7 @@ export const AddImg = ({ navigation }) => {
         </TouchableOpacity>
         {description[active]?.length > 0 &&
           <View
-            style={{ position: 'absolute', top: 60, left: 10, paddingVertical: 5, backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 10, paddingHorizontal: 10 }}>
+            style={{ position: 'absolute', top: 60, left: 10, paddingVertical: 5, backgroundColor: fonColor[active], borderRadius: 10, paddingHorizontal: 10 }}>
             <Text style={{ color: activecolor[active] ?? "white", fontFamily: font[active], backgroundColor: begraund[active] }}>
               {description[active]}
             </Text>
@@ -382,7 +410,7 @@ export const AddImg = ({ navigation }) => {
         <TouchableOpacity onPress={() => { delateFoto(index) }} style={{ position: 'absolute', top: 60, right: 10 }}>
           <CloseSvg1 />
         </TouchableOpacity>
-        <TouchableOpacity style={{ position: 'absolute', top: 90, right: 10 }} onPress={() => addPhoto(uri, 1)}>
+        <TouchableOpacity style={{ position: 'absolute', top: 100, right: 10 }} onPress={() => addPhoto(uri, 1)}>
           <AddImage />
         </TouchableOpacity>
       </View>
@@ -409,6 +437,7 @@ export const AddImg = ({ navigation }) => {
             color={JSON.stringify(activecolor)}
             background={JSON.stringify(begraund)}
             font_family={JSON.stringify(font)}
+            cveta={JSON.stringify(fonColor)}
           />
           <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B', borderWidth: 1, borderColor: 'white', paddingHorizontal: 5 }]}>{t(mainData.lang).Yourcontent}</Text>
           {/* <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B', borderWidth: 1, borderColor: 'white', paddingHorizontal: 5 }]}>{t(mainData.lang).Yourcontent}</Text> */}
@@ -435,13 +464,15 @@ export const AddImg = ({ navigation }) => {
             </View>}
           </View>
         </ScrollView >
+        <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B' }]}>Подчеркни описание к публикации особенным шрифтом и цветом.</Text>
+
         <View style={{ width: '100%', marginBottom: 20 }}>
           {activeTab == 1 && <View style={{ height: 60, width: '100%' }}>
             <TextInput
               style={styles.input}
               placeholder={t(mainData.lang).adddescription}
               placeholderTextColor={"black"}
-              // value={}
+              value={description[active]}
               onChangeText={e => addDescription(e, active)}
             />
           </View>}
@@ -466,34 +497,39 @@ export const AddImg = ({ navigation }) => {
               })}
             </ScrollView>
           </View>}
+          {activeTab == 5 && <View >
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 10, height: 50, alignItems: 'center' }}>
+              {color3.map((elm, i) => {
+                return <TouchableOpacity onPress={() => changeFontColor(elm.title, active)} key={i} style={{ width: 20, height: 20, borderRadius: 30, backgroundColor: elm.title }} />
+              })}
+            </ScrollView>
+          </View>}
 
-          <ScrollView showsHorizontalScrollIndicator={false}>
+          <View horizontal showsHorizontalScrollIndicator={false}>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 10, gap: 10, flexDirection: 'row' }}>
               <TouchableOpacity onPress={() => setActiveTab(1)} style={[styles.editItem, activeTab == 1 && { backgroundColor: "#FFC24B" }]}>
-                <TextSvg2 style={{ width: 30, height: 30 }} />
+                <TextSvg2 />
                 <Text style={styles.textStyle}>Текст</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setActiveTab(2)} style={[styles.editItem, activeTab == 2 && { backgroundColor: "#FFC24B" }]}>
-                <View style={{ width: 30, alignItems: 'center' }}>
-                  <FontFemalySvg />
-                </View>
+                <FontFemalySvg />
                 <Text style={styles.textStyle}>Шрифт</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setActiveTab(3)} style={[styles.editItem, activeTab == 3 && { backgroundColor: "#FFC24B" }]}>
-                <View style={{ width: 30, alignItems: 'center' }}>
-                  <SelectColor />
-                </View>
-                <Text style={styles.textStyle}>Размер</Text>
+                <SelectColor />
+                <Text style={styles.textStyle}>Цвет</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setActiveTab(4)} style={[styles.editItem, activeTab == 4 && { backgroundColor: "#FFC24B" }]}>
-                <View style={{ width: 30, }}>
-                  <SelectColor />
-                </View>
-                <Text style={styles.textStyle}>Цвет</Text>
+                <SelectColor />
+                <Text style={[styles.textStyle]}>Подч.</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setActiveTab(5)} style={[styles.editItem, activeTab == 4 && { backgroundColor: "#FFC24B" }]}>
+                <SelectColor />
+                <Text style={styles.textStyle}>Маркер</Text>
               </TouchableOpacity>
             </View>
 
-          </ScrollView>
+          </View>
         </View>
       </KeyboardAvoidingView >
     );
@@ -524,6 +560,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     height: 20,
     width: '100%',
+    position: 'absolute',
+    bottom: 20,
   },
   centeredView: {
     alignItems: 'center',
@@ -534,8 +572,8 @@ const styles = StyleSheet.create({
   },
   editItem: {
     backgroundColor: 'white',
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     justifyContent: 'flex-end',
     alignItems: 'center',
     gap: 5,

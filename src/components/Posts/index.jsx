@@ -39,9 +39,9 @@ export const Posts = ({
   many_category,
   podcherknuti,
   my,
-  showStatisitc
+  showStatisitc,
+  cveta
 }) => {
-  console.log(font_family)
   const [active, setActive] = useState(0)
   const [like, setLike] = useState({ liked, like_count })
   const dispatch = useDispatch()
@@ -244,6 +244,16 @@ export const Posts = ({
       }
       return bg
     }
+    const GetCveta = (bg) => {
+      if (!bg) {
+        return "rgba(0,0,0,0.5)"
+      }
+      else if (bg[0] == '[') {
+        let newCvet = JSON.parse(cveta)
+        return newCvet[active]
+      }
+      return "rgba(0,0,0,0.5)"
+    }
 
 
     return (
@@ -270,16 +280,13 @@ export const Posts = ({
             onAnimationFinish={(e) => { setShowLikeICone(false) }}
           />
         </View>}
-
-
-
-        {description &&
-          <View style={{ marginVertical: 10, position: 'absolute', top: 45, backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 5, marginHorizontal: 5, }}>
+        {description != "[]" &&
+          <View style={{ marginVertical: 10, position: 'absolute', top: 45, backgroundColor: GetCveta(cveta), borderRadius: 5, marginHorizontal: 5, }}>
             {description[active] &&
               <View style={[{ paddingHorizontal: 10, }]}>
                 <View>
                   {description[active] &&
-                    <Text style={[Styles.darkMedium13, { color: GetColor(color), fontFamily: GetFont(font_family), backgroundColor: GetBegraund(podcherknuti), marginTop: 3 }]}>
+                    <Text style={[Styles.darkMedium13, { color: GetColor(color), fontFamily: GetFont(font_family), backgroundColor: GetBegraund(podcherknuti), marginTop: 3, paddingHorizontal: 5 }]}>
                       {`${description[active].slice(0, MAX_Height)}`}
                     </Text>
                   }
@@ -320,7 +327,6 @@ export const Posts = ({
     );
   }
 
-
   return <View style={[styles.wrapper, { height: height }]}>
     <View style={styles.header}>
       <PostHeader
@@ -330,6 +336,7 @@ export const Posts = ({
         podcherknuti={podcherknuti}
         userID={userID}
         activeImage={active}
+        cveta={cveta}
         id={id}
         auth_user_book={auth_user_book}
         photo={photos}
@@ -340,12 +347,10 @@ export const Posts = ({
         addToblack={(e) => addToblack()}
       />
     </View>
-
-
     {!background ? <FlatList
       horizontal
       pagingEnabled
-      // style={{ width: '100%', height: '100%' }}s
+      // style={{ width: '100%', height: '100%' }}
       showsHorizontalScrollIndicator={false}
       decelerationRate="normal"
       keyExtractor={(item) => item.id.toString()}
@@ -372,11 +377,7 @@ export const Posts = ({
         {photos?.map((elm, i) => (
           <View key={i} style={[styles.pagination, i === active && { backgroundColor: AppColors.GoldenTainoi_Color, borderRadius: 50 }]} />
         ))}
-      </View>
-    }
-
-
-
+      </View>}
 
 
     <View style={styles.bodyWrapper}>
@@ -505,7 +506,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    zIndex: 99999,
+    zIndex: 99999
   },
   pagination: {
     width: 6,

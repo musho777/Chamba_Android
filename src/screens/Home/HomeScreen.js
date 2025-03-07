@@ -190,6 +190,7 @@ export const HomeScreen = () => {
         return (
           <Posts
             photos={item?.photo}
+            cveta={item?.cveta}
             surname={item?.user.surname}
             avatar={item?.user.avatar}
             auth_user_book={item.auth_user_book}
@@ -222,26 +223,6 @@ export const HomeScreen = () => {
             my={userData?.data.id != item?.user.id ? false : true}
             showStatisitc={showStatisitc}
           />
-          // <Post
-          //   data={item}
-          //   adminStatus={item.admin_status}
-          //   index={index}
-          //   setShowStatistic={() => ChangeViewStatisticsOpenText()}
-          //   showStatisitc={showStatisitc}
-          //   // scroll={(e) => Scroll(e)}
-          //   viewableItems={viewableItems}
-          //   setShowLike={() => setLikeClose(true)}
-          //   setShowView={() => setShowView(true)}
-          //   addToblack={(e) => AddToBack(e)}
-          //   setShowComment={() => setShowComment(true)}
-          //   deletData={(e) => deletData(e)}
-          //   setSelectidId={(id) => setSelectidId(id)}
-          //   setShowInfo={(e) => setShowInfo(e)}
-          //   setShowShare={(e) => setShowShare(e)}
-          //   setSelectedVidioId={(e) => setSelectedVidioId(e)}
-          //   setCommentData={(e) => setCommentData(e)}
-          //   setPostUserId={(e) => setPostUserId(e)}
-          // />
         );
       }
       return null;
