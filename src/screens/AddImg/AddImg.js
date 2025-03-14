@@ -499,6 +499,9 @@ export const AddImg = ({ navigation }) => {
           </View>}
           {activeTab == 5 && <View >
             <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 10, height: 50, alignItems: 'center' }}>
+              <TouchableOpacity style={{ borderWidth: 1, borderColor: "white", padding: 8, borderRadius: 5, justifyContent: "center", alignItems: 'center' }} onPress={() => changeFontColor("rgba(0,0,0,0.5)", active)}>
+                <Text style={{ color: 'white', fontSize: 15 }}>x</Text>
+              </TouchableOpacity>
               {color3.map((elm, i) => {
                 return <TouchableOpacity onPress={() => changeFontColor(elm.title, active)} key={i} style={{ width: 20, height: 20, borderRadius: 30, backgroundColor: elm.title }} />
               })}
@@ -519,11 +522,11 @@ export const AddImg = ({ navigation }) => {
                 <SelectColor />
                 <Text style={styles.textStyle}>Цвет</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setActiveTab(4)} style={[styles.editItem, activeTab == 4 && { backgroundColor: "#FFC24B" }]}>
+              {/* <TouchableOpacity onPress={() => setActiveTab(4)} style={[styles.editItem, activeTab == 4 && { backgroundColor: "#FFC24B" }]}>
                 <SelectColor />
                 <Text style={[styles.textStyle]}>Подч.</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setActiveTab(5)} style={[styles.editItem, activeTab == 4 && { backgroundColor: "#FFC24B" }]}>
+              </TouchableOpacity> */}
+              <TouchableOpacity onPress={() => setActiveTab(5)} style={[styles.editItem, activeTab == 5 && { backgroundColor: "#FFC24B" }]}>
                 <SelectColor />
                 <Text style={styles.textStyle}>Маркер</Text>
               </TouchableOpacity>

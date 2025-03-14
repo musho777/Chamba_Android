@@ -51,6 +51,10 @@ export const HomeScreen = () => {
       setShowModal(true);
     }
     setShowStatistic(userData.allData.data?.view_statistics_open_text)
+
+
+    // if(user.data.new_registred ==1 &&  user.data.)
+
   }, [userData.data])
 
   const ChangeViewStatisticsOpenText = () => {

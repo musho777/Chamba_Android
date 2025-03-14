@@ -7,7 +7,7 @@ import { DelatePhotoFromPost, DelatePhotofromPost, DeletLocalPhoto, EditLentPhot
 import { ClearEditPost } from '../../store/action/clearAction';
 import { t } from '../../components/lang';
 import FastImage from 'react-native-fast-image';
-import { CloseSvg1, FontFemalySvg, SelectColor, TextSvg2 } from '../../assets/svg/Svgs';
+import { CloseSvg1, EditAvaterSvg, FontFemalySvg, SelectColor, TextSvg2 } from '../../assets/svg/Svgs';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -398,11 +398,16 @@ export const EditPostScreen = ({ route }) => {
         </View>}
         {activeTab == 5 && <View >
           <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 10, height: 50, alignItems: 'center' }}>
+            <TouchableOpacity style={{ borderWidth: 1, borderColor: "black", padding: 8, borderRadius: 5, justifyContent: "center", alignItems: 'center' }} onPress={() => changeFonColor("rgba(0,0,0,0.5)", index)}>
+              <Text style={{ fontSize: 15 }}>x</Text>
+            </TouchableOpacity>
             {color3.map((elm, i) => {
               return <TouchableOpacity onPress={() => changeFonColor(elm.title, index)} key={i} style={{ width: 20, height: 20, borderRadius: 30, backgroundColor: elm.title }} />
             })}
           </ScrollView>
         </View>}
+
+
 
         <ScrollView showsHorizontalScrollIndicator={false}>
           <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 10, gap: 10, flexDirection: 'row' }}>
@@ -420,11 +425,11 @@ export const EditPostScreen = ({ route }) => {
               <SelectColor />
               <Text style={styles.textStyle}>Цвет</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setActiveTab(4)} style={[styles.editItem, activeTab == 4 && { backgroundColor: "#FFC24B" }]}>
+            {/* <TouchableOpacity onPress={() => setActiveTab(4)} style={[styles.editItem, activeTab == 4 && { backgroundColor: "#FFC24B" }]}>
               <SelectColor />
               <Text style={styles.textStyle}>Подч.</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setActiveTab(5)} style={[styles.editItem, activeTab == 4 && { backgroundColor: "#FFC24B" }]}>
+            </TouchableOpacity> */}
+            <TouchableOpacity onPress={() => setActiveTab(5)} style={[styles.editItem, activeTab == 5 && { backgroundColor: "#FFC24B" }]}>
               <SelectColor />
               <Text style={styles.textStyle}>Маркер</Text>
             </TouchableOpacity>

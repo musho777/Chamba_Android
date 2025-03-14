@@ -120,7 +120,11 @@ export const RegisterScreen = ({ navigation, route }) => {
     setShow(false)
     dispatch(ClearConfirmPasswordAction())
     dispatch(ClearRegisterAction())
-    navigation.navigate('Catalog');
+    // navigation.navigate('Catalog');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'TabNavigation', params: { screen: 'Home' } }],
+    });
     ShowDesctiption()
   }
 
@@ -179,7 +183,7 @@ export const RegisterScreen = ({ navigation, route }) => {
 
         {sendMail && (
           <View style={{ alignItems: 'center' }}>
-            <Text style={[Styles.balihaiMedium13, { textAlign: 'center' }]}>
+            <Text style={[Styles.balihaiMedium13, { textAlign: 'center', marginBottom: 10 }]}>
               Мы отправили вам на почту комбинацию цифр, впишите её ниже.
             </Text>
             <ConfirmCode clear={confirm.error !== ''} code={(e) => setCode(e)} />

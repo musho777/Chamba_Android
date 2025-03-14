@@ -319,7 +319,7 @@ export const EditProfilScreen = ({ navigation }) => {
                 />
               </View>
               <Text style={[Styles.balihaiMedium10, { paddingHorizontal: 17, marginTop: 10 }]}>
-                Вырази свой аккаунт особенным шрифтом и цветом.
+                Вырази свой аккаунт индивидуальным шрифтом и цветом.
               </Text>
               <View style={{ marginBottom: 10 }}>
                 <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 17, alignItems: 'center', marginVertical: 10 }}>
