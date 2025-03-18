@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, version } from 'react';
 import { FlatList, Image, StyleSheet, Text, View, TouchableOpacity, Dimensions, SafeAreaView, ScrollView } from 'react-native';
 import { Styles } from '../../styles/Styles';
 import { HeaderWhiteTitle } from '../../headers/HeaderWhiteTitle.';
@@ -15,6 +15,7 @@ export const AboutApplication = ({ navigation }) => {
   const [active, setActive] = useState(0);
   const ref = useRef()
   const [paused, setPaused] = useState(false)
+  const [vertion, setVertion] = useState("")
   const sliderData = [
     {
       id: "1",
@@ -98,9 +99,10 @@ export const AboutApplication = ({ navigation }) => {
   const renderItem = ({ item }) => {
     if (item.type == "video") {
       return <Video
-        style={styles.image}
+        style={[{ height: height - 100, width: width, marginTop: 100 }]}
         ref={ref}
         paused={paused}
+        resizeMode="cover"
         source={require("../../assets/img/aboutUs.mp4")}
       />
     }
@@ -130,7 +132,7 @@ export const AboutApplication = ({ navigation }) => {
             <Text style={Styles.whiteRegular12}>Готовые изображения на фон для твоего аккаунта.</Text>
             <Text style={Styles.whiteRegular12}>Звуковой комментарий к публикации.</Text>
             <Text style={Styles.whiteRegular12}>Маленькое правило Не выкладывать фото с собой, в только то, что происходит вокруг тебя!</Text>
-            <Text style={[Styles.whiteRegular12, { marginBottom: 120 }]}>Не трать время на скучную ленту! Скачай приложение и окунись в мир интересных открытий!</Text>
+            <Text style={[Styles.whiteRegular12, { marginBottom: 180 }]}>Не трать время на скучную ленту! Скачай приложение и окунись в мир интересных открытий!</Text>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -149,32 +151,36 @@ export const AboutApplication = ({ navigation }) => {
     }
   }, [active])
 
-  return (
-    <View style={{ backgroundColor: 'rgb(12,59,78)' }}>
-      <View style={{ position: 'absolute', top: 55, width: '100%', height: 30, zIndex: 9999 }}>
-        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15 }} onPress={() => navigation.goBack()}>
-          <BackArrowWhite />
-          <Text style={[Styles.darkSemiBold16, { marginHorizontal: 15, color: 'white' }]}>
-            {t(mainData.lang).AboutProgram}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.paginationWrapper}>
-        {sliderData.map((elm, i) => {
-          return <View key={i} style={[styles.pagination, active == i && { backgroundColor: '#FFC24B' }]} />
-        })}
-      </View>
-      <FlatList
-        data={sliderData}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        onScroll={handleMomentumScrollEnd}
-      />
-    </View>
-  );
+  if (version) {
+    return <View></View>
+  }
+
+  // return (
+  //   <View style={{ backgroundColor: 'rgb(12,59,78)' }}>
+  //     <View style={{ position: 'absolute', top: 75, width: '100%', height: 30, zIndex: 9999 }}>
+  //       <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15 }} onPress={() => navigation.goBack()}>
+  //         <BackArrowWhite />
+  //         <Text style={[Styles.darkSemiBold16, { marginHorizontal: 15, color: 'white' }]}>
+  //           {t(mainData.lang).AboutProgram}
+  //         </Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //     <View style={styles.paginationWrapper}>
+  //       {sliderData.map((elm, i) => {
+  //         return <View key={i} style={[styles.pagination, active == i && { backgroundColor: '#FFC24B' }]} />
+  //       })}
+  //     </View>
+  //     <FlatList
+  //       data={sliderData}
+  //       horizontal
+  //       pagingEnabled
+  //       showsHorizontalScrollIndicator={false}
+  //       renderItem={renderItem}
+  //       keyExtractor={(item) => item.id}
+  //       onScroll={handleMomentumScrollEnd}
+  //     />
+  //   </View>
+  // );
 };
 
 const styles = StyleSheet.create({

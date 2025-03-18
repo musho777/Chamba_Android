@@ -345,7 +345,7 @@ export const EditPostScreen = ({ route }) => {
           {photos?.map((elm, i) => {
             return <TouchableOpacity activeOpacity={1} onPress={() => setIndex(i)} key={i} style={{ width: 80, height: 80 }}>
               <TouchableOpacity
-                onPress={() => delateFoto(i, elm.id)}
+                onPress={() => delateFoto(i, elm.id, elm.post_id)}
                 style={styles.close}>
                 <CloseSvg1 smole />
               </TouchableOpacity>
