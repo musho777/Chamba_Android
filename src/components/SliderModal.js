@@ -3,11 +3,11 @@ import { ModalSliderImg } from './ModalSliderImg';
 export const SliderModal = ({ modalVisible, photo, activePhoto, close }) => {
 
     return <View >
-        <StatusBar
+        {/* <StatusBar
             translucent
             backgroundColor="black"
             barStyle={'dark-content'}
-        />
+        /> */}
         <Modal
             animationType="fade"
             transparent={true}

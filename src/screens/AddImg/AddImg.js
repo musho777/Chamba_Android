@@ -464,7 +464,7 @@ export const AddImg = ({ navigation }) => {
             </View>}
           </View>
         </ScrollView >
-        <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B' }]}>Подчеркни описание к публикации особенным шрифтом и цветом.</Text>
+        <Text style={[Styles.whiteMedium9, { textAlign: 'center', marginTop: 10, zIndex: 99999, color: '#FFC24B' }]}>Добавь эмоциональности к описанию публикации особенным шрифтом и цветом.</Text>
 
         <View style={{ width: '100%', marginBottom: 20 }}>
           {activeTab == 1 && <View style={{ height: 60, width: '100%' }}>

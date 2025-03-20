@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { GetFollowerAction, GetPostLikeAction, LikePostAction } from "../../store/action/action"
 import { PostHeader } from "./postHeader"
 import LottieView from "lottie-react-native"
+import { SliderModal } from "../SliderModal"
+
 
 const { width } = Dimensions.get('window');
 export const Posts = ({
@@ -57,6 +59,7 @@ export const Posts = ({
   const MAX_Height = 40;
   const heightAnim = useRef(new Animated.Value(0)).current;
   const [showText, setShowText] = useState(false)
+  const [visable, setVisable] = useState(false)
 
   useEffect(() => {
     setLike({ liked, like_count })
@@ -162,16 +165,22 @@ export const Posts = ({
     if (lastClickTime.current && now - lastClickTime.current < DOUBLE_CLICK_DELAY) {
       if (clickTimeout.current) {
         clearTimeout(clickTimeout.current);
+        clickTimeout.current = null;
       }
       const { locationX, locationY } = event.nativeEvent;
       setPosition({ x: locationX - 180, y: locationY - 180 });
       setShowLikeICone(true);
       animation?.current?.play();
-      Like()
+      Like();
     } else {
       lastClickTime.current = now;
+      clickTimeout.current = setTimeout(() => {
+        setVisable(true)
+        clickTimeout.current = null;
+      }, DOUBLE_CLICK_DELAY);
     }
   };
+
 
   const Like = () => {
     let item = { ...like }
@@ -382,13 +391,11 @@ export const Posts = ({
 
     <View style={styles.bodyWrapper}>
       <TouchableOpacity
-        onPress={() => Like()}
-        onLongPress={(e) => {
+        onPress={(e) => {
           e.preventDefault()
           dispatch(GetPostLikeAction({ post_id: id }, staticdata.token, 1));
           setShowLike(true)
         }}
-
         style={styles.hover}>
         {like.liked ? <WhiteHeart /> : <NotLineSvgWhite />}
         <Text style={[Styles.darkMedium14, { color: 'white' }]}>{like.like_count}</Text>
@@ -462,6 +469,12 @@ export const Posts = ({
         </View>
       </TouchableOpacity> */}
     </View>
+    <SliderModal
+      activePhoto={active}
+      modalVisible={visable}
+      close={() => setVisable(false)}
+      photo={photos}
+    />
   </View>
 }
 
