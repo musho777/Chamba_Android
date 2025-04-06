@@ -142,10 +142,10 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
       }
     }
     else {
-      height = 393
+      height = 310
       setHoriznotal(true)
       if (active == index) {
-        setHeight(393)
+        setHeight(310)
       }
     }
     // const ChangePauesd = (e, index) => {

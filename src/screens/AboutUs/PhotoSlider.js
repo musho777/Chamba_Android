@@ -71,10 +71,10 @@ export const PhotoSlider = ({ navigation }) => {
       id: '16',
       image: require('../../assets/img/1.jpg'),
     },
-    {
-      id: '19',
-      image: require('../../assets/img/99.jpg'),
-    },
+    // {
+    //   id: '19',
+    //   image: require('../../assets/img/99.jpg'),
+    // },
 
 
     {
@@ -83,9 +83,14 @@ export const PhotoSlider = ({ navigation }) => {
     },
 
     {
-      id: '21',
-      image: require('../../assets/img/101.jpg'),
+      id: '223',
+      image: require('../../assets/img/223.jpg'),
     },
+
+    // {
+    //   id: '21',
+    //   image: require('../../assets/img/101.jpg'),
+    // },
 
 
     {
@@ -112,13 +117,13 @@ export const PhotoSlider = ({ navigation }) => {
       id: '112',
       image: require('../../assets/img/112.jpg'),
     },
-    {
-      id: '113',
-      image: require('../../assets/img/113.jpg'),
-    },
+    // {
+    //   id: '113',
+    //   image: require('../../assets/img/113.jpg'),
+    // },
     {
       id: '114',
-      image: require('../../assets/img/114.png'),
+      image: require('../../assets/img/114.jpg'),
     },
     //
     {
@@ -143,7 +148,9 @@ export const PhotoSlider = ({ navigation }) => {
 
 
   const renderItem = ({ item }) => {
-    return <Image source={item.image} style={styles.image} />
+    return <View style={{ width: width, height: height, backgroundColor: 'rgb(12,59,78)' }}>
+      <Image source={item.image} style={styles.image} />
+    </View>
   };
 
 
@@ -182,10 +189,12 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width,
-    height: height,
+    height: height - 130,
     borderRadius: 10,
     resizeMode: 'contain',
     marginTop: 15,
+    position: 'absolute',
+    bottom: 0
   },
   title: {
     fontSize: 14,
@@ -193,7 +202,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   pagination: {
-    width: width / 28,
+    width: width / 40,
     height: 3,
     backgroundColor: '#CCD6DF',
     borderRadius: 10,
@@ -204,7 +213,7 @@ const styles = StyleSheet.create({
     zIndex: 999,
     gap: 5,
     top: 60,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     width: '100%',
     justifyContent: 'center'
   },

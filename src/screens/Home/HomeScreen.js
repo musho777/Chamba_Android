@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { View, FlatList, RefreshControl, Text, ActivityIndicator, BackHandler, StatusBar, Dimensions } from 'react-native';
+import { View, FlatList, RefreshControl, Text, ActivityIndicator, BackHandler, StatusBar, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Post } from '../../components/post/Post';
 import { AddPostViewCount, Api, DelatePostAction, FullScreenAction, GetLentsAction, getUserInfoAction, ShowTabNavigation } from '../../store/action/action';
@@ -18,6 +18,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CommmentModal } from '../../components/comment/CommmentModal';
 import { SpamModal } from '../../components/spamModal';
 import { Posts } from '../../components/Posts';
+import axios from 'axios';
 
 
 export const HomeScreen = () => {
@@ -36,6 +37,8 @@ export const HomeScreen = () => {
   const [commentData, setCommentData] = useState({ parentId: "", categoryId: "" })
   const [selectedVidioId, setSelectedVidioId] = useState(null)
   const [showInfo, setShowInfo] = useState(false)
+  const intervalRef = useRef(null);
+  const [showButton, setShowButton] = useState(0)
 
   const [showView, setShowView] = useState(false)
   const [likeClose, setLikeClose] = useState(false)
@@ -101,6 +104,30 @@ export const HomeScreen = () => {
 
 
 
+  const fetchUserInfo = async () => {
+    if (staticdata.token)
+      try {
+        const response = await axios.get(`${Api}/auth_user_info`, {
+          headers: {
+            Authorization: `Bearer ${staticdata.token}`,
+          },
+        });
+        setShowButton(response.data?.data?.show_refresh_button_stauts)
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+  };
+
+
+  useEffect(() => {
+    fetchUserInfo();
+    intervalRef.current = setInterval(fetchUserInfo, 10000);
+
+    return () => clearInterval(intervalRef.current);
+  }, [staticdata]);
+
+
+
 
   const goTop = () => {
     flatListRef.current.scrollToOffset({ offset: 0, animated: true });
@@ -162,6 +189,26 @@ export const HomeScreen = () => {
     setViewableItems(changed)
   }, []);
 
+
+  const refresh = async () => {
+    setShowButton(1)
+    setPage(1)
+    dispatch(getUserInfoAction(staticdata.token));
+    dispatch(GetLentsAction(staticdata.token, 1));
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${staticdata.token}`);
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    fetch(`${Api}/show_refresh_button_stauts`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+  }
 
 
   const handleEndReached = useCallback(() => {
@@ -263,6 +310,9 @@ export const HomeScreen = () => {
         backgroundColor="white"
         barStyle={'dark-content'}
       /> */}
+      {showButton == 1 && <TouchableOpacity onPress={() => refresh()} style={styles.showRefreshButton}>
+        <Text style={{ color: "white" }}>Refresh</Text>
+      </TouchableOpacity>}
       {!fullScreen && <HomeHeader onPress={() => goTop()} />}
       {showModal && <ModalComponent
         showModal={showModal}
@@ -332,3 +382,18 @@ export const HomeScreen = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  showRefreshButton: {
+    position: 'absolute',
+    top: 70,
+    left: '50%',
+    transform: [{ translateX: -50 - 10 }],
+    backgroundColor: '#FFC24B',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 10,
+    zIndex: 99999,
+    width: 130,
+  },
+})

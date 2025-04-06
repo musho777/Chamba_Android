@@ -216,7 +216,7 @@ export const Posts = ({
     }
     else {
       if (active == index) {
-        setHeight(393)
+        setHeight(310)
       }
     }
 

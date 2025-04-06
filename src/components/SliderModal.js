@@ -1,18 +1,14 @@
-import { Modal, StyleSheet, View, StatusBar } from 'react-native';
+import { Modal, StyleSheet, View } from 'react-native';
 import { ModalSliderImg } from './ModalSliderImg';
 export const SliderModal = ({ modalVisible, photo, activePhoto, close }) => {
 
     return <View >
-        {/* <StatusBar
-            translucent
-            backgroundColor="black"
-            barStyle={'dark-content'}
-        /> */}
         <Modal
             animationType="fade"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => close()}
+            statusBarTranslucent={true}
             accessibilityLabel="Tap me!"
         >
             <View style={styles.centeredView}>
@@ -26,6 +22,7 @@ export const SliderModal = ({ modalVisible, photo, activePhoto, close }) => {
 
 const styles = StyleSheet.create({
     centeredView: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgb(0,0,0)',
