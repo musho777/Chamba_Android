@@ -5,6 +5,7 @@ import {
   FlatList,
   Dimensions,
   TouchableOpacity,
+  PixelRatio,
   // Text,
 } from 'react-native';
 import { AppColors } from '../styles/AppColors';
@@ -17,6 +18,7 @@ import SliderImage from './sliderImage';
 // import Sliders from '@react-native-community/slider';
 import LottieView from 'lottie-react-native';
 
+const dpi = PixelRatio.get() * 160;
 const windowWidth = Dimensions.get('window').width;
 // const windowHeight = Dimensions.get('window').height;
 
@@ -133,19 +135,19 @@ export const Slider = React.memo(({ adminStatus, scroll, id, photo, viewableItem
   // const { fullScreen } = useSelector((st) => st.fullScreenData)
 
   const renderItem = ({ item, index }) => {
-    let height = 525
+    let height = 565
     if (item.height - 200 > item.width) {
-      height = 525
+      height = 565
       setHoriznotal(false)
       if (active == index) {
-        setHeight(525)
+        setHeight(515)
       }
     }
     else {
-      height = 310
+      height = 320
       setHoriznotal(true)
       if (active == index) {
-        setHeight(310)
+        setHeight(320)
       }
     }
     // const ChangePauesd = (e, index) => {

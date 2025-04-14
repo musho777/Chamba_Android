@@ -55,7 +55,7 @@ export const Followings = ({ id }) => {
   };
 
   return (
-    <View style={{ paddingHorizontal: 15 }}>
+    <View style={{ paddingHorizontal: 15, flex: 1, }}>
       <Input
         data={data}
         onChange={e => setData(e)}
@@ -70,13 +70,13 @@ export const Followings = ({ id }) => {
           })}
         </View> :
         <FlatList
-          refreshControl={
-            <RefreshControl
-              onRefresh={() => {
-                dispatch(GetFollowersAction({ search: data, user_id: id }, staticdata.token, page))
-              }}
-            />
-          }
+          // refreshControl={
+          //   <RefreshControl
+          //     onRefresh={() => {
+          //       dispatch(GetFollowersAction({ search: data, user_id: id }, staticdata.token, page))
+          //     }}
+          //   />
+          // }
           data={getFollowers?.data}
           enableEmptySections={true}
           ListEmptyComponent={() => (

@@ -371,7 +371,7 @@ export const AddImg = ({ navigation }) => {
 
 
     return <View>
-      <View keyboardShouldPersistTaps='handled' style={(localheight[index]?.height - localheight[index]?.width) - 50 >= 0 ? { maxHeight: 525 } : { maxHeight: 310 }}>
+      <View style={localheight[index]?.height >= 400 ? { maxHeight: 545 } : { maxHeight: 310 }}>
         <TouchableOpacity activeOpacity={1}>
           <View style={styles.hover} >
             <View
@@ -389,7 +389,7 @@ export const AddImg = ({ navigation }) => {
             </View>
           </View>
           <FastImage
-            style={[styles.img, (localheight[index]?.height - localheight[index]?.width) >= 0 ? { maxHeight: 545 } : { maxHeight: 310 }]}
+            style={[styles.img, localheight[index]?.height >= 350 ? { maxHeight: 545 } : { maxHeight: 310 }]}
             source={{ uri: item.uri }}
             onLoad={(event) => {
               const { width, height } = event.nativeEvent;
@@ -397,7 +397,7 @@ export const AddImg = ({ navigation }) => {
               item.push({ width: width, height: height })
               setLocalHeight(item)
             }}
-            resizeMode={FastImage.resizeMode.cover}
+            resizeMode={FastImage.resizeMode.contain}
           />
         </TouchableOpacity>
         {description[active]?.length > 0 &&

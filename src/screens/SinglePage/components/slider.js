@@ -6,6 +6,7 @@ import {
   FlatList,
   Dimensions,
   Text,
+  PixelRatio,
 } from 'react-native';
 import { AppColors } from '../../../styles/AppColors';
 import { VidioComponent } from '../../../components/post/Vidio/VidioComponent';
@@ -14,6 +15,9 @@ import FastImage from 'react-native-fast-image';
 
 
 const windowWidth = Dimensions.get('window').width;
+
+const dpi = PixelRatio.get() * 160;
+
 
 export const Slider = ({ photo, music_name, description, setActiveImage, save, setVertical }) => {
   const [active, setActive] = useState(0);
@@ -70,14 +74,14 @@ export const Slider = ({ photo, music_name, description, setActiveImage, save, s
         }}
         onMomentumScrollEnd={handleMomentumScrollEnd}
         renderItem={({ item, index }) => {
-          let height = 525
+          let height = 565
           if (item.height < 650) {
-            height = 400
+            height = 320
             // setHeights(500)
             setVertical(false)
           }
           else {
-            height = 525
+            height = 565
             setVertical(true)
           }
           return (

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { View, FlatList, RefreshControl, Text, ActivityIndicator, BackHandler, StatusBar, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, FlatList, RefreshControl, Text, ActivityIndicator, StatusBar, TouchableOpacity, StyleSheet } from 'react-native';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { Post } from '../../components/post/Post';
-import { AddPostViewCount, Api, DelatePostAction, FullScreenAction, GetLentsAction, getUserInfoAction, ShowTabNavigation } from '../../store/action/action';
+import { AddPostViewCount, Api, DelatePostAction, GetLentsAction, getUserInfoAction } from '../../store/action/action';
 import { ModalComponent } from './modal';
 import { PostLoading } from '../../components/post/Loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -191,7 +190,7 @@ export const HomeScreen = () => {
 
 
   const refresh = async () => {
-    setShowButton(1)
+    setShowButton(0)
     setPage(1)
     dispatch(getUserInfoAction(staticdata.token));
     dispatch(GetLentsAction(staticdata.token, 1));
@@ -311,7 +310,7 @@ export const HomeScreen = () => {
         barStyle={'dark-content'}
       /> */}
       {showButton == 1 && <TouchableOpacity onPress={() => refresh()} style={styles.showRefreshButton}>
-        <Text style={{ color: "white" }}>Refresh</Text>
+        <Text style={[Styles.balihaiSemiBold14, { color: "white" }]}>Новые публикации</Text>
       </TouchableOpacity>}
       {!fullScreen && <HomeHeader onPress={() => goTop()} />}
       {showModal && <ModalComponent
@@ -385,15 +384,15 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   showRefreshButton: {
     position: 'absolute',
-    top: 70,
+    top: 30,
     left: '50%',
-    transform: [{ translateX: -50 - 10 }],
+    transform: [{ translateX: -50 - 40 }],
     backgroundColor: '#FFC24B',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
-    zIndex: 99999,
-    width: 130,
+    zIndex: 999,
+    width: 170,
   },
 })

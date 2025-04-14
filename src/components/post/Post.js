@@ -38,7 +38,7 @@ export const Post = React.memo(({
   const [long, setLong] = useState(false)
   const [activeImage, setActiveImage] = useState(0)
   const { fullScreen, indexData } = useSelector((st) => st.fullScreenData)
-  const [height, setHeight] = useState(680)
+  const [height, setHeight] = useState(565)
   const onLongClikc = () => {
     setLong(true)
   }

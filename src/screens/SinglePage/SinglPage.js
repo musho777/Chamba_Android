@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Dimensions,
   ScrollView,
+  PixelRatio,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -23,7 +24,7 @@ import { Posts } from '../../components/Posts';
 
 const windowWidth = Dimensions.get('window').width;
 
-
+const dpi = PixelRatio.get() * 160;
 export const SinglPageScreen = ({ route }) => {
   const user = useSelector((st) => st.userData)
   const staticdata = useSelector(st => st.static);
@@ -138,7 +139,7 @@ export const SinglPageScreen = ({ route }) => {
   }
   return (
     <SafeAreaView style={[{ backgroundColor: 'black', alignItems: 'center', justifyContent: 'center', height: '100%', }]}>
-      <View contentContainerStyle={{ marginTop: (windowWidth + insets.top - (!horiznotal ? 525 : 380) / 2), marginBottom: 500 }}>
+      <View contentContainerStyle={{ marginTop: (windowWidth + insets.top - (!horiznotal ? 565 : 320) / 2), marginBottom: 500 }}>
         {data && <Posts
           photos={data?.photo}
           surname={data?.user.surname}

@@ -111,7 +111,7 @@ export const t = (lang = 'ru') => {
             Edit: "Редактировать",
             Confirmpassword: "Подтвердите пароль",
             Deletepost: "Удалить публикацию",
-            Companyname: 'Имя Фамилия или название Бизнес-аккаунта.',
+            Companyname: 'Название Бизнес - аккаунта',
             search: "Поиск",
             Notfound: "Не найдено",
             subscribe: "Подписаться",

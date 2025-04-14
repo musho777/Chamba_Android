@@ -4,12 +4,14 @@ import {
     StyleSheet,
     Image,
     Dimensions,
+    PixelRatio,
 } from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import { AppColors } from '../styles/AppColors';
 
 const windowWidth = Dimensions.get('window').width;
-
+const dpi = PixelRatio.get() * 160;
+const spx = 70 * (dpi / 25.4);
 export const ModalSliderImg = ({ photo, activePhoto }) => {
     const [active, setActive] = useState(activePhoto || 0);
     return (
@@ -24,7 +26,7 @@ export const ModalSliderImg = ({ photo, activePhoto }) => {
                     const imageUrl = `https://chambaonline.pro/uploads/${item.photo}`;
                     return (
                         <Image
-                            style={[styles.img, item.height - 200 > item.width ? { height: 525 } : { height: 310 }]}
+                            style={[styles.img, item.height - 200 > item.width ? { height: 565 } : { height: 320 }]}
                             source={{ uri: imageUrl }}
                         />
                     );

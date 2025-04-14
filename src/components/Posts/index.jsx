@@ -1,4 +1,4 @@
-import { Animated, Dimensions, Easing, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Animated, Dimensions, Easing, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View, PixelRatio } from "react-native"
 import { NotLineSvgWhite, ShearSvg } from "../../assets/svg/Svgs"
 import { Styles } from "../../styles/Styles"
 import { CommentWhite, WhiteHeart, WhiteViewSvg } from "../../assets/svg/TabBarSvg"
@@ -54,7 +54,7 @@ export const Posts = ({
   const lastClickTime = useRef(0);
   const clickTimeout = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [height, setHeight] = useState(525)
+  const [height, setHeight] = useState(565)
   const [showLikeIcone, setShowLikeICone] = useState(false)
   const MAX_Height = 40;
   const heightAnim = useRef(new Animated.Value(0)).current;
@@ -202,7 +202,7 @@ export const Posts = ({
   const startAnimation = (show) => {
     setShowText(!showText)
     Animated.timing(heightAnim, {
-      toValue: show ? 520 - 70 : 0,
+      toValue: show ? (height > 500 ? 450 - 70 : 240) : 0,
       duration: 400,
       easing: Easing.linear,
       useNativeDriver: false,
@@ -211,12 +211,12 @@ export const Posts = ({
   const renderItem = ({ item, index }) => {
     if (item.height - 200 > item.width) {
       if (active == index) {
-        setHeight(525)
+        setHeight(565)
       }
     }
     else {
       if (active == index) {
-        setHeight(310)
+        setHeight(320)
       }
     }
 
@@ -311,7 +311,7 @@ export const Posts = ({
             }
           </View>}
 
-        <Animated.View style={[{ position: 'absolute', bottom: 0, backgroundColor: 'white', width: '100%', borderTopRightRadius: 10, borderTopLeftRadius: 10 }, { height: heightAnim }]}>
+        <Animated.View style={[{ position: 'absolute', bottom: 0, backgroundColor: 'white', width: '100%', borderTopRightRadius: 10, borderTopLeftRadius: 10, zIndex: 9999999 }, { height: heightAnim }]}>
           <ScrollView
             nestedScrollEnabled={true}
             scrollEventThrottle={16}
@@ -319,7 +319,7 @@ export const Posts = ({
             style={styles.textScrollContainer}>
             {description && <TouchableOpacity style={{ padding: 10 }} activeOpacity={1}>
               {description[active] &&
-                <Text style={[Styles.darkMedium13, { color: GetColor(color), fontFamily: GetFont(font_family), backgroundColor: GetBegraund(podcherknuti) }]}>
+                <Text style={[Styles.darkMedium13, { color: "black", fontFamily: GetFont(font_family), backgroundColor: GetBegraund(podcherknuti) }]}>
                   {description[active]}
                 </Text>
               }
@@ -371,10 +371,10 @@ export const Posts = ({
       renderItem={renderItem}
       onMomentumScrollEnd={handleMomentumScrollEnd}
     /> :
-      <View style={{ height: 525, position: 'relative' }}>
+      <View style={{ height: 565, position: 'relative' }}>
         <Image
           source={fone[background - 1]}
-          style={[{ height: 525, width: width }]}
+          style={[{ height: 565, width: width }]}
         />
         <View style={styles.textWrapper}>
           <Text style={{ padding: 10, textAlign: 'center', color: color, fontFamily: font_family, fontSize: JSON.parse(font_size) }}>{description}</Text>
@@ -389,7 +389,7 @@ export const Posts = ({
       </View>}
 
 
-    <View style={styles.bodyWrapper}>
+    {!showText && <View style={styles.bodyWrapper}>
       <TouchableOpacity
         onPress={(e) => {
           e.preventDefault()
@@ -468,7 +468,7 @@ export const Posts = ({
           <Text style={[Styles.balihaiRegular14, { color: 'white' }]}>{view_count}</Text>
         </View>
       </TouchableOpacity> */}
-    </View>
+    </View>}
     <SliderModal
       activePhoto={active}
       modalVisible={visable}
@@ -481,7 +481,7 @@ export const Posts = ({
 const styles = StyleSheet.create({
   wrapper: {
     width: "100%",
-    height: 525,
+    height: 565,
     marginBottom: 10,
   },
   image: {
@@ -507,9 +507,9 @@ const styles = StyleSheet.create({
   },
   bodyWrapper: {
     position: 'absolute',
-    bottom: 25,
+    bottom: 10,
     right: 10,
-    gap: 10,
+    gap: 6,
   },
   paginationWrapper: {
     flexDirection: 'row',

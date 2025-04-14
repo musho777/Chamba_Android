@@ -69,7 +69,7 @@ export const Followers = React.memo(({ id }) => {
     );
   };
   return (
-    <View style={{ paddingHorizontal: 15 }}>
+    <View style={{ paddingHorizontal: 15, flex: 1, }}>
       <Input
         data={data}
         onChange={e => setData(e)}
@@ -87,15 +87,15 @@ export const Followers = React.memo(({ id }) => {
         <FlatList
           refreshControl={
             <RefreshControl
-              onRefresh={() => {
-                dispatch(
-                  GetFollowerAction(
-                    { search: data, user_id: id },
-                    staticdata.token,
-                    page,
-                  ),
-                );
-              }}
+            // onRefresh={() => {
+            //   dispatch(
+            //     GetFollowerAction(
+            //       { search: data, user_id: id },
+            //       staticdata.token,
+            //       page,
+            //     ),
+            //   );
+            // }}
             />
           }
           ListEmptyComponent={() => {
