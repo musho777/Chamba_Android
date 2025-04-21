@@ -87,7 +87,7 @@ export const ProfileScreen = () => {
           numColumns={2}
           ListEmptyComponent={ListEmptyComponent}
           scrollEventThrottle={16}
-          onEndReached={debounce(handleEndReached, 300)}
+          onEndReached={handleEndReached}
           initialNumToRender={5}
           maxToRenderPerBatch={windowSize}
           onEndReachedThreshold={0.5}

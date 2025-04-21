@@ -78,8 +78,8 @@ android {
         applicationId "com.photohost"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 34
-        versionName "2.6"
+        versionCode 35
+        versionName "2.7"
     }
     signingConfigs {
         release {

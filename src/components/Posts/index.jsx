@@ -50,7 +50,7 @@ export const Posts = ({
   const staticdata = useSelector(st => st.static);
   const user = useSelector(st => st.userData);
   const animation = useRef(null);
-  const DOUBLE_CLICK_DELAY = 300;
+  const DOUBLE_CLICK_DELAY = 800;
   const lastClickTime = useRef(0);
   const clickTimeout = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -291,10 +291,10 @@ export const Posts = ({
         </View>}
         {description != "[]" &&
           <View style={{ marginVertical: 10, position: 'absolute', top: 45, backgroundColor: GetCveta(cveta), borderRadius: 5, marginHorizontal: 5, }}>
-            {description[active] &&
+            {description?.length > 0 && description[active] &&
               <View style={[{ paddingHorizontal: 10, }]}>
                 <View>
-                  {description[active] &&
+                  {description?.length > 0 && description[active] &&
                     <Text style={[Styles.darkMedium13, { color: GetColor(color), fontFamily: GetFont(font_family), backgroundColor: GetBegraund(podcherknuti), marginTop: 3, paddingHorizontal: 5 }]}>
                       {`${description[active].slice(0, MAX_Height)}`}
                     </Text>
@@ -317,13 +317,13 @@ export const Posts = ({
             scrollEventThrottle={16}
             showsVerticalScrollIndicator={false}
             style={styles.textScrollContainer}>
-            {description && <TouchableOpacity style={{ padding: 10 }} activeOpacity={1}>
+            {description?.length > 0 && description && <TouchableOpacity style={{ padding: 10 }} activeOpacity={1}>
               {description[active] &&
                 <Text style={[Styles.darkMedium13, { color: "black", fontFamily: GetFont(font_family), backgroundColor: GetBegraund(podcherknuti) }]}>
                   {description[active]}
                 </Text>
               }
-              {description[active] && <TouchableOpacity onPress={() => startAnimation(false)}>
+              {description?.length > 0 && description[active] && <TouchableOpacity onPress={() => startAnimation(false)}>
                 <Text style={[Styles.balihaiMedium13]}>
                   Cвернуть
                 </Text>

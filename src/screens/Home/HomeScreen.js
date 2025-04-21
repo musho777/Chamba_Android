@@ -211,15 +211,10 @@ export const HomeScreen = () => {
 
 
   const handleEndReached = useCallback(() => {
-    if (getLents?.nextPage && !getLents.loading && !getLents.secondLoading && !isFetching) {
-      setIsFetching(true)
+    if (getLents?.nextPage && (!getLents.loading || !getLents.secondLoading) && !isFetching) {
       let p = page + 1;
       dispatch(GetLentsAction(staticdata.token, p));
       setPage(p);
-
-      setTimeout(() => {
-        setIsFetching(false);
-      }, 1000);
     }
     else if (!getLents?.nextPage) {
       dispatch(AddPostViewCount({ post_id: getLents?.data[getLents?.data?.length - 1].id }, staticdata.token))
@@ -327,16 +322,14 @@ export const HomeScreen = () => {
           style={{ position: 'relative' }}
           showsVerticalScrollIndicator={false}
           renderItem={renderItem}
-          onEndReached={debounce(handleEndReached, 300)}
+          onEndReached={handleEndReached}
           onEndReachedThreshold={0.5}
-          initialNumToRender={5}
-          maxToRenderPerBatch={5}
+          initialNumToRender={10}
+          maxToRenderPerBatch={10}
           windowSize={10}
           removeClippedSubviews={true}
           ref={flatListRef}
           viewabilityConfig={viewabilityConfig.current}
-          // getItemLayout={getItemLayout}
-
           onViewableItemsChanged={onViewableItemsChanged}
           refreshControl={refreshControl}
         />
