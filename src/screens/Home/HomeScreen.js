@@ -81,7 +81,7 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     if (staticdata.token && !getLents?.data.length) {
-      dispatch(GetLentsAction(staticdata.token, 1));
+      dispatch(GetLentsAction(staticdata.token));
     }
   }, [staticdata.token, dispatch]);
 
@@ -193,7 +193,7 @@ export const HomeScreen = () => {
     setShowButton(0)
     setPage(1)
     dispatch(getUserInfoAction(staticdata.token));
-    dispatch(GetLentsAction(staticdata.token, 1));
+    dispatch(GetLentsAction(staticdata.token));
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${staticdata.token}`);
 
@@ -213,7 +213,7 @@ export const HomeScreen = () => {
   const handleEndReached = useCallback(() => {
     if (getLents?.nextPage && (!getLents.loading || !getLents.secondLoading) && !isFetching) {
       let p = page + 1;
-      dispatch(GetLentsAction(staticdata.token, p));
+      dispatch(GetLentsAction(staticdata.token, getLents?.nextPage));
       setPage(p);
     }
     else if (!getLents?.nextPage) {
@@ -282,7 +282,7 @@ export const HomeScreen = () => {
     onRefresh={() => {
       setPage(1)
       dispatch(getUserInfoAction(staticdata.token));
-      dispatch(GetLentsAction(staticdata.token, 1));
+      dispatch(GetLentsAction(staticdata.token));
     }}
   />
   const viewabilityConfig = {

@@ -541,7 +541,7 @@ const styles = StyleSheet.create({
   hoverItem: {
     height: '100%',
     justifyContent: 'space-between',
-    width: 20,
+    minWidth: 20,
     alignItems: 'center'
   }
 })

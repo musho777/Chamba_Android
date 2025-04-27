@@ -29,6 +29,7 @@
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/stack": "^6.3.17",
     "@rneui/themed": "^4.0.0-rc.8",
+    "@shopify/flash-list": "^1.8.0",
     "@simform_solutions/react-native-audio-waveform": "^2.1.1",
     "@unimodules/core": "^7.1.2",
     "axios": "^1.4.0",
