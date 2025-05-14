@@ -209,16 +209,16 @@ export const Posts = ({
     }).start();
   };
   const renderItem = ({ item, index }) => {
-    if (item.height - 200 > item.width) {
-      if (active == index) {
-        setHeight(565)
-      }
-    }
-    else {
-      if (active == index) {
-        setHeight(320)
-      }
-    }
+    // if (item.height - 200 > item.width) {
+    //   if (active == index) {
+    //     setHeight(565)
+    //   }
+    // }
+    // else {
+    //   if (active == index) {
+    //     setHeight(320)
+    //   }
+    // }
 
 
     const GetColor = (color) => {
@@ -264,20 +264,28 @@ export const Posts = ({
       return "rgba(0,0,0,0.5)"
     }
 
+    const aspectRatio = item.width / item.height;
+    const calculatedHeight = width / aspectRatio;
+    if (active === index) {
+      if (calculatedHeight <= 600) {
+        setHeight(calculatedHeight)
+      }
+      else {
+        setHeight(565)
+      }
+    }
 
     return (
       <TouchableOpacity
         onPress={(e) => handleClick(e, item)}
         activeOpacity={1}>
-        <FastImage
-          style={{ width: width, height: "100%" }}
+        <Image
+          style={{ width: width, height: calculatedHeight, }}
           source={{
             uri: `https://chambaonline.pro/uploads/${item.photo}`,
             priority: FastImage.priority.high,
             cache: FastImage.cacheControl.immutable
           }}
-          fallback={false}
-          resizeMode={FastImage.resizeMode.cover}
         />
         {showLikeIcone && <View style={{ position: 'absolute', left: position.x, top: position.y }}>
           <LottieView
@@ -481,7 +489,7 @@ export const Posts = ({
 const styles = StyleSheet.create({
   wrapper: {
     width: "100%",
-    height: 565,
+    // height: 565,
     marginBottom: 10,
   },
   image: {

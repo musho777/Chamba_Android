@@ -139,7 +139,7 @@ export const SinglPageScreen = ({ route }) => {
   }
   return (
     <SafeAreaView style={[{ backgroundColor: 'black', alignItems: 'center', justifyContent: 'center', height: '100%', }]}>
-      <View contentContainerStyle={{ marginTop: (windowWidth + insets.top - (!horiznotal ? 565 : 320) / 2), marginBottom: 500 }}>
+      <View style = {{flex:1,justifyContent:'center',alignItems:'center'}}>
         {data && <Posts
           photos={data?.photo}
           surname={data?.user.surname}
@@ -178,22 +178,6 @@ export const SinglPageScreen = ({ route }) => {
           showStatisitc={showStatisitc}
         />}
       </View>
-      {/* <Post
-          data={data}
-          setHoriznotal={(e) => setHoriznotal(e)}
-          setShowLike={() => setLikeClose(true)}
-          setShowView={() => setShowView(true)}
-          addToblack={(e) => AddToBack(e)}
-          deletData={(e) => deletData(e)}
-          setSelectidId={(id) => console.log(id)}
-          setShowShare={(e) => setShowShare(e)}
-          setCommentData={(e) => setCommentData(e)}
-          setShowComment={() => setShowComment(true)}
-          big={true}
-          horiznotal={horiznotal}
-          setShowInfo={(e) => setShowInfo(e)}
-          setPostUserId={(e) => { }}
-        /> */}
       {
         showView && <ViewComponent
           id={data?.id}

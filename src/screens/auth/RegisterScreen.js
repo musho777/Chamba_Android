@@ -162,6 +162,7 @@ export const RegisterScreen = ({ navigation, route }) => {
           onChange={(e) => setName({ ...name, value: e })}
         />
         <Input
+          fontSize={9}
           placeholder={t(mainData.lang).Enteryouremail}
           error={email.error || register.error?.email}
           value={email.value}
@@ -175,6 +176,7 @@ export const RegisterScreen = ({ navigation, route }) => {
         />
         } */}
         <Input
+          fontSize={9}
           placeholder={t(mainData.lang).Createapassword}
           error={password.error}
           value={password.value}

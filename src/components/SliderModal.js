@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgb(0,0,0)',
-        height: '100%',
+        // height: '100%',
     },
     centeredView2: {
         position: 'absolute',
@@ -38,5 +38,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         width: '100%',
         height: 'auto',
+        flex:1,
+        justifyContent:'center',
     },
 });
