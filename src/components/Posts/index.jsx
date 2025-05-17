@@ -3,13 +3,14 @@ import { NotLineSvgWhite, ShearSvg } from "../../assets/svg/Svgs"
 import { Styles } from "../../styles/Styles"
 import { CommentWhite, WhiteHeart, WhiteViewSvg } from "../../assets/svg/TabBarSvg"
 import FastImage from "react-native-fast-image"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { AppColors } from "../../styles/AppColors"
 import { useDispatch, useSelector } from "react-redux"
 import { GetFollowerAction, GetPostLikeAction, LikePostAction } from "../../store/action/action"
 import { PostHeader } from "./postHeader"
 import LottieView from "lottie-react-native"
 import { SliderModal } from "../SliderModal"
+import { useFocusEffect } from "@react-navigation/native"
 
 
 const { width } = Dimensions.get('window');
@@ -60,6 +61,13 @@ export const Posts = ({
   const heightAnim = useRef(new Animated.Value(0)).current;
   const [showText, setShowText] = useState(false)
   const [visable, setVisable] = useState(false)
+  const [flatListKey, setFlatListKey] = useState(Date.now());
+
+  useFocusEffect(
+    useCallback(() => {
+      setFlatListKey(Date.now());
+    }, [])
+  );
 
   useEffect(() => {
     setLike({ liked, like_count })
@@ -367,10 +375,11 @@ export const Posts = ({
     {!background ? <FlatList
       horizontal
       pagingEnabled
-      // style={{ width: '100%', height: '100%' }}
       showsHorizontalScrollIndicator={false}
       decelerationRate="normal"
-      keyExtractor={(item) => item.id.toString()}
+      extraData={photos}
+      key={flatListKey}
+      keyExtractor={(item) => item.id}
       data={photos}
       windowSize={5}
       initialNumToRender={5}
