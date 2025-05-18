@@ -7,7 +7,7 @@ import { t } from '../../lang';
 export const InputComponent = ({ sendComment, setSendCommet, sendCommentFunction, width }) => {
   const mainData = useSelector(st => st.mainData);
 
-  return <View style={[width ? styles.InputComponent : { width: '83%' }]}>
+  return <View style={[width ? styles.InputComponent : { width: '73%' }]}>
     <Input
       send
       pdR={50}

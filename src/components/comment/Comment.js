@@ -194,7 +194,7 @@ export const Comments = ({ commentData, CommentCount = () => { } }) => {
             user={user}
             width={getSound.data.length}
           />
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center',gap:getSound.data.length ? 5:15  }}>
             <TouchableOpacity accessibilityLabel="Emojy" onPress={() => setIsOpen(true)}>
               <Emojy />
             </TouchableOpacity>

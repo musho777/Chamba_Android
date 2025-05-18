@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgb(0,0,0)',
+         backgroundColor:"rgba(0,0,0,0.8)"
         // height: '100%',
     },
     centeredView2: {

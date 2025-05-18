@@ -408,11 +408,16 @@ export const Posts = ({
 
     {!showText && <View style={styles.bodyWrapper}>
       <TouchableOpacity
-        onPress={(e) => {
+        onLongPress={(e) => {
           e.preventDefault()
           dispatch(GetPostLikeAction({ post_id: id }, staticdata.token, 1));
           setShowLike(true)
         }}
+        onPress={(e) => {
+          e.preventDefault()
+          Like()
+        }}
+
         style={styles.hover}>
         {like.liked ? <WhiteHeart /> : <NotLineSvgWhite />}
         <Text style={[Styles.darkMedium14, { color: 'white' }]}>{like.like_count}</Text>
