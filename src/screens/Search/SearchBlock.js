@@ -63,7 +63,7 @@ export const SearchBlock = () => {
           handleSearchInput={(e) => handleSearchInput(e)}
         />
         <FlatList
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={item => item?.id?.toString()}
           data={search.data}
           enableEmptySections={true}
           style={{ width: '100%' }}

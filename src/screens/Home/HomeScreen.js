@@ -274,7 +274,7 @@ export const HomeScreen = () => {
     },
     [blackList, getLents.data.length, viewableItems, fullScreen]
   );
-  const keyExtractor = React.useCallback((item) => item.id.toString(), []);
+  const keyExtractor = React.useCallback((item) => item?.id?.toString(), []);
 
   const refreshControl = <RefreshControl
     refreshing={getLents?.loading}
@@ -377,7 +377,7 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   showRefreshButton: {
     position: 'absolute',
-    top: 30,
+    top: 45,
     left: '50%',
     transform: [{ translateX: -50 - 40 }],
     backgroundColor: '#FFC24B',

@@ -1,5 +1,6 @@
 import { Modal, StyleSheet, View } from 'react-native';
 import { ModalSliderImg } from './ModalSliderImg';
+
 export const SliderModal = ({ modalVisible, photo, activePhoto, close }) => {
 
     return <View >
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-         backgroundColor:"rgba(0,0,0,0.8)"
+        backgroundColor: "rgba(0,0,0,0.9)"
         // height: '100%',
     },
     centeredView2: {
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         width: '100%',
         height: 'auto',
-        flex:1,
-        justifyContent:'center',
+        flex: 1,
+        justifyContent: 'center',
     },
 });

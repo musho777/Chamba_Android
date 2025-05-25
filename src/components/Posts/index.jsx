@@ -169,24 +169,25 @@ export const Posts = ({
     ));
   };
   const handleClick = (event, item) => {
-    const now = new Date().getTime();
-    if (lastClickTime.current && now - lastClickTime.current < DOUBLE_CLICK_DELAY) {
-      if (clickTimeout.current) {
-        clearTimeout(clickTimeout.current);
-        clickTimeout.current = null;
-      }
-      const { locationX, locationY } = event.nativeEvent;
-      setPosition({ x: locationX - 180, y: locationY - 180 });
-      setShowLikeICone(true);
-      animation?.current?.play();
-      Like();
-    } else {
-      lastClickTime.current = now;
-      clickTimeout.current = setTimeout(() => {
-        setVisable(true)
-        clickTimeout.current = null;
-      }, DOUBLE_CLICK_DELAY);
-    }
+    setVisable(true)
+    // const now = new Date().getTime();
+    // if (lastClickTime.current && now - lastClickTime.current < DOUBLE_CLICK_DELAY) {
+    //   if (clickTimeout.current) {
+    //     clearTimeout(clickTimeout.current);
+    //     clickTimeout.current = null;
+    //   }
+    //   const { locationX, locationY } = event.nativeEvent;
+    //   setPosition({ x: locationX - 180, y: locationY - 180 });
+    //   setShowLikeICone(true);
+    //   animation?.current?.play();
+    //   Like();
+    // } else {
+    //   lastClickTime.current = now;
+    //   clickTimeout.current = setTimeout(() => {
+    //     setVisable(true)
+    //     clickTimeout.current = null;
+    //   }, DOUBLE_CLICK_DELAY);
+    // }
   };
 
 

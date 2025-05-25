@@ -197,7 +197,7 @@ export const SearchProfil = ({ navigation, route }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <FlatList
         data={seletedScreen ? postData : [{ id: 1 }]}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item?.id?.toString()}
         showsVerticalScrollIndicator={false}
         refreshing={postLoading}
         contentContainerStyle={{ paddingHorizontal: 15 }}

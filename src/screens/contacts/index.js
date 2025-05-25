@@ -130,7 +130,7 @@ export const ContactsPage = ({ navigation }) => {
       refreshControl={
         <RefreshControl refreshing={loading} />
       }
-      keyExtractor={item => item.id.toString()}
+      keyExtractor={item => item?.id?.toString()}
       data={data}
       enableEmptySections={true}
       ListEmptyComponent={() => {

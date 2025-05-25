@@ -28,7 +28,6 @@ import { ChatScreen } from '../screens/chat/ChatScreen';
 import { SinglPageScreen } from '../screens/SinglePage/SinglPage';
 import { EditPostScreen } from '../screens/SinglePage/EditPostScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CheckBlack } from '../../CheckBlack';
 import { LoginNavigation } from './LoginNavigation';
 import { Catalog } from '../screens/catalog';
 import { OtherUserScreenNavigation } from './OtherUserScreenNavigation';
@@ -202,7 +201,6 @@ export default Navigation = ({ token, initialRouteName, id }) => {
   return (
     <BottomSheetModalProvider>
       <NavigationContainer theme={MyTheme}>
-        {<CheckBlack token={token} />}
         <Stack.Navigator initialRouteName={initialRouteName}>
           <Stack.Screen
             name="LoginScreen1"
