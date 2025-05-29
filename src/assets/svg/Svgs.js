@@ -418,7 +418,7 @@ export const SendMsgSvg = () => {
   </Svg>
 }
 
-export const CloseSvg = () => {
+export const CloseSvg = ({color = "#404040"}) => {
   return <Svg
     width={17}
     height={17}
@@ -429,7 +429,7 @@ export const CloseSvg = () => {
   >
     <Path
       d="M16 1L1 16M1 1l15 15"
-      stroke="#404040"
+      stroke={color}
       strokeWidth={1.8}
       strokeLinecap="round"
     />

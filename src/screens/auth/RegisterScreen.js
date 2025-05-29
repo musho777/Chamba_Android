@@ -128,7 +128,6 @@ export const RegisterScreen = ({ navigation, route }) => {
     ShowDesctiption()
   }
 
-
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       {show &&
@@ -186,8 +185,8 @@ export const RegisterScreen = ({ navigation, route }) => {
 
         {sendMail && (
           <View style={{ alignItems: 'center' }}>
-            <Text style={[Styles.balihaiMedium13, { textAlign: 'center', marginBottom: 10 }]}>
-              Мы отправили вам на почту комбинацию цифр, впишите её ниже.
+            <Text style={[Styles.balihaiMedium13, { textAlign: 'center', marginBottom: 10,fontSize:10 }]}>
+              Код отправлен на почту, при отсутствии уведомления нажмите спам и рефреш
             </Text>
             <ConfirmCode clear={confirm.error !== ''} code={(e) => setCode(e)} />
           </View>

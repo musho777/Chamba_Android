@@ -23,8 +23,9 @@ export const ViewComponent = ({ id, token, close, big = false, selectedVidioId }
   }, [id])
 
   useEffect(() => {
+    if(!big)
     dispatch(HidenTabNavigation())
-  }, [])
+  }, [big])
 
 
   useEffect(() => {
@@ -58,6 +59,7 @@ export const ViewComponent = ({ id, token, close, big = false, selectedVidioId }
     <BottomSheet
       index={0}
       snapPoints={['80%']}
+
       backdropComponent={renderBackdrop}
       enablePanDownToClose={true}
       onClose={() => {

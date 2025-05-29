@@ -40,6 +40,8 @@
     "lottie-react-native": "^7.0.0",
     "native-base": "^3.4.28",
     "npm": "^10.8.2",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "react": "18.3.1",
     "react-native": "0.75.5",
     "react-native-accordion": "^1.0.1",
@@ -66,6 +68,7 @@
     "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^17.1.0",
     "react-native-multiple-select": "^0.5.12",
+    "react-native-nitro-modules": "^0.25.2",
     "react-native-pager-view": "^6.2.0",
     "react-native-permissions": "^3.8.4",
     "react-native-progress": "^5.0.1",
@@ -97,7 +100,8 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "rn-emoji-keyboard": "^1.7.0",
-    "rn-progressive-image": "^3.0.0"
+    "rn-progressive-image": "^3.0.0",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

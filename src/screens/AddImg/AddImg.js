@@ -25,7 +25,9 @@ import { AddImage, CloseSvg1, FontFemalySvg, SelectColor, TextSvg2 } from '../..
 import { Status } from './component/status';
 import { AppColors } from '../../styles/AppColors';
 import { CommonActions, useFocusEffect } from '@react-navigation/native';
-import { openPicker } from '@baronha/react-native-multiple-image-picker';
+// import { openPicker } from '@baronha/react-native-multiple-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
+
 import FastImage from 'react-native-fast-image';
 import { Header } from './component/header';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -252,46 +254,56 @@ export const AddImg = ({ navigation }) => {
   }, [createPost.status]);
 
   const addPhoto = async (data, i) => {
-    const options = {
-      maxSelectedAssets: 10,
-      doneTitle: "Добавить",
-      usedCameraButton: false,
-      isPreview: false,
-      mediaType: "image",
-    }
+    setFirst(true)
+
     try {
-      const response = await openPicker(options);
-      let item = [...data]
-      if (response.didCancel) {
-        if (uri.length == 0) {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: 'TabNavigation' }],
+      ImagePicker.openPicker({
+        cropping: false,
+        compressImageQuality: 1,
+        multiple: true,
+        mediaType: "photo",
+        videoQuality: "low",
+        durationLimit: 60,
+        storageOptions: {
+          skipBackup: true,
+          path: 'images'
+        }
+      })
+        .then((response) => {
+          let item = [...data]
+          if (response.didCancel) {
+            if (uri.length == 0) {
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 0,
+                  routes: [{ name: 'TabNavigation' }],
+                })
+              );
+              setFirst(false)
+            }
+          }
+          else {
+            if (response.length) {
+              setFirst(true)
+            }
+            response?.map((elm, i) => {
+              if (item.length <= 10) {
+                item.push({ uri: elm.path, mime: elm?.type });
+              }
             })
-          );
-          setFirst(false)
-        }
-      }
-      else if (!response.didCancel && !response.error) {
-        if (response.length) {
-          setFirst(true)
-        }
-        response?.map((elm, i) => {
-          if (item.length <= 10) {
-            item.push({ uri: elm.path, mime: elm.mime });
+            setUri(item);
           }
         })
-        setUri(item);
-      }
+        .catch((error) => {
+        });
     }
     catch (error) {
       Close()
       setFirst(false)
       navigation.navigate('TabNavigation')
     }
-
   }
+
 
 
   const delateFoto = index => {

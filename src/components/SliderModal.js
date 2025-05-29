@@ -1,45 +1,46 @@
 import { Modal, StyleSheet, View } from 'react-native';
 import { ModalSliderImg } from './ModalSliderImg';
+import { BlurView } from '@react-native-community/blur';
 
 export const SliderModal = ({ modalVisible, photo, activePhoto, close }) => {
-
-    return <View >
+    return (
         <Modal
             animationType="fade"
             transparent={true}
             visible={modalVisible}
-            onRequestClose={() => close()}
+            onRequestClose={close}
             statusBarTranslucent={true}
-            accessibilityLabel="Tap me!"
         >
-            <View style={styles.centeredView}>
+            <BlurView
+                style={styles.centeredView}
+                blurType="dark"
+                blurAmount={40}
+                reducedTransparencyFallbackColor="black"
+            >
+                <View style = {styles.wrapper}>
                 <View style={styles.modalView}>
-                    <ModalSliderImg photo={photo} activePhoto={activePhoto} />
+                    <ModalSliderImg close = {close} photo={photo} activePhoto={activePhoto} />
                 </View>
-            </View>
-        </Modal >
-    </View >
-}
+                </View>
+            </BlurView>
+        </Modal>
+    );
+};
 
 const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: "rgba(0,0,0,0.9)"
-        // height: '100%',
-    },
-    centeredView2: {
-        position: 'absolute',
-        zIndex: 9999,
-        top: 10,
-        right: 10,
     },
     modalView: {
-        borderRadius: 0,
-        width: '100%',
-        height: 'auto',
-        flex: 1,
+        height:"100%",
+        alignItems: 'center',
         justifyContent: 'center',
     },
+    wrapper:{
+        width:'100%',
+        height:"100%",
+        backgroundColor:'transparent'
+    }
 });

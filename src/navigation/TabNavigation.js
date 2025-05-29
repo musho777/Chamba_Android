@@ -54,7 +54,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
     };
   }, []);
   if (!isKeyboardVisible) {
-    if (currentRouteName != "AddImg" && show && !fullScreen) {
+    if (currentRouteName != "AddImg"  && show && !fullScreen) {
       return (
         <View style={styles.tabWrapper}>
           <BootomModal ref={bottomSheetRef} snapPoints={snapPoints}>
@@ -290,6 +290,7 @@ const styles = StyleSheet.create({
     width: '80%',
     left: '10%',
     right: 0,
+    zIndex:1,
     paddingVertical: 5,
     backgroundColor: 'white',
     borderRadius: 15,

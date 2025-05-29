@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, Modal, TouchableOpacity, Image, ActivityIndicator, Alert, Keyboard } from "react-native";
-// import { pick } from "@react-native-documents/picker";
 import { useSelector } from "react-redux";
 import { launchImageLibrary } from 'react-native-image-picker';
-import { CloseSvg, CloseSvg1, Success } from "../assets/svg/Svgs";
+import {  CloseSvg1, Success } from "../assets/svg/Svgs";
 
 
 export const SendMail = ({ visible, onClose }) => {
@@ -99,13 +98,12 @@ export const SendMail = ({ visible, onClose }) => {
             <Button title="Oтправить" onPress={uploadFile} />
           )}
 
-          {/* Кнопка закрытия */}
           <TouchableOpacity onPress={onClose} style={{ marginTop: 10, position: 'absolute', right: 0 }}>
             <TouchableOpacity onPress={() => {
               setSuccass(false)
               onClose()
             }} style={{ position: 'absolute', top: 5, right: 5 }}>
-              <CloseSvg1 />
+              <Text>x</Text>
             </TouchableOpacity>
           </TouchableOpacity>
         </View> :
@@ -114,7 +112,7 @@ export const SendMail = ({ visible, onClose }) => {
               setSuccass(false)
               onClose()
             }} style={{ position: 'absolute', top: 5, right: 5 }}>
-              <CloseSvg1 />
+              <Text>x</Text>
             </TouchableOpacity>
             <Text style={{ fontSize: 14, fontWeight: "bold", marginBottom: 10, textAlign: 'center' }}>Выше сообщение отправлено.</Text>
             <Success />

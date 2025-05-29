@@ -88,6 +88,12 @@ android {
         versionName "1.0"
     }
     signingConfigs {
+        release {
+            storeFile file('photoHost.keystore')
+            storePassword '11111111'
+            keyAlias 'photoHost'
+            keyPassword '11111111'
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'

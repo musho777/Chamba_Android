@@ -1,83 +1,89 @@
 import { useState } from 'react';
 import {
-    View,
-    StyleSheet,
-    Image,
-    Dimensions,
-    PixelRatio,
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import { AppColors } from '../styles/AppColors';
+import { CloseSvg } from '../assets/svg/Svgs';
 
 const windowWidth = Dimensions.get('window').width;
-export const ModalSliderImg = ({ photo, activePhoto }) => {
-    const [active, setActive] = useState(activePhoto || 0);
-  
-    return (
-        <View>
-            <SwiperFlatList
-                index={active}
-                horizontal
-                pagingEnabled
-                data={photo}
-                onChangeIndex={({ index }) => setActive(index)}
-                renderItem={({ item,index }) => {
-                    let height = 545
-                    const aspectRatio = item.width / item.height;
-                    const calculatedHeight = windowWidth / aspectRatio;
-                    if (active === index) {
-                        if (calculatedHeight <= 600) {
-                            height =calculatedHeight 
-                        }
-                        else {
-                            height = 565
-                        }
-                      }
-                    const imageUrl = `https://chambaonline.pro/uploads/${item.photo}`;
-                    return (
-                        <Image
-                        style={[styles.img, { height:height }]}
-                            source={{ uri: imageUrl }}
-                        />
-                    );
-                }}
-            />
-            {photo.length > 1 && (
-                <View style={styles.paginationWrapper}>
-                    {photo.map((_, i) => (
-                        <View
-                            key={i}
-                            style={[
-                                styles.pagination,
-                                i === active && { backgroundColor: AppColors.GoldenTainoi_Color },
-                            ]}
-                        />
-                    ))}
-                </View>
-            )}
-        </View>
-    );
-};
+const windowHeight = Dimensions.get('window').height;
 
+export const ModalSliderImg = ({ photo, activePhoto,close }) => {
+  const [active, setActive] = useState(activePhoto || 0);
+
+  return (
+    <View style={styles.wrapper}>
+      <SwiperFlatList
+        index={active}
+        horizontal
+        pagingEnabled
+        showPagination={false}
+        data={photo}
+        onChangeIndex={({ index }) => setActive(index)}
+        style={styles.swiper}
+        renderItem={({ item }) => {
+          let height = item.height - 200 > item.width ? 565 : 329;
+          const imageUrl = `https://chambaonline.pro/uploads/${item.photo}`;
+
+          return (
+            <View style={styles.imageWrapper}>
+              <Image
+                source={{ uri: imageUrl }}
+                style={[styles.image, { height }]}
+                resizeMode="cover"
+              />
+              <TouchableOpacity onPress={()=>close()} style  = {{position:'absolute',right:10,top:10}}>
+                <CloseSvg color='red'  />
+              </TouchableOpacity>
+            </View>
+          );
+        }}
+      />
+      {photo.length > 1 && (
+        <View style={styles.paginationWrapper}>
+          {photo.map((_, i) => (
+            <View
+              key={i}
+              style={[
+                styles.pagination,
+                i === active && { backgroundColor: AppColors.GoldenTainoi_Color },
+              ]}
+            />
+          ))}
+        </View>
+      )}
+    </View>
+  );
+};
 const styles = StyleSheet.create({
-    img: {
-        width: windowWidth,
-        flexShrink: 0,
-    },
-    pagination: {
-        width: 6,
-        height: 6,
-        backgroundColor: '#CCD6DF',
-        marginHorizontal: 5,
-        borderRadius: 50,
-    },
-    paginationWrapper: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        bottom: 10,
-        left: 0,
-        right: 0
-    },
+  wrapper: {
+  },
+  swiper: {
+    flexGrow: 0,
+  },
+  imageWrapper: {
+    width: windowWidth,
+  },
+  image: {
+    width: windowWidth,
+    borderRadius: 10,
+  },
+  paginationWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+  },
+  pagination: {
+    width: 6,
+    height: 6,
+    backgroundColor: '#CCD6DF',
+    marginHorizontal: 5,
+    borderRadius: 50,
+  },
 });

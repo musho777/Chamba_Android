@@ -218,18 +218,6 @@ export const Posts = ({
     }).start();
   };
   const renderItem = ({ item, index }) => {
-    // if (item.height - 200 > item.width) {
-    //   if (active == index) {
-    //     setHeight(565)
-    //   }
-    // }
-    // else {
-    //   if (active == index) {
-    //     setHeight(320)
-    //   }
-    // }
-
-
     const GetColor = (color) => {
       if (!color) {
         return "white"
@@ -272,24 +260,22 @@ export const Posts = ({
       }
       return "rgba(0,0,0,0.5)"
     }
-
-    const aspectRatio = item.width / item.height;
-    const calculatedHeight = width / aspectRatio;
-    if (active === index) {
-      if (calculatedHeight <= 600) {
-        setHeight(calculatedHeight)
-      }
-      else {
+    if (item.height - 200 > item.width) {
+      if (active == index) {
         setHeight(565)
       }
     }
-
+    else {
+      if (active == index) {
+        setHeight(320)
+      }
+    }
     return (
       <TouchableOpacity
         onPress={(e) => handleClick(e, item)}
         activeOpacity={1}>
         <Image
-          style={{ width: width, height: calculatedHeight, }}
+          style={{ width: width, height: height, }}
           source={{
             uri: `https://chambaonline.pro/uploads/${item.photo}`,
             priority: FastImage.priority.high,
@@ -473,24 +459,6 @@ export const Posts = ({
           </View>
         </TouchableOpacity>
       </View>
-
-      {/* <TouchableOpacity
-        activeOpacity={my ? 0 : 1}
-        onPress={() => {
-          if (my && view_count > 0) {
-            setShowStatistic(0)
-            setShowView(true)
-            setSelectidId(id)
-          }
-        }}
-        style={styles.hover}>
-        <View style={styles.hoverItem}>
-          <View style={{ marginTop: 1 }}>
-            <WhiteViewSvg />
-          </View>
-          <Text style={[Styles.balihaiRegular14, { color: 'white' }]}>{view_count}</Text>
-        </View>
-      </TouchableOpacity> */}
     </View>}
     <SliderModal
       activePhoto={active}
