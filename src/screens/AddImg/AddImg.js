@@ -288,7 +288,8 @@ export const AddImg = ({ navigation }) => {
             }
             response?.map((elm, i) => {
               if (item.length <= 10) {
-                item.push({ uri: elm.path, mime: elm?.type });
+                console.log(elm)
+                item.push({ uri: elm.path, mime: elm?.mime });
               }
             })
             setUri(item);
